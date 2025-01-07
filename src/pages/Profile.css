@@ -1,0 +1,50 @@
+/* --- Profile.css --- */
+
+.profile {
+    margin-left: 250px; /* Account for sidebar width */
+    padding: 20px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    min-height: 100vh;
+  }
+  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .profile-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+  }
+  
+  .profile-header p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+  }
+  
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .profile-section {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .profile-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+  
+  .profile-section p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+  }
+  

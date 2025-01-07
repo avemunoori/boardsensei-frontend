@@ -1,0 +1,18 @@
+/* ChessBoard.css */
+
+.chessboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #f4f6f9; /* Light gray background */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chessboard-container .chessboard {
+    border: 1px solid #bdc3c7; /* Light gray border */
+    border-radius: 4px;
+  }
+  
