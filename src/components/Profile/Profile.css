@@ -1,0 +1,50 @@
+.profile-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .profile-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333333;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .progress-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .progress-section h2 {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .progress-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .progress-section li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    color: #333333;
+  }
+  

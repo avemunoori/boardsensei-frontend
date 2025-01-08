@@ -1,0 +1,57 @@
+/* Main container for the chessboard */
+.chessboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  /* Chessboard wrapper to handle responsive scaling */
+  .chessboard-wrapper {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Move controls for navigation (Previous, Next) */
+  .move-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .move-controls button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .move-controls button:hover {
+    background-color: #0056b3;
+  }
+  
+  .move-controls button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Current move display */
+  .current-move {
+    font-size: 1rem;
+    color: #333333;
+    margin: 0 15px;
+  }
+  
