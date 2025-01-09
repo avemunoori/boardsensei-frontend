@@ -1,0 +1,32 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--secondary-color);
+  }
+  
+  .home-content {
+    text-align: center;
+    background-color: #ffffff;
+    padding: var(--spacing-large);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-content h1 {
+    font-size: var(--font-size-large);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-medium);
+  }
+  
+  .home-content p {
+    font-size: var(--font-size-base);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-medium);
+  }
+  
+  .home-actions button {
+    margin: 0 var(--spacing-small);
+  }
+  

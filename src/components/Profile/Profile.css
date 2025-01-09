@@ -1,0 +1,49 @@
+.profile-container {
+    padding: var(--spacing-medium);
+    background-color: var(--secondary-color);
+    min-height: 100vh;
+  }
+  
+  .profile-container h1 {
+    font-size: var(--font-size-large);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-medium);
+  }
+  
+  .error-message {
+    color: var(--error-color);
+    font-size: var(--font-size-small);
+    margin-bottom: var(--spacing-small);
+  }
+  
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+  }
+  
+  .progress-section {
+    background-color: #ffffff;
+    padding: var(--spacing-medium);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .progress-section h2 {
+    font-size: var(--font-size-base);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-small);
+  }
+  
+  .progress-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .progress-section li {
+    background-color: #f1f1f1;
+    padding: var(--spacing-small);
+    margin-bottom: var(--spacing-small);
+    border-radius: var(--border-radius);
+  }
+  
