@@ -1,29 +1,41 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
-import LessonsList from "./components/Lessons/LessonsList"; // Updated import
-import Profile from "./components/Profile/Profile";
+import LessonsList from "./components/Lessons/LessonsList";
 import Quiz from "./components/Quiz/Quiz";
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
+import Profile from "./components/Profile/Profile";
 import "./App.css";
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <Router>
       <div className="app-container">
-        <Sidebar />
+        {isAuthenticated && <Sidebar />}
         <div className="content-container">
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/lessons" element={<LessonsList />} /> {/* Updated route */}
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/quiz" element={<Quiz />} />
-            <Route path="/grandmaster-games" element={<GrandmasterGames />} />
+            {/* Public Routes */}
+            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+            <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
+            
+            {/* Protected Routes */}
+            {isAuthenticated ? (
+              <>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/lessons" element={<LessonsList />} />
+                <Route path="/quiz" element={<Quiz />} />
+                <Route path="/grandmaster-games" element={<GrandmasterGames />} />
+                <Route path="/profile" element={<Profile />} />
+              </>
+            ) : (
+              // Redirect to login if not authenticated
+              <Route path="*" element={<Navigate to="/login" />} />
+            )}
           </Routes>
         </div>
       </div>

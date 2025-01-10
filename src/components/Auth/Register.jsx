@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../../services/api";
-import "./Auth.css";
+import "./Auth.css"; // Import Auth.css
 
-const Register = () => {
+const Register = ({ setIsAuthenticated }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,10 +14,11 @@ const Register = () => {
     e.preventDefault();
     try {
       const { data } = await API.post("/auth/register", { name, email, password });
-      alert("Registration successful!");
-      navigate("/login");
+      localStorage.setItem("token", data.token); // Save token
+      setIsAuthenticated(true); // Update authentication state
+      navigate("/dashboard"); // Redirect to Dashboard
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
+      setError(err.response?.data?.message || "Registration failed");
     }
   };
 
@@ -48,11 +49,10 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="auth-button">Register</button>
+          <button type="submit" className="auth-button">
+            Register
+          </button>
         </form>
-        <p>
-          Already have an account? <span onClick={() => navigate("/login")}>Login here</span>
-        </p>
       </div>
     </div>
   );

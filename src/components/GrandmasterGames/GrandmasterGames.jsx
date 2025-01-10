@@ -20,8 +20,17 @@ const GrandmasterGames = () => {
       const response = await axios.get(
         `https://api.chess.com/pub/player/${grandmaster}/games/${year}/${month}`
       );
-      const { games } = response.data;
-      setGames(games.slice(0, 10)); // Display only the first 10 games
+      const fetchedGames = response.data.games.slice(0, 10); // Fetch only the first 10 games
+
+      // Validate and transform the data if needed
+      const validGames = fetchedGames.map((game) => ({
+        white: game.white || "Unknown",
+        black: game.black || "Unknown",
+        result: game.result || "Unknown",
+        url: game.url || "#",
+      }));
+
+      setGames(validGames);
     } catch (err) {
       setError("Failed to fetch games. Please try again.");
     }

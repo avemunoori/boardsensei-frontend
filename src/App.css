@@ -3,24 +3,111 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background-color: #f8f9fa;
+  background-color: var(--secondary-color); /* Use a light background */
 }
 
 /* Sidebar styles */
 .sidebar {
   width: 240px;
-  background-color: #1a1a1a;
+  background-color: #1a1a1a; /* Dark sidebar */
   color: #ffffff;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
+}
+
+.sidebar h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #333333;
+  color: #e0e0e0;
+}
+
+.sidebar-link.active {
+  background-color: #444444;
+  font-weight: bold;
 }
 
 /* Main content area */
 .content-container {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #ffffff;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Buttons */
+button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--primary-color-hover);
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Forms */
+input, select, textarea {
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Cards */
+.card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
 }
