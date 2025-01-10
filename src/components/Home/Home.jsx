@@ -27,7 +27,7 @@ const Home = ({ setIsAuthenticated }) => {
           <p>Test your knowledge with interactive quizzes and track your progress.</p>
         </div>
         <div className="feature-card">
-          <h3>Grandmaster Games</h3>
+          <h3>Grandmaster</h3>
           <p>Study games from top grandmasters and learn from the best.</p>
         </div>
       </div>
