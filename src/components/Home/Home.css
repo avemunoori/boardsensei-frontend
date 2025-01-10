@@ -4,10 +4,12 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background: url("https://images.unsplash.com/photo-1602968407815-5963b28c66af?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-      center/cover no-repeat; /* Chessboard background */
-    min-height: 100vh;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    background: url("https://www.samsonhistorical.com/cdn/shop/products/Brown-and-Tan-Marble-Chess-Set-2_1200x.jpg?v=1675363469")
+      center/cover no-repeat; /* Ensure background fully covers */
     position: relative;
+    overflow: hidden; /* Prevent scrollbars */
   }
   
   /* Overlay for better text visibility */
@@ -18,30 +20,25 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+    background: rgba(0, 0, 0, 0.6); /* Darken overlay */
     z-index: 1;
-  }
-  
-  /* Ensure content is above the overlay */
-  .hero-section,
-  .feature-cards {
-    position: relative;
-    z-index: 2;
+    filter: blur(2px); /* Slight blur to reduce distractions */
   }
   
   /* Hero Section */
   .hero-section {
     text-align: center;
     margin-bottom: 40px;
-    animation: fadeIn 1.5s ease;
+    position: relative;
+    z-index: 2; /* Ensure above the overlay */
   }
   
   .hero-section h1 {
     font-size: 3rem;
-    color: #ffffff; /* White text for better contrast */
+    color: #ffffff; /* White text for contrast */
     margin-bottom: 20px;
     font-family: "Poppins", sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for visibility */
   }
   
   .hero-section p {
@@ -50,39 +47,14 @@
     margin-bottom: 30px;
   }
   
-  .home-actions {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px; /* Add spacing above buttons */
-  }
-  
-  .home-button {
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    color: #ffffff;
-    background: linear-gradient(45deg, #007bff, #0056b3); /* Gradient buttons */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-  }
-  
-  .home-button:hover {
-    background: linear-gradient(45deg, #0056b3, #003f8a);
-    transform: scale(1.05); /* Slight zoom on hover */
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5); /* Glow effect */
-  }
-  
   /* Feature Cards */
   .feature-cards {
     display: flex;
-    gap: 15px; /* Reduce gap for better alignment */
+    gap: 20px;
     justify-content: center;
     flex-wrap: wrap; /* Responsive wrapping */
-    padding: 0 20px; /* Add horizontal padding */
+    position: relative;
+    z-index: 2; /* Ensure above the overlay */
   }
   
   .feature-card {
@@ -93,60 +65,22 @@
     text-align: center;
     width: 300px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards; /* Fade-in animation */
-  }
-  
-  .feature-card h3 {
-    font-size: 1.8rem;
-    color: #333333;
-    margin-bottom: 10px;
-  }
-  
-  .feature-card p {
-    font-size: 1rem;
-    color: #555555;
   }
   
   .feature-card:hover {
     transform: scale(1.05); /* Hover zoom */
-    background-color: #f9f9f9; /* Slightly lighter background on hover */
+    background-color: #f9f9f9; /* Light background on hover */
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
   }
   
-  /* Responsive Design for Mobile */
+  /* Responsive Design */
   @media (max-width: 768px) {
     .feature-cards {
       flex-direction: column;
       align-items: center;
     }
     .feature-card {
-      width: 90%; /* Expand cards on smaller screens */
-    }
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+      width: 90%; /* Expand cards for smaller screens */
     }
   }
   
