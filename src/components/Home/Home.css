@@ -5,7 +5,7 @@
     align-items: center;
     padding: 20px;
     background: url("https://www.samsonhistorical.com/cdn/shop/products/Brown-and-Tan-Marble-Chess-Set-2_1200x.jpg?v=1675363469")
-      center/cover no-repeat, linear-gradient(120deg, #f3f4f6, #e9ecef); /* Background image and gradient */
+      center/cover no-repeat; /* Unique chess-themed background */
     min-height: 100vh; /* Full viewport height */
     position: relative;
   }
@@ -18,9 +18,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Darken overlay */
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
     z-index: 1;
-    filter: blur(1px); /* Slight blur for subtle effect */
+    filter: blur(1px); /* Subtle blur effect */
   }
   
   /* Hero Section */
@@ -29,6 +29,7 @@
     margin-bottom: 40px;
     position: relative;
     z-index: 2; /* Ensure above the overlay */
+    animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
   }
   
   .hero-section h1 {
@@ -43,6 +44,7 @@
     font-size: 1.3rem;
     color: #f0f0f0;
     margin-bottom: 30px;
+    animation: fadeIn 1.8s ease; /* Slight delay for subheading */
   }
   
   /* Hero Buttons */
@@ -88,11 +90,35 @@
     text-align: center;
     width: 300px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeIn 2s ease; /* Smooth fade-in for cards */
   }
   
   .feature-card:hover {
     transform: scale(1.05); /* Slight zoom effect */
     background-color: #f9f9f9; /* Light background on hover */
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .feature-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+    .feature-card {
+      width: 90%; /* Expand cards for smaller screens */
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   

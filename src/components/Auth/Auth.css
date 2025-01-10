@@ -4,8 +4,8 @@
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height */
-    background: url("https://www.samsonhistorical.com/cdn/shop/products/Brown-and-Tan-Marble-Chess-Set-2_1200x.jpg?v=1675363469")
-      center/cover no-repeat, linear-gradient(120deg, #f3f4f6, #e9ecef); /* Background image and gradient */
+    background: url("https://mychessets.com/cdn/shop/articles/text-to-image_50f0c4ce-0382-42d0-b3a6-8f4a83924c43.png?v=1713646032")
+      center/cover no-repeat; /* Correct background image */
     position: relative;
     overflow: hidden; /* Prevent scrollbars */
   }
@@ -26,13 +26,14 @@
   /* Authentication form styles */
   .auth-form {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Ensure form is above the overlay */
     background-color: #ffffff; /* White form card */
     padding: 40px;
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Softer shadow */
     text-align: center;
     width: 350px;
+    animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
   }
   
   /* Form Heading */
@@ -69,7 +70,7 @@
     background: linear-gradient(45deg, #007bff, #0056b3); /* Gradient buttons */
     color: #ffffff;
     border: none;
-    border-radius: 8px; /* Rounded buttons */
+    border-radius: 8px; /* Rounded button */
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: bold;
@@ -108,5 +109,17 @@
   
   .auth-form span:hover {
     text-decoration: underline;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
