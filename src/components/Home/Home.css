@@ -4,25 +4,47 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background: linear-gradient(120deg, #f3f4f6, #e9ecef); /* Background gradient */
+    background: url("https://images.unsplash.com/photo-1602968407815-5963b28c66af?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+      center/cover no-repeat; /* Use the image */
     min-height: 100vh;
+    position: relative;
+  }
+  
+  /* Overlay for better text visibility */
+  .home-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 1;
+  }
+  
+  .hero-section,
+  .feature-cards {
+    position: relative; /* Ensure content is above the overlay */
+    z-index: 2;
   }
   
   /* Hero Section */
   .hero-section {
     text-align: center;
     margin-bottom: 40px;
+    animation: fadeIn 1.5s ease;
   }
   
   .hero-section h1 {
-    font-size: 2.5rem;
-    color: #333333;
+    font-size: 3rem;
+    color: #ffffff; /* White text for better contrast */
     margin-bottom: 20px;
+    font-family: "Poppins", sans-serif;
   }
   
   .hero-section p {
-    font-size: 1.2rem;
-    color: #555555;
+    font-size: 1.3rem;
+    color: #f0f0f0;
     margin-bottom: 30px;
   }
   
@@ -33,18 +55,21 @@
   }
   
   .home-button {
-    padding: 10px 20px;
-    font-size: 1.1rem;
+    padding: 12px 24px;
+    font-size: 1.2rem;
     color: #ffffff;
-    background-color: #007bff;
+    background: linear-gradient(45deg, #007bff, #0056b3); /* Gradient buttons */
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
   }
   
   .home-button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #0056b3, #003f8a);
+    transform: scale(1.05); /* Slight zoom on hover */
   }
   
   /* Feature Cards */
@@ -59,14 +84,14 @@
     background-color: #ffffff;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 300px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
   .feature-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #333333;
     margin-bottom: 10px;
   }
@@ -77,7 +102,19 @@
   }
   
   .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px); /* Hover lift effect */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
