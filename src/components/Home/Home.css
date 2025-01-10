@@ -5,7 +5,7 @@
     align-items: center;
     padding: 20px;
     background: url("https://images.unsplash.com/photo-1602968407815-5963b28c66af?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-      center/cover no-repeat; /* Use the image */
+      center/cover no-repeat; /* Chessboard background */
     min-height: 100vh;
     position: relative;
   }
@@ -18,13 +18,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
     z-index: 1;
   }
   
+  /* Ensure content is above the overlay */
   .hero-section,
   .feature-cards {
-    position: relative; /* Ensure content is above the overlay */
+    position: relative;
     z-index: 2;
   }
   
@@ -40,6 +41,7 @@
     color: #ffffff; /* White text for better contrast */
     margin-bottom: 20px;
     font-family: "Poppins", sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow */
   }
   
   .hero-section p {
@@ -52,6 +54,7 @@
     display: flex;
     gap: 20px;
     justify-content: center;
+    margin-top: 20px; /* Add spacing above buttons */
   }
   
   .home-button {
@@ -70,14 +73,16 @@
   .home-button:hover {
     background: linear-gradient(45deg, #0056b3, #003f8a);
     transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5); /* Glow effect */
   }
   
   /* Feature Cards */
   .feature-cards {
     display: flex;
-    gap: 20px;
+    gap: 15px; /* Reduce gap for better alignment */
     justify-content: center;
-    flex-wrap: wrap; /* Makes it responsive */
+    flex-wrap: wrap; /* Responsive wrapping */
+    padding: 0 20px; /* Add horizontal padding */
   }
   
   .feature-card {
@@ -88,6 +93,10 @@
     text-align: center;
     width: 300px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards; /* Fade-in animation */
   }
   
   .feature-card h3 {
@@ -102,12 +111,35 @@
   }
   
   .feature-card:hover {
-    transform: translateY(-10px); /* Hover lift effect */
+    transform: scale(1.05); /* Hover zoom */
+    background-color: #f9f9f9; /* Slightly lighter background on hover */
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive Design for Mobile */
+  @media (max-width: 768px) {
+    .feature-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+    .feature-card {
+      width: 90%; /* Expand cards on smaller screens */
+    }
   }
   
   /* Animations */
   @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
     from {
       opacity: 0;
       transform: translateY(20px);
