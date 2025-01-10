@@ -8,6 +8,7 @@ import LessonsList from "./components/Lessons/LessonsList";
 import Quiz from "./components/Quiz/Quiz";
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
 import Profile from "./components/Profile/Profile";
+import Home from "./components/Home/Home"; // Import Home component
 import "./App.css";
 
 const App = () => {
@@ -16,13 +17,23 @@ const App = () => {
   return (
     <Router>
       <div className="app-container">
-        {isAuthenticated && <Sidebar />}
+        <Sidebar isAuthenticated={isAuthenticated} />
         <div className="content-container">
           <Routes>
             {/* Public Routes */}
-            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
-            
+            <Route
+              path="/"
+              element={<Home setIsAuthenticated={setIsAuthenticated} />}
+            />
+            <Route
+              path="/login"
+              element={<Login setIsAuthenticated={setIsAuthenticated} />}
+            />
+            <Route
+              path="/register"
+              element={<Register setIsAuthenticated={setIsAuthenticated} />}
+            />
+
             {/* Protected Routes */}
             {isAuthenticated ? (
               <>
@@ -33,8 +44,8 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
               </>
             ) : (
-              // Redirect to login if not authenticated
-              <Route path="*" element={<Navigate to="/login" />} />
+              // Redirect to Home if not authenticated
+              <Route path="*" element={<Navigate to="/" />} />
             )}
           </Routes>
         </div>
