@@ -19,6 +19,7 @@ const Sidebar = ({ isAuthenticated }) => {
           </>
         ) : (
           <>
+            <NavLink to="/" className="sidebar-link">Home</NavLink>
             <NavLink to="/login" className="sidebar-link">Login</NavLink>
             <NavLink to="/register" className="sidebar-link">Register</NavLink>
           </>

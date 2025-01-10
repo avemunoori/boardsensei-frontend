@@ -8,7 +8,7 @@ import LessonsList from "./components/Lessons/LessonsList";
 import Quiz from "./components/Quiz/Quiz";
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
 import Profile from "./components/Profile/Profile";
-import Home from "./components/Home/Home"; // Import Home component
+import Home from "./components/Home/Home";
 import "./App.css";
 
 const App = () => {
@@ -21,18 +21,16 @@ const App = () => {
         <div className="content-container">
           <Routes>
             {/* Public Routes */}
-            <Route
-              path="/"
-              element={<Home setIsAuthenticated={setIsAuthenticated} />}
-            />
-            <Route
-              path="/login"
-              element={<Login setIsAuthenticated={setIsAuthenticated} />}
-            />
-            <Route
-              path="/register"
-              element={<Register setIsAuthenticated={setIsAuthenticated} />}
-            />
+            {!isAuthenticated ? (
+              <>
+                <Route path="/" element={<Home setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
+              </>
+            ) : (
+              // Redirect unauthenticated users to Login
+              <Route path="*" element={<Navigate to="/login" />} />
+            )}
 
             {/* Protected Routes */}
             {isAuthenticated ? (
@@ -42,11 +40,10 @@ const App = () => {
                 <Route path="/quiz" element={<Quiz />} />
                 <Route path="/grandmaster-games" element={<GrandmasterGames />} />
                 <Route path="/profile" element={<Profile />} />
+                {/* Redirect / to Dashboard for authenticated users */}
+                <Route path="/" element={<Navigate to="/dashboard" />} />
               </>
-            ) : (
-              // Redirect to Home if not authenticated
-              <Route path="*" element={<Navigate to="/" />} />
-            )}
+            ) : null}
           </Routes>
         </div>
       </div>
