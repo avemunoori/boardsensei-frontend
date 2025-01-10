@@ -19,7 +19,7 @@ const Home = ({ setIsAuthenticated }) => {
 
       <div className="feature-cards">
         <div className="feature-card">
-          <h3>Learn Chess Openings</h3>
+          <h3>Learn Openings</h3>
           <p>Explore and master popular chess openings to improve your game.</p>
         </div>
         <div className="feature-card">
