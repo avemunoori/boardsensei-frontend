@@ -1,8 +1,11 @@
 import axios from "axios";
 
 // Backend API Configuration
+// - baseURL reads from REACT_APP_BACKEND_URL, which should have /api already.
 const backendAPI = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || "https://boardsensei-backend-production.up.railway.app/api",
+  baseURL:
+    process.env.REACT_APP_BACKEND_URL ||
+    "https://boardsensei-backend-production.up.railway.app/api",
 });
 
 // Add Authorization Header
@@ -21,10 +24,13 @@ export const fetchQuizzes = () => backendAPI.get("/quizzes");
 export const fetchQuizById = (id) => backendAPI.get(`/quizzes/${id}`);
 export const submitQuizAnswers = (id, answers) =>
   backendAPI.post(`/quizzes/${id}/submit`, { answers });
+
 export const fetchUserProgress = (userId) =>
   backendAPI.get(`/auth/users/progress/${userId}`);
+
 export const loginUser = (credentials) =>
   backendAPI.post("/auth/login", credentials);
+
 export const registerUser = (userDetails) =>
   backendAPI.post("/auth/register", userDetails);
 
