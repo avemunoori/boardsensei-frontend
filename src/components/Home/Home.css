@@ -1,18 +1,21 @@
 /* 
   MAIN HOME CONTAINER 
-  - Keep the marble background, but add an animated overlay 
-  - to create a shifting "dreamy" atmosphere.
+  - Fill entire screen with the marble image,
+  - plus an animated overlay for a dreamy effect.
 */
 .home-container {
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background: url("https://www.samsonhistorical.com/cdn/shop/products/Brown-and-Tan-Marble-Chess-Set-2_1200x.jpg?v=1675363469")
-      center/cover no-repeat; /* Marble chess theme */
-    min-height: 100vh;
+    justify-content: center; /* Center hero content vertically if desired */
     position: relative;
-    overflow: hidden; /* So overlay does not scroll */
+    overflow: hidden; /* So overlay doesn’t scroll */
+  
+    /* Marble chess theme, forced to cover the entire container */
+    background: url("https://www.samsonhistorical.com/cdn/shop/products/Brown-and-Tan-Marble-Chess-Set-2_1200x.jpg?v=1675363469")
+      center center / cover no-repeat;
   }
   
   /* 
@@ -26,6 +29,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    /* Multi-stop gradient that shifts over time */
     background: linear-gradient(
       135deg,
       rgba(0, 0, 0, 0.4) 0%,
@@ -35,8 +39,7 @@
     background-size: 200% 200%;
     animation: overlayGradient 10s ease-in-out infinite;
     z-index: 1;
-    /* Soft blur to blend with the marble */
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px); /* Soft blur to blend with marble */
   }
   
   /* 
@@ -54,9 +57,8 @@
     }
   }
   
-  /* 
-    HERO SECTION 
-    - Content on top of the overlay 
+  /* HERO SECTION 
+     - Content on top of the overlay
   */
   .hero-section {
     text-align: center;
@@ -66,9 +68,8 @@
     animation: fadeInUp 1.5s ease;
   }
   
-  /* 
-    SHIMMER TEXT 
-    - Large, glowing text that cycles through a color gradient 
+  /* SHIMMER TEXT 
+     - Large, glowing text that cycles through a color gradient
   */
   .hero-section h1 {
     font-size: 3.5rem;
@@ -87,7 +88,7 @@
     );
     background-size: 200% 100%;
     -webkit-background-clip: text;
-    background-clip: text; /* Add the standard property */
+    background-clip: text; /* standard property */
     -webkit-text-fill-color: transparent;
     animation: shimmer 3s infinite;
   }
@@ -145,9 +146,8 @@
     box-shadow: 0 8px 25px rgba(0, 123, 255, 0.7);
   }
   
-  /* 
-    FEATURE CARDS 
-    - Appear in front of overlay, with a fade-up effect 
+  /* FEATURE CARDS 
+     - Appear in front of overlay, with fade-up effect
   */
   .feature-cards {
     display: flex;
@@ -155,7 +155,7 @@
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
-    z-index: 2; 
+    z-index: 2;
     animation: fadeInUp 2.5s ease;
   }
   
@@ -175,12 +175,10 @@
   .feature-card:hover {
     transform: translateY(-8px) rotate(0.5deg);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9;
   }
   
-  /* 
-    OPTIONAL: Radial highlight on hover 
-  */
+  /* OPTIONAL: Radial highlight on hover */
   .feature-card::before {
     content: "";
     position: absolute;
@@ -205,9 +203,7 @@
     opacity: 1;
   }
   
-  /* 
-    RESPONSIVE DESIGN 
-  */
+  /* RESPONSIVE DESIGN */
   @media (max-width: 768px) {
     .feature-cards {
       flex-direction: column;
@@ -218,9 +214,7 @@
     }
   }
   
-  /* 
-    ANIMATIONS 
-  */
+  /* ANIMATIONS */
   @keyframes fadeIn {
     0% {
       opacity: 0;

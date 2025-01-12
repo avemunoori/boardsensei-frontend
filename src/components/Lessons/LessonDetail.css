@@ -9,9 +9,9 @@
     background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
     background-size: 400% 400%;
     animation: lessonDetailBgShift 12s ease-in-out infinite; /* shifting gradient */
-    
+  
     position: relative;
-    animation: fadeIn 1s ease; 
+    animation: fadeIn 1s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,7 +53,7 @@
     position: relative;
   
     /* Gradient text fallback color */
-    color: #333333; 
+    color: #333333;
   
     /* Gradient text for modern browsers */
     background: linear-gradient(45deg, #007bff, #9f6eff);
@@ -89,6 +89,18 @@
     font-size: 1.2rem;
     color: #555555;
     line-height: 1.6;
+  }
+  
+  /* 
+    OPTIONAL CHESSBOARD SECTION 
+    - If you want to wrap your ChessBoard in a separate container 
+    - for alignment or spacing.
+  */
+  .lesson-chessboard-section {
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 30px;
+    animation: fadeInUp 1.8s ease;
   }
   
   /* STEPS SECTION */

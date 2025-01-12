@@ -1,15 +1,36 @@
-/* Main container for the chessboard */
+/* 
+  MAIN CONTAINER FOR THE CHESSBOARD 
+  - Animated gradient background for a vibrant look.
+*/
 .chessboard-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #f8f9fa;
     min-height: 100vh;
+    background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
+    background-size: 400% 400%;
+    animation: chessBgShift 12s ease-in-out infinite; /* Smooth gradient shifting */
   }
   
-  /* Chessboard wrapper to handle responsive scaling */
+  /* Keyframe for the container's animated background */
+  @keyframes chessBgShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* 
+    CHESSBOARD WRAPPER 
+    - Slight glow and rounding to focus on the board
+  */
   .chessboard-wrapper {
     width: 100%;
     max-width: 500px;
@@ -17,35 +38,82 @@
     border: 2px solid #333;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1.5s ease;
   }
   
-  /* Move controls for navigation (Previous, Next) */
+  /* Fade-in-up animation for the board wrapper */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 
+    MOVE CONTROLS (Previous, Next) 
+  */
   .move-controls {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     gap: 10px;
+    animation: fadeIn 2s ease; /* Staggered fade in for controls */
   }
   
+  /* Fade-in for the move-controls */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    40% {
+      opacity: 0.6;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Move control buttons */
   .move-controls button {
     padding: 10px 20px;
     font-size: 1rem;
     color: #ffffff;
-    background-color: #007bff;
+    background: linear-gradient(45deg, #007bff, #0056b3);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease,
+      box-shadow 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
   }
   
+  /* Hover effect for move control buttons */
   .move-controls button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #0056b3, #003f8a);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
   }
   
+  /* Disabled state */
   .move-controls button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
   
   /* Current move display */
@@ -53,5 +121,35 @@
     font-size: 1rem;
     color: #333333;
     margin: 0 15px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+
+  .extra-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    animation: fadeIn 2.2s ease;
+    justify-content: center;
+  }
+  
+  .extra-controls button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+    color: #ffffff;
+    background: linear-gradient(45deg, #007bff, #825eff);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease,
+      box-shadow 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .extra-controls button:hover {
+    background: linear-gradient(45deg, #825eff, #5b34ea);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(123, 55, 255, 0.5);
   }
   
