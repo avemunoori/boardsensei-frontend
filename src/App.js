@@ -9,6 +9,7 @@ import Quiz from "./components/Quiz/Quiz";
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
+import LessonDetail from "./components/Lessons/LessonDetail"; // <-- Import LessonDetail component
 import "./App.css";
 
 const App = () => {
@@ -52,7 +53,7 @@ const App = () => {
               /* 
                 Protected routes (authenticated):
                 - Default "/" goes to /dashboard
-                - /dashboard, /lessons, /quiz, /grandmaster-games, /profile
+                - /dashboard, /lessons, /lessons/:id, /quiz, /grandmaster-games, /profile
 
                 If user tries unknown path while authenticated,
                 redirect them to /dashboard.
@@ -61,6 +62,8 @@ const App = () => {
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/lessons" element={<LessonsList />} />
+                {/* Added LessonDetail route: /lessons/:id */}
+                <Route path="/lessons/:id" element={<LessonDetail />} />
                 <Route path="/quiz" element={<Quiz />} />
                 <Route path="/grandmaster-games" element={<GrandmasterGames />} />
                 <Route path="/profile" element={<Profile />} />

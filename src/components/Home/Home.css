@@ -1,16 +1,24 @@
-/* Main container for the home page */
+/* 
+  MAIN HOME CONTAINER 
+  - Keep the marble background, but add an animated overlay 
+  - to create a shifting "dreamy" atmosphere.
+*/
 .home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     background: url("https://www.samsonhistorical.com/cdn/shop/products/Brown-and-Tan-Marble-Chess-Set-2_1200x.jpg?v=1675363469")
-      center/cover no-repeat; /* Unique chess-themed background */
-    min-height: 100vh; /* Full viewport height */
+      center/cover no-repeat; /* Marble chess theme */
+    min-height: 100vh;
     position: relative;
+    overflow: hidden; /* So overlay does not scroll */
   }
   
-  /* Overlay for better text visibility */
+  /* 
+    ANIMATED GRADIENT OVERLAY 
+    - Subtle but mesmerizing effect 
+  */
   .home-container::before {
     content: "";
     position: absolute;
@@ -18,105 +26,226 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.6) 50%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+    background-size: 200% 200%;
+    animation: overlayGradient 10s ease-in-out infinite;
     z-index: 1;
-    filter: blur(1px); /* Subtle blur effect */
+    /* Soft blur to blend with the marble */
+    backdrop-filter: blur(2px);
   }
   
-  /* Hero Section */
+  /* 
+    KEYFRAME for overlay's shifting gradient 
+  */
+  @keyframes overlayGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* 
+    HERO SECTION 
+    - Content on top of the overlay 
+  */
   .hero-section {
     text-align: center;
     margin-bottom: 40px;
     position: relative;
-    z-index: 2; /* Ensure above the overlay */
-    animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
+    z-index: 2; /* Above the overlay */
+    animation: fadeInUp 1.5s ease;
   }
   
+  /* 
+    SHIMMER TEXT 
+    - Large, glowing text that cycles through a color gradient 
+  */
   .hero-section h1 {
-    font-size: 3rem;
-    color: #ffffff; /* White text for better contrast */
+    font-size: 3.5rem;
     margin-bottom: 20px;
     font-family: "Poppins", sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+    position: relative;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  
+    /* Shimmer effect */
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.8)
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text; /* Add the standard property */
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s infinite;
   }
   
+  /* 
+    TEXT SHIMMER KEYFRAME 
+  */
+  @keyframes shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Hero Subtitle */
   .hero-section p {
     font-size: 1.3rem;
     color: #f0f0f0;
+    animation: fadeIn 2s ease;
     margin-bottom: 30px;
-    animation: fadeIn 1.8s ease; /* Slight delay for subheading */
   }
   
-  /* Hero Buttons */
+  /* 
+    HERO BUTTONS 
+  */
   .home-actions {
     display: flex;
     gap: 20px;
     justify-content: center;
+    animation: fadeInUp 2.2s ease;
   }
   
   .home-button {
-    padding: 12px 24px;
+    padding: 14px 28px;
     font-size: 1.2rem;
     color: #ffffff;
-    background: linear-gradient(45deg, #007bff, #0056b3); /* Gradient buttons */
+    background: linear-gradient(45deg, #007bff, #0056b3);
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+    font-family: "Poppins", sans-serif;
   }
   
   .home-button:hover {
     background: linear-gradient(45deg, #0056b3, #003f8a);
-    transform: scale(1.05); /* Slight zoom effect */
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5); /* Glow effect */
+    transform: scale(1.08);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.7);
   }
   
-  /* Feature Cards */
+  /* 
+    FEATURE CARDS 
+    - Appear in front of overlay, with a fade-up effect 
+  */
   .feature-cards {
     display: flex;
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap; /* Responsive wrapping */
+    flex-wrap: wrap;
     position: relative;
-    z-index: 2; /* Ensure above the overlay */
+    z-index: 2; 
+    animation: fadeInUp 2.5s ease;
   }
   
   .feature-card {
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
+    padding: 24px;
+    border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 300px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    animation: fadeIn 2s ease; /* Smooth fade-in for cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden; /* so glows or radial effects don't overflow */
+    animation: fadeIn 2.5s ease;
   }
   
   .feature-card:hover {
-    transform: scale(1.05); /* Slight zoom effect */
-    background-color: #f9f9f9; /* Light background on hover */
+    transform: translateY(-8px) rotate(0.5deg);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9; 
   }
   
-  /* Responsive Design */
+  /* 
+    OPTIONAL: Radial highlight on hover 
+  */
+  .feature-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .feature-card:hover::before {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  /* 
+    RESPONSIVE DESIGN 
+  */
   @media (max-width: 768px) {
     .feature-cards {
       flex-direction: column;
       align-items: center;
     }
     .feature-card {
-      width: 90%; /* Expand cards for smaller screens */
+      width: 90%;
     }
   }
   
-  /* Animations */
+  /* 
+    ANIMATIONS 
+  */
   @keyframes fadeIn {
-    from {
+    0% {
       opacity: 0;
       transform: translateY(20px);
     }
-    to {
+    40% {
+      opacity: 0.6;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateY(10px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
     }

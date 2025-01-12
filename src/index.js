@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css"; // Global styles
+import "./index.css"; // Global resets & variables loaded here
 import App from "./App";
 
 ReactDOM.render(

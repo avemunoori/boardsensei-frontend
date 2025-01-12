@@ -1,24 +1,73 @@
-/* Main Quiz Container */
+/* 
+  MAIN QUIZ CONTAINER 
+  - Animated gradient background for extra flair
+*/
 .quiz-container {
     padding: 20px;
     min-height: 100vh;
-    /* Light gradient background to match overall theme */
-    background: linear-gradient(120deg, #f3f4f6, #e9ecef);
+    background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
+    background-size: 400% 400%;
+    animation: quizBgShift 10s ease-in-out infinite; /* Gently shifting gradient */
     position: relative;
-    animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
+    animation: fadeIn 1s ease; /* Smooth container fade-in */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Optionally center content horizontally */
   }
   
-  /* Quiz Heading */
+  /* Keyframe for the container's animated gradient */
+  @keyframes quizBgShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* QUIZ HEADING (with gradient text) */
   .quiz-container h1 {
-    font-size: 2rem;
+    font-size: 2.4rem;
     margin-bottom: 20px;
-    color: #333333;
-    text-align: center;
     font-family: "Poppins", sans-serif;
+    text-align: center;
+  
+    /* Fallback color if gradient text isn’t supported */
+    color: #333333;
+  
+    /* Gradient text for modern browsers */
+    background: linear-gradient(45deg, #007bff, #9f6eff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    /* Standard properties for forward-compatibility */
+    background-clip: text;
+    color: transparent;
+  
+    /* Soft text shadow */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  
+    /* Optional shimmer for more "wow" (comment out if too much) */
+    animation: quizHeadingShimmer 3s linear infinite;
   }
   
-  /* Error Message */
+  /* Shimmer keyframe for the heading */
+  @keyframes quizHeadingShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* ERROR MESSAGE */
   .error-message {
     color: red;
     font-size: 1rem;
@@ -26,16 +75,50 @@
     text-align: center;
   }
   
-  /* Individual Quiz Question Card */
+  /* INDIVIDUAL QUIZ QUESTION CARD */
   .quiz-question {
     margin-bottom: 20px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 1.8s ease; /* Slightly staggered fade-up */
+    animation: fadeInUp 1.8s ease; /* Slight fade-up */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden; /* If we want a radial highlight effect */
   }
   
+  /* Radial highlight on question hover */
+  .quiz-question::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle, 
+      rgba(159,110,255,0.15) 0%, 
+      rgba(0,123,255,0) 60%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: -1;
+  }
+  
+  .quiz-question:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .quiz-question:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Quiz Question Title */
   .quiz-question h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
@@ -43,7 +126,7 @@
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
   }
   
-  /* Quiz Options */
+  /* QUIZ OPTIONS */
   .quiz-question label {
     display: block;
     font-size: 1rem;
@@ -55,7 +138,7 @@
     margin-right: 10px;
   }
   
-  /* Submit Button */
+  /* SUBMIT BUTTON */
   .quiz-submit-button {
     display: block;
     margin: 0 auto; /* Center the button */
@@ -66,17 +149,19 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Poppins", sans-serif;
   }
   
   .quiz-submit-button:hover {
     background: linear-gradient(45deg, #0056b3, #003f8a);
-    transform: scale(1.05); /* Slight zoom effect */
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
   
-  /* Quiz Results Card */
+  /* QUIZ RESULTS CARD */
   .quiz-results {
     padding: 20px;
     background-color: #ffffff;
@@ -84,15 +169,52 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     animation: fadeInUp 2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
   
-  /* Fade-In Animations */
+  /* Optional radial highlight on quiz-results hover */
+  .quiz-results::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle, 
+      rgba(255, 255, 0, 0.15) 0%, 
+      rgba(255, 255, 255, 0) 60%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: -1;
+  }
+  
+  .quiz-results:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .quiz-results:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* FADE-IN ANIMATIONS */
   @keyframes fadeIn {
-    from {
+    0% {
       opacity: 0;
       transform: translateY(20px);
     }
-    to {
+    40% {
+      opacity: 0.6;
+      transform: translateY(5px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
     }
@@ -104,7 +226,7 @@
       transform: translateY(40px);
     }
     50% {
-      opacity: 0.6;
+      opacity: 0.7;
       transform: translateY(10px);
     }
     100% {

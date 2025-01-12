@@ -1,25 +1,73 @@
-/* Main Dashboard Container */
+/* 
+  MAIN DASHBOARD CONTAINER 
+  - Animated gradient background for a striking effect
+*/
 .dashboard-container {
     padding: 20px;
     min-height: 100vh;
-    /* Subtle gradient background to match your theme */
-    background: linear-gradient(120deg, #f3f4f6, #e9ecef);
+    background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
+    background-size: 400% 400%;
+    animation: dashBgAnimation 12s ease-in-out infinite; /* Looping gradient shift */
     position: relative;
-    /* Smooth fade-in animation for the entire dashboard */
-    animation: fadeIn 1.5s ease;
+    animation: fadeIn 1s ease; /* Quick fade-in */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  /* Dashboard Heading */
+  /* Keyframes for the container’s animated gradient background */
+  @keyframes dashBgAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* DASHBOARD HEADING */
   .dashboard-container h1 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #333333;
-    text-align: center; /* Center the heading for a more polished look */
-    font-family: "Poppins", sans-serif; /* Crisp, modern font */
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    /* Gradient text with fallback */
+    color: #333333; /* fallback color if gradient text isn't supported */
+    
+    /* The gradient for modern browsers */
+    background: linear-gradient(45deg, #007bff, #9f6eff);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    
+    /* Standard properties for future or partial support */
+    background-clip: text; 
+    color: transparent;
+    
+    /* Soft text shadow */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    
+    /* Slight shimmer effect if you want to push the "wow" factor further */
+    animation: headingShimmer 3s linear infinite;
   }
   
-  /* Error Message */
+  /* Optional: Shimmer keyframe for heading text */
+  @keyframes headingShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* ERROR MESSAGE */
   .error-message {
     color: red;
     font-size: 1rem;
@@ -27,21 +75,49 @@
     text-align: center;
   }
   
-  /* Dashboard Content Wrapper */
+  /* DASHBOARD CONTENT WRAPPER */
   .dashboard-content {
+    width: 100%;
+    max-width: 1200px; /* Optional max-width to center content */
     display: flex;
     flex-direction: column;
     gap: 20px;
-    animation: fadeInUp 1.8s ease; /* Staggered fade-in effect for content */
+    animation: fadeInUp 1.8s ease; /* Staggered fade for content */
   }
   
-  /* Progress Section (cards for Lessons/Quizzes completed) */
+  /* PROGRESS SECTION (Cards for Lessons/Quizzes completed) */
   .progress-section {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 12px; /* Slightly more rounded corners */
+    border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden; /* If we use a radial highlight or effect */
+  }
+  
+  .progress-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(159, 110, 255, 0.15) 0%,
+      rgba(0, 123, 255, 0) 60%
+    );
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: -1;
+  }
+  
+  .progress-section:hover::before {
+    opacity: 1;
+    transform: scale(1);
   }
   
   .progress-section:hover {
@@ -49,16 +125,16 @@
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
   }
   
-  /* Section Heading */
+  /* SECTION HEADING */
   .progress-section h2 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: #007bff;
     margin-bottom: 15px;
     text-align: center;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   }
   
-  /* Progress Lists */
+  /* PROGRESS LISTS */
   .progress-section ul {
     list-style-type: none;
     padding: 0;
@@ -78,12 +154,12 @@
     background-color: #e2e2e2; /* Slight hover effect */
   }
   
-  /* Actions Section (buttons) */
+  /* ACTIONS SECTION (Buttons) */
   .actions-section {
     display: flex;
     gap: 15px;
     justify-content: center;
-    margin-top: 20px; /* Adds spacing above the buttons */
+    margin-top: 20px;
   }
   
   .actions-section button {
@@ -101,16 +177,20 @@
   
   .actions-section button:hover {
     background: linear-gradient(45deg, #0056b3, #003f8a);
-    transform: scale(1.05); /* Slight zoom effect */
+    transform: scale(1.05);
   }
   
-  /* Fade-In Animations */
+  /* FADE-IN ANIMATIONS */
   @keyframes fadeIn {
-    from {
+    0% {
       opacity: 0;
       transform: translateY(20px);
     }
-    to {
+    40% {
+      opacity: 0.6;
+      transform: translateY(5px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
     }

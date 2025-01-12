@@ -1,29 +1,80 @@
-/* Main Sidebar Container */
+/* 
+  MAIN SIDEBAR CONTAINER 
+  - Animated gradient background 
+*/
 .sidebar {
     width: 240px;
     height: 100vh;
-    /* Dark gradient background for a more elegant look */
-    background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    background: linear-gradient(135deg, #1a1a1a, #2b2b2b, #333333);
+    background-size: 400% 400%;
+    animation: sidebarGradientShift 12s ease-in-out infinite; /* Looping gradient shift */
+  
     color: #ffffff;
     display: flex;
     flex-direction: column;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     position: relative;
-    animation: fadeInLeft 1s ease; /* Smooth slide-in from the left */
+    animation: fadeInLeft 1s ease; /* Slide-in from the left */
   }
   
-  /* Sidebar Logo */
+  /* 
+    KEYFRAME for the sidebar's shifting background 
+  */
+  @keyframes sidebarGradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* SIDEBAR LOGO */
   .sidebar-logo {
     font-size: 1.8rem;
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
     font-family: "Poppins", sans-serif;
+    position: relative;
+  
+    /* Gradient text fallback color */
+    color: #ffffff;
+  
+    /* Gradient text for modern browsers */
+    background: linear-gradient(45deg, #007bff, #9f6eff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    /* Standard properties for forward-compatibility */
+    background-clip: text;
+    color: transparent;
+  
+    /* Subtle text shadow for depth */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  
+    /* Optional mild shimmer effect on the logo text */
+    animation: sidebarLogoShimmer 3s linear infinite;
   }
   
-  /* Navigation Links */
+  /* SIDEBAR LOGO SHIMMER (if you want extra "wow") */
+  @keyframes sidebarLogoShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* SIDEBAR NAVIGATION LINKS WRAPPER */
   .sidebar-nav {
     display: flex;
     flex-direction: column;
@@ -31,7 +82,7 @@
     margin-top: 20px;
   }
   
-  /* Individual Link */
+  /* INDIVIDUAL LINK */
   .sidebar-link {
     text-decoration: none;
     color: #ffffff;
@@ -39,22 +90,42 @@
     padding: 10px 15px;
     border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    overflow: hidden; /* If we use radial highlight behind each link */
+  }
+  
+  /* Radial highlight effect behind the link on hover */
+  .sidebar-link::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 80%);
+    transform: translateY(-50%);
+    transition: height 0.4s ease;
+    z-index: -1;
+  }
+  
+  .sidebar-link:hover::before {
+    height: 200%;
   }
   
   /* Hover State for Links */
   .sidebar-link:hover {
-    background-color: #333333;
+    background-color: rgba(255, 255, 255, 0.1);
     transform: translateX(5px); /* Slight slide to the right on hover */
   }
   
-  /* Active Link (current route) */
+  /* ACTIVE LINK (current route) */
   .active {
-    background-color: #555555;
+    background-color: rgba(255, 255, 255, 0.2);
     font-weight: bold;
-    transform: translateX(5px); /* Mirror the hover effect so it stays shifted */
+    transform: translateX(5px);
   }
   
-  /* Animations */
+  /* ANIMATIONS */
   @keyframes fadeInLeft {
     from {
       opacity: 0;

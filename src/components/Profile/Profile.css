@@ -1,25 +1,78 @@
-/* Main Profile Container */
+/* 
+  MAIN PROFILE CONTAINER 
+  - Animated gradient background 
+*/
 .profile-container {
     min-height: 100vh;
     padding: var(--spacing-medium);
   
-    /* Use a subtle gradient to match the rest of the app's modern style */
-    background: linear-gradient(120deg, var(--secondary-color), #e9ecef);
+    /* Instead of a simple linear gradient, we do an animated, multi-stop gradient. 
+       We still use var(--secondary-color) as part of the gradient. */
+    background: linear-gradient(135deg, var(--secondary-color), #e9ecef, #dfe3e8);
+    background-size: 400% 400%;
+    animation: profileBgAnimation 12s ease-in-out infinite; /* Slowly shifts background */
+  
     position: relative;
-    animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
+    animation: fadeIn 1s ease; /* Quick container fade-in */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  /* Profile Heading */
+  /* Keyframe for the container’s animated background gradient */
+  @keyframes profileBgAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* PROFILE HEADING */
   .profile-container h1 {
     font-size: var(--font-size-large);
-    color: var(--text-color);
     margin-bottom: var(--spacing-medium);
     text-align: center;
     font-family: "Poppins", sans-serif;
+  
+    /* Fallback color */
+    color: var(--text-color);
+  
+    /* Gradient text for modern browsers */
+    background: linear-gradient(45deg, var(--primary-color), #9f6eff);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+  
+    /* Standard future properties for gradient text */
+    background-clip: text;
+    color: transparent;
+  
+    /* Soft text shadow */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  
+    /* Optional mild shimmer if you want extra "wow" 
+       If it's too much, remove or comment out. */
+    animation: profileHeadingShimmer 3s linear infinite;
   }
   
-  /* Error Message */
+  /* Shimmer keyframe for heading text */
+  @keyframes profileHeadingShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* ERROR MESSAGE */
   .error-message {
     color: var(--error-color);
     font-size: var(--font-size-small);
@@ -27,21 +80,50 @@
     text-align: center;
   }
   
-  /* Profile Content Section */
+  /* PROFILE CONTENT SECTION */
   .profile-content {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-medium);
     animation: fadeInUp 1.8s ease; /* Slightly staggered fade-in for content */
+    width: 100%;
+    max-width: 1000px; /* optional max-width to center content */
   }
   
-  /* Progress Section Card */
+  /* PROGRESS SECTION CARD */
   .progress-section {
     background-color: #ffffff;
     padding: var(--spacing-medium);
     border-radius: var(--border-radius);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden; /* if we use radial highlight */
+  }
+  
+  /* OPTIONAL: Radial highlight effect for progress-section on hover */
+  .progress-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(159, 110, 255, 0.15) 0%,
+      rgba(0, 123, 255, 0) 60%
+    );
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: -1;
+  }
+  
+  .progress-section:hover::before {
+    opacity: 1;
+    transform: scale(1);
   }
   
   .progress-section:hover {
@@ -49,7 +131,7 @@
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
   }
   
-  /* Progress Section Heading */
+  /* PROGRESS SECTION HEADING */
   .progress-section h2 {
     font-size: var(--font-size-base);
     color: var(--primary-color);
@@ -58,7 +140,7 @@
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
   }
   
-  /* Progress Section List */
+  /* PROGRESS SECTION LIST */
   .progress-section ul {
     list-style-type: none;
     padding: 0;
@@ -77,13 +159,17 @@
     background-color: #e4e4e4; /* Subtle hover effect for each item */
   }
   
-  /* Animations */
+  /* FADE-IN ANIMATIONS */
   @keyframes fadeIn {
-    from {
+    0% {
       opacity: 0;
       transform: translateY(20px);
     }
-    to {
+    40% {
+      opacity: 0.6;
+      transform: translateY(5px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
     }
