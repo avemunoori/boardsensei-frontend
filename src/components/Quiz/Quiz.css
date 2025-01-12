@@ -1,18 +1,22 @@
 /* 
   MAIN QUIZ CONTAINER 
-  - Animated gradient background for extra flair
+  - Fill entire screen, with an animated gradient background for extra flair
 */
 .quiz-container {
-    padding: 20px;
+    width: 100%;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Optionally center content horizontally */
+    justify-content: flex-start; /* Content starts near the top */
+    padding: 20px;
+  
+    /* Animated multi-stop gradient */
     background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
     background-size: 400% 400%;
     animation: quizBgShift 10s ease-in-out infinite; /* Gently shifting gradient */
     position: relative;
     animation: fadeIn 1s ease; /* Smooth container fade-in */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Optionally center content horizontally */
   }
   
   /* Keyframe for the container's animated gradient */
@@ -86,6 +90,8 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden; /* If we want a radial highlight effect */
+    width: 100%;
+    max-width: 600px; /* Optionally limit card width for nicer layout */
   }
   
   /* Radial highlight on question hover */
@@ -141,7 +147,7 @@
   /* SUBMIT BUTTON */
   .quiz-submit-button {
     display: block;
-    margin: 0 auto; /* Center the button */
+    margin: 30px auto 0 auto; /* Put space above and center the button */
     padding: 12px 24px;
     font-size: 1rem;
     color: #ffffff;
@@ -172,6 +178,8 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
+    width: 100%;
+    max-width: 600px; /* match question card width */
   }
   
   /* Optional radial highlight on quiz-results hover */
