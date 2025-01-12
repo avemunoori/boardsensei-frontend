@@ -1,42 +1,68 @@
+/* Main Sidebar Container */
 .sidebar {
     width: 240px;
-    background-color: #1a1a1a;
-    color: #ffffff;
     height: 100vh;
+    /* Dark gradient background for a more elegant look */
+    background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeInLeft 1s ease; /* Smooth slide-in from the left */
   }
   
+  /* Sidebar Logo */
   .sidebar-logo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
+    font-family: "Poppins", sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   }
   
+  /* Navigation Links */
   .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-top: 20px;
   }
   
+  /* Individual Link */
   .sidebar-link {
     text-decoration: none;
     color: #ffffff;
     font-size: 1rem;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
+  /* Hover State for Links */
   .sidebar-link:hover {
     background-color: #333333;
+    transform: translateX(5px); /* Slight slide to the right on hover */
   }
   
+  /* Active Link (current route) */
   .active {
     background-color: #555555;
     font-weight: bold;
+    transform: translateX(5px); /* Mirror the hover effect so it stays shifted */
+  }
+  
+  /* Animations */
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   

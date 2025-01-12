@@ -1,71 +1,133 @@
+/* Main Dashboard Container */
 .dashboard-container {
     padding: 20px;
-    background-color: #f8f9fa;
     min-height: 100vh;
+    /* Subtle gradient background to match your theme */
+    background: linear-gradient(120deg, #f3f4f6, #e9ecef);
+    position: relative;
+    /* Smooth fade-in animation for the entire dashboard */
+    animation: fadeIn 1.5s ease;
   }
   
+  /* Dashboard Heading */
   .dashboard-container h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
     color: #333333;
+    text-align: center; /* Center the heading for a more polished look */
+    font-family: "Poppins", sans-serif; /* Crisp, modern font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   }
   
+  /* Error Message */
   .error-message {
     color: red;
     font-size: 1rem;
     margin-bottom: 10px;
+    text-align: center;
   }
   
+  /* Dashboard Content Wrapper */
   .dashboard-content {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    animation: fadeInUp 1.8s ease; /* Staggered fade-in effect for content */
   }
   
+  /* Progress Section (cards for Lessons/Quizzes completed) */
   .progress-section {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
+  .progress-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Section Heading */
   .progress-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: #007bff;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   }
   
+  /* Progress Lists */
   .progress-section ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
   }
   
   .progress-section li {
     padding: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     background-color: #f1f1f1;
-    border-radius: 5px;
+    border-radius: 8px;
     color: #333333;
+    transition: background-color 0.2s ease;
   }
   
+  .progress-section li:hover {
+    background-color: #e2e2e2; /* Slight hover effect */
+  }
+  
+  /* Actions Section (buttons) */
   .actions-section {
     display: flex;
     gap: 15px;
     justify-content: center;
+    margin-top: 20px; /* Adds spacing above the buttons */
   }
   
   .actions-section button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1rem;
     color: #ffffff;
-    background-color: #007bff;
+    background: linear-gradient(45deg, #007bff, #0056b3);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .actions-section button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #0056b3, #003f8a);
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  /* Fade-In Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   

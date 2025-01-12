@@ -17,33 +17,57 @@ const App = () => {
   return (
     <Router>
       <div className="app-container">
-        <Sidebar isAuthenticated={isAuthenticated} />
+        {/* Render the Sidebar only if the user is authenticated */}
+        {isAuthenticated && <Sidebar isAuthenticated={isAuthenticated} />}
+
         <div className="content-container">
           <Routes>
-            {/* Public Routes */}
             {!isAuthenticated ? (
+              /* 
+                Public routes (unauthenticated):
+                - Home (/)
+                - Login (/login)
+                - Register (/register)
+
+                If user tries any other path while not authenticated,
+                redirect them to /login.
+              */
               <>
-                <Route path="/" element={<Home setIsAuthenticated={setIsAuthenticated} />} />
-                <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-                <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
+                <Route 
+                  path="/" 
+                  element={<Home setIsAuthenticated={setIsAuthenticated} />} 
+                />
+                <Route 
+                  path="/login" 
+                  element={<Login setIsAuthenticated={setIsAuthenticated} />} 
+                />
+                <Route 
+                  path="/register" 
+                  element={<Register setIsAuthenticated={setIsAuthenticated} />} 
+                />
+                {/* Any other path -> go to /login */}
+                <Route path="*" element={<Navigate to="/login" replace />} />
               </>
             ) : (
-              // Redirect unauthenticated users to Login
-              <Route path="*" element={<Navigate to="/login" />} />
-            )}
+              /* 
+                Protected routes (authenticated):
+                - Default "/" goes to /dashboard
+                - /dashboard, /lessons, /quiz, /grandmaster-games, /profile
 
-            {/* Protected Routes */}
-            {isAuthenticated ? (
+                If user tries unknown path while authenticated,
+                redirect them to /dashboard.
+              */
               <>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/lessons" element={<LessonsList />} />
                 <Route path="/quiz" element={<Quiz />} />
                 <Route path="/grandmaster-games" element={<GrandmasterGames />} />
                 <Route path="/profile" element={<Profile />} />
-                {/* Redirect / to Dashboard for authenticated users */}
-                <Route path="/" element={<Navigate to="/dashboard" />} />
+                {/* Any other path -> go to /dashboard */}
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>
-            ) : null}
+            )}
           </Routes>
         </div>
       </div>

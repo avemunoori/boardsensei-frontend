@@ -1,27 +1,37 @@
+/* Main Lessons Container */
 .lessons-container {
   padding: 20px;
-  background-color: #f8f9fa;
   min-height: 100vh;
+  /* Subtle gradient background to match overall theme */
+  background: linear-gradient(120deg, #f3f4f6, #e9ecef);
+  position: relative;
+  animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
 }
 
+/* Header with Title and Search */
 .lessons-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  animation: fadeInUp 1.8s ease;
 }
 
 .lessons-header h1 {
   font-size: 2rem;
   color: #333333;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .lessons-header input {
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #cccccc;
-  border-radius: 5px;
+  border-radius: 8px; /* More rounded for a modern feel */
   width: 250px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .lessons-header input:focus {
@@ -30,22 +40,28 @@
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+/* Error Message */
 .error-message {
   color: red;
   font-size: 1rem;
   margin-bottom: 10px;
+  text-align: center;
 }
 
+/* Lessons Grid */
 .lessons-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+  position: relative;
+  animation: fadeInUp 1.8s ease;
 }
 
+/* Individual Lesson Card */
 .lesson-card {
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px; /* Slightly more rounding */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -60,6 +76,7 @@
   font-size: 1.5rem;
   color: #007bff;
   margin-bottom: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .lesson-card p {
@@ -68,17 +85,47 @@
   margin-bottom: 15px;
 }
 
+/* "Start Lesson" or related button */
 .lesson-card button {
   padding: 10px 20px;
   font-size: 1rem;
   color: #ffffff;
-  background-color: #007bff;
+  background: linear-gradient(45deg, #007bff, #0056b3);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
 }
 
 .lesson-card button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(45deg, #0056b3, #003f8a);
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Fade-In Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

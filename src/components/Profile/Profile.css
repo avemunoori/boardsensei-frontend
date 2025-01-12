@@ -1,43 +1,68 @@
+/* Main Profile Container */
 .profile-container {
-    padding: var(--spacing-medium);
-    background-color: var(--secondary-color);
     min-height: 100vh;
+    padding: var(--spacing-medium);
+  
+    /* Use a subtle gradient to match the rest of the app's modern style */
+    background: linear-gradient(120deg, var(--secondary-color), #e9ecef);
+    position: relative;
+    animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
   }
   
+  /* Profile Heading */
   .profile-container h1 {
     font-size: var(--font-size-large);
     color: var(--text-color);
     margin-bottom: var(--spacing-medium);
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   }
   
+  /* Error Message */
   .error-message {
     color: var(--error-color);
     font-size: var(--font-size-small);
     margin-bottom: var(--spacing-small);
+    text-align: center;
   }
   
+  /* Profile Content Section */
   .profile-content {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-medium);
+    animation: fadeInUp 1.8s ease; /* Slightly staggered fade-in for content */
   }
   
+  /* Progress Section Card */
   .progress-section {
     background-color: #ffffff;
     padding: var(--spacing-medium);
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
+  .progress-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Progress Section Heading */
   .progress-section h2 {
     font-size: var(--font-size-base);
     color: var(--primary-color);
     margin-bottom: var(--spacing-small);
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
   }
   
+  /* Progress Section List */
   .progress-section ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
   }
   
   .progress-section li {
@@ -45,5 +70,37 @@
     padding: var(--spacing-small);
     margin-bottom: var(--spacing-small);
     border-radius: var(--border-radius);
+    transition: background-color 0.2s ease;
+  }
+  
+  .progress-section li:hover {
+    background-color: #e4e4e4; /* Subtle hover effect for each item */
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
