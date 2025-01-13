@@ -5,9 +5,9 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 import LessonsList from "./components/Lessons/LessonsList";
-import LessonDetail from "./components/Lessons/LessonDetail"; 
-import QuizList from "./components/Quiz/QuizList";     // <-- new listing component
-import QuizDetail from "./components/Quiz/QuizDetail"; // <-- new detail component
+import LessonDetail from "./components/Lessons/LessonDetail";
+import QuizList from "./components/Quiz/QuizList";     // <-- Quizzes listing
+import QuizDetail from "./components/Quiz/QuizDetail"; // <-- Single Quiz detail
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
@@ -19,52 +19,51 @@ const App = () => {
   return (
     <Router>
       <div className="app-container">
-        {/* Render the Sidebar only if the user is authenticated */}
+        {/* Render Sidebar only if user is authenticated */}
         {isAuthenticated && <Sidebar isAuthenticated={isAuthenticated} />}
 
         <div className="content-container">
           <Routes>
-            {/* Public Routes (Unauthenticated) */}
+            {/* Unauthenticated Routes */}
             {!isAuthenticated ? (
               <>
-                <Route 
-                  path="/" 
-                  element={<Home setIsAuthenticated={setIsAuthenticated} />} 
+                <Route
+                  path="/"
+                  element={<Home setIsAuthenticated={setIsAuthenticated} />}
                 />
-                <Route 
-                  path="/login" 
-                  element={<Login setIsAuthenticated={setIsAuthenticated} />} 
+                <Route
+                  path="/login"
+                  element={<Login setIsAuthenticated={setIsAuthenticated} />}
                 />
-                <Route 
-                  path="/register" 
-                  element={<Register setIsAuthenticated={setIsAuthenticated} />} 
+                <Route
+                  path="/register"
+                  element={<Register setIsAuthenticated={setIsAuthenticated} />}
                 />
-
                 {/* Any other path -> go to /login */}
                 <Route path="*" element={<Navigate to="/login" replace />} />
               </>
             ) : (
-              /* Protected Routes (Authenticated) */
+              /* Authenticated Routes */
               <>
-                {/* Default "/" goes to "/dashboard" */}
+                {/* Default / goes to /dashboard if logged in */}
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                
+
                 <Route path="/dashboard" element={<Dashboard />} />
-                
+
                 {/* Lessons */}
                 <Route path="/lessons" element={<LessonsList />} />
                 <Route path="/lessons/:id" element={<LessonDetail />} />
-                
-                {/* Quizzes */}
-                <Route path="/quizzes" element={<QuizList />} />            {/* <-- quiz listing */}
-                <Route path="/quizzes/:id" element={<QuizDetail />} />      {/* <-- quiz detail */}
-                
+
+                {/* Quizzes (list + detail) */}
+                <Route path="/quizzes" element={<QuizList />} />
+                <Route path="/quizzes/:id" element={<QuizDetail />} />
+
                 {/* Grandmaster Games */}
                 <Route path="/grandmaster-games" element={<GrandmasterGames />} />
-                
+
                 {/* Profile */}
                 <Route path="/profile" element={<Profile />} />
-                
+
                 {/* Any other path -> go to /dashboard */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>
