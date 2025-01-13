@@ -5,11 +5,12 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 import LessonsList from "./components/Lessons/LessonsList";
-import Quiz from "./components/Quiz/Quiz";
+import LessonDetail from "./components/Lessons/LessonDetail"; 
+import QuizList from "./components/Quiz/QuizList";     // <-- new listing component
+import QuizDetail from "./components/Quiz/QuizDetail"; // <-- new detail component
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
-import LessonDetail from "./components/Lessons/LessonDetail"; // <-- Import LessonDetail component
 import "./App.css";
 
 const App = () => {
@@ -23,16 +24,8 @@ const App = () => {
 
         <div className="content-container">
           <Routes>
+            {/* Public Routes (Unauthenticated) */}
             {!isAuthenticated ? (
-              /* 
-                Public routes (unauthenticated):
-                - Home (/)
-                - Login (/login)
-                - Register (/register)
-
-                If user tries any other path while not authenticated,
-                redirect them to /login.
-              */
               <>
                 <Route 
                   path="/" 
@@ -46,27 +39,32 @@ const App = () => {
                   path="/register" 
                   element={<Register setIsAuthenticated={setIsAuthenticated} />} 
                 />
+
                 {/* Any other path -> go to /login */}
                 <Route path="*" element={<Navigate to="/login" replace />} />
               </>
             ) : (
-              /* 
-                Protected routes (authenticated):
-                - Default "/" goes to /dashboard
-                - /dashboard, /lessons, /lessons/:id, /quiz, /grandmaster-games, /profile
-
-                If user tries unknown path while authenticated,
-                redirect them to /dashboard.
-              */
+              /* Protected Routes (Authenticated) */
               <>
+                {/* Default "/" goes to "/dashboard" */}
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                
                 <Route path="/dashboard" element={<Dashboard />} />
+                
+                {/* Lessons */}
                 <Route path="/lessons" element={<LessonsList />} />
-                {/* Added LessonDetail route: /lessons/:id */}
                 <Route path="/lessons/:id" element={<LessonDetail />} />
-                <Route path="/quiz" element={<Quiz />} />
+                
+                {/* Quizzes */}
+                <Route path="/quizzes" element={<QuizList />} />            {/* <-- quiz listing */}
+                <Route path="/quizzes/:id" element={<QuizDetail />} />      {/* <-- quiz detail */}
+                
+                {/* Grandmaster Games */}
                 <Route path="/grandmaster-games" element={<GrandmasterGames />} />
+                
+                {/* Profile */}
                 <Route path="/profile" element={<Profile />} />
+                
                 {/* Any other path -> go to /dashboard */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>

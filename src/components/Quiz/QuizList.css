@@ -1,0 +1,223 @@
+/* 
+  MAIN QUIZ LIST CONTAINER 
+  - Full-screen optional with an animated gradient background
+*/
+.quiz-list-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content horizontally */
+    justify-content: flex-start; /* Start content near the top */
+  
+    /* Animated gradient background */
+    background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
+    background-size: 400% 400%;
+    animation: quizListBgShift 12s ease-in-out infinite; 
+    position: relative;
+    animation: fadeIn 1s ease; /* Smooth container fade-in */
+  }
+  
+  /* Keyframes for the container's animated background */
+  @keyframes quizListBgShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* QUIZ LIST HEADER (Title + Search) */
+  .quiz-list-header {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+    animation: fadeInUp 1.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Spacing between elements */
+  }
+  
+  /* Heading for Quizzes */
+  .quiz-list-header h1 {
+    font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+  
+    /* Gradient text fallback color */
+    color: #333333;
+  
+    /* Gradient text effect (optional) */
+    background: linear-gradient(45deg, #007bff, #9f6eff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: quizListTitleShimmer 3s linear infinite;
+  }
+  
+  /* Shimmer for the quiz list heading */
+  @keyframes quizListTitleShimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Search Input */
+  .quiz-list-header input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .quiz-list-header input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+  }
+  
+  /* ERROR MESSAGE */
+  .error-message {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* QUIZ LIST GRID */
+  .quiz-list-grid {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    animation: fadeInUp 1.5s ease;
+  }
+  
+  /* INDIVIDUAL QUIZ CARD */
+  .quiz-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden; /* If we want radial highlight */
+  }
+  
+  /* Optional radial highlight on .quiz-card hover */
+  .quiz-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(159, 110, 255, 0.15) 0%,
+      rgba(0, 123, 255, 0) 60%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: -1;
+  }
+  
+  .quiz-card:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* QUIZ CARD TITLE */
+  .quiz-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-family: "Poppins", sans-serif;
+    color: #007bff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* QUIZ CARD DESCRIPTION */
+  .quiz-card p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+  
+  /* START QUIZ BUTTON */
+  .quiz-card button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+    color: #ffffff;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quiz-card button:hover {
+    background: linear-gradient(45deg, #0056b3, #003f8a);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* FADE-IN ANIMATIONS */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    40% {
+      opacity: 0.6;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

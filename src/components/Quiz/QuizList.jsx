@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom";
 import API from "../../services/api";
-import "./Quiz.css";
+import "./QuizList.css"; // Create a similar style as LessonsList.css
 
-const Quiz = () => {
+const QuizList = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
@@ -12,10 +12,10 @@ const Quiz = () => {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        // 1) Fetch all quizzes from /quizzes
+        // GET /quizzes from your backend
         const { data } = await API.get("/quizzes");
-        // data.data should be an array of quiz objects
-        setQuizzes(data.data);
+        // data.data should hold an array of quizzes
+        setQuizzes(data.data || []);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch quizzes");
       }
@@ -24,22 +24,21 @@ const Quiz = () => {
     fetchQuizzes();
   }, []);
 
-  // 2) Filter quizzes by name based on search term
+  // Filter quizzes by the search term
   const filteredQuizzes = quizzes.filter((quiz) =>
     quiz.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // 3) Navigate to the quiz detail page on "Start Quiz"
+  // Navigate to the quiz detail page
   const handleStartQuiz = (quizId) => {
-    // This navigates to /quizzes/:id
+    // Navigate to /quizzes/:id (the detail component)
     navigate(`/quizzes/${quizId}`);
   };
 
   return (
-    <div className="quiz-container">
-      <div className="quiz-header">
+    <div className="quiz-list-container">
+      <div className="quiz-list-header">
         <h1>Quizzes</h1>
-        {/* Search bar to filter quizzes by name */}
         <input
           type="text"
           placeholder="Search quizzes..."
@@ -48,15 +47,12 @@ const Quiz = () => {
         />
       </div>
 
-      {/* Show any errors */}
       {error && <p className="error-message">{error}</p>}
 
-      {/* Display quizzes in a grid (similar to lessons) */}
-      <div className="quiz-grid">
+      <div className="quiz-list-grid">
         {filteredQuizzes.map((quiz) => (
           <div key={quiz._id} className="quiz-card">
             <h2>{quiz.name}</h2>
-            {/* If there's a quiz description, display it here */}
             {quiz.description && <p>{quiz.description}</p>}
 
             <button onClick={() => handleStartQuiz(quiz._id)}>
@@ -69,4 +65,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default QuizList;
