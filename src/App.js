@@ -6,65 +6,71 @@ import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 import LessonsList from "./components/Lessons/LessonsList";
 import LessonDetail from "./components/Lessons/LessonDetail";
-import QuizList from "./components/Quiz/QuizList";     // <-- Quizzes listing
-import QuizDetail from "./components/Quiz/QuizDetail"; // <-- Single Quiz detail
+import QuizList from "./components/Quiz/QuizList";     // Lists all quizzes
+import QuizDetail from "./components/Quiz/QuizDetail"; // Single quiz Q&A
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
 import "./App.css";
 
 const App = () => {
+  // Tracks whether user is logged in
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <Router>
       <div className="app-container">
-        {/* Render Sidebar only if user is authenticated */}
+        {/* Renders the Sidebar if user is authenticated */}
         {isAuthenticated && <Sidebar isAuthenticated={isAuthenticated} />}
 
         <div className="content-container">
           <Routes>
-            {/* Unauthenticated Routes */}
+            {/* 
+              If user is NOT authenticated, 
+              allow them to see Home, Login, Register. 
+              Anything else => redirect to /login.
+            */}
             {!isAuthenticated ? (
               <>
-                <Route
-                  path="/"
-                  element={<Home setIsAuthenticated={setIsAuthenticated} />}
+                {/* Public (Unauthenticated) Routes */}
+                <Route 
+                  path="/" 
+                  element={<Home setIsAuthenticated={setIsAuthenticated} />} 
                 />
-                <Route
-                  path="/login"
-                  element={<Login setIsAuthenticated={setIsAuthenticated} />}
+                <Route 
+                  path="/login" 
+                  element={<Login setIsAuthenticated={setIsAuthenticated} />} 
                 />
-                <Route
-                  path="/register"
-                  element={<Register setIsAuthenticated={setIsAuthenticated} />}
+                <Route 
+                  path="/register" 
+                  element={<Register setIsAuthenticated={setIsAuthenticated} />} 
                 />
-                {/* Any other path -> go to /login */}
+                {/* Catch-all => /login */}
                 <Route path="*" element={<Navigate to="/login" replace />} />
               </>
             ) : (
-              /* Authenticated Routes */
               <>
-                {/* Default / goes to /dashboard if logged in */}
+                {/* Authenticated Routes */}
+                {/* Visiting "/" => go to /dashboard */}
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
+                
                 <Route path="/dashboard" element={<Dashboard />} />
 
-                {/* Lessons */}
+                {/* Lessons: list + detail */}
                 <Route path="/lessons" element={<LessonsList />} />
                 <Route path="/lessons/:id" element={<LessonDetail />} />
-
-                {/* Quizzes (list + detail) */}
+                
+                {/* Quizzes: list + detail */}
                 <Route path="/quizzes" element={<QuizList />} />
                 <Route path="/quizzes/:id" element={<QuizDetail />} />
 
-                {/* Grandmaster Games */}
+                {/* GrandmasterGames */}
                 <Route path="/grandmaster-games" element={<GrandmasterGames />} />
 
                 {/* Profile */}
                 <Route path="/profile" element={<Profile />} />
 
-                {/* Any other path -> go to /dashboard */}
+                {/* Catch-all => /dashboard */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>
             )}
