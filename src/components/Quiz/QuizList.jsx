@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 import API from "../../services/api";
-import "./QuizList.css"; // Create a similar style as LessonsList.css
+import "./QuizList.css"; // <-- Uses the styles you provided
 
 const QuizList = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -12,9 +12,9 @@ const QuizList = () => {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        // GET /quizzes from your backend
+        // Fetch all quizzes from "/quizzes"
         const { data } = await API.get("/quizzes");
-        // data.data should hold an array of quizzes
+        // data.data should be an array of quiz objects
         setQuizzes(data.data || []);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch quizzes");
@@ -24,14 +24,13 @@ const QuizList = () => {
     fetchQuizzes();
   }, []);
 
-  // Filter quizzes by the search term
+  // Filter quizzes by name using searchTerm
   const filteredQuizzes = quizzes.filter((quiz) =>
     quiz.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Navigate to the quiz detail page
+  // Navigate to a specific quiz detail page
   const handleStartQuiz = (quizId) => {
-    // Navigate to /quizzes/:id (the detail component)
     navigate(`/quizzes/${quizId}`);
   };
 
@@ -53,6 +52,7 @@ const QuizList = () => {
         {filteredQuizzes.map((quiz) => (
           <div key={quiz._id} className="quiz-card">
             <h2>{quiz.name}</h2>
+            {/* Optional description field */}
             {quiz.description && <p>{quiz.description}</p>}
 
             <button onClick={() => handleStartQuiz(quiz._id)}>

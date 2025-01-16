@@ -20,14 +20,14 @@ const App = () => {
   return (
     <Router>
       <div className="app-container">
-        {/* Renders the Sidebar if user is authenticated */}
+        {/* Renders Sidebar if user is authenticated */}
         {isAuthenticated && <Sidebar isAuthenticated={isAuthenticated} />}
 
         <div className="content-container">
           <Routes>
             {/* 
-              If user is NOT authenticated, 
-              allow them to see Home, Login, Register. 
+              If user is NOT authenticated,
+              allow them to see Home, Login, Register only.
               Anything else => redirect to /login.
             */}
             {!isAuthenticated ? (
@@ -35,17 +35,18 @@ const App = () => {
                 {/* Public (Unauthenticated) Routes */}
                 <Route 
                   path="/" 
-                  element={<Home setIsAuthenticated={setIsAuthenticated} />} 
+                  element={<Home setIsAuthenticated={setIsAuthenticated} />}
                 />
                 <Route 
                   path="/login" 
-                  element={<Login setIsAuthenticated={setIsAuthenticated} />} 
+                  element={<Login setIsAuthenticated={setIsAuthenticated} />}
                 />
                 <Route 
                   path="/register" 
-                  element={<Register setIsAuthenticated={setIsAuthenticated} />} 
+                  element={<Register setIsAuthenticated={setIsAuthenticated} />}
                 />
-                {/* Catch-all => /login */}
+
+                {/* Catch-all => /login if not authenticated */}
                 <Route path="*" element={<Navigate to="/login" replace />} />
               </>
             ) : (
@@ -53,7 +54,7 @@ const App = () => {
                 {/* Authenticated Routes */}
                 {/* Visiting "/" => go to /dashboard */}
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                
+
                 <Route path="/dashboard" element={<Dashboard />} />
 
                 {/* Lessons: list + detail */}
@@ -70,7 +71,7 @@ const App = () => {
                 {/* Profile */}
                 <Route path="/profile" element={<Profile />} />
 
-                {/* Catch-all => /dashboard */}
+                {/* Any other path -> /dashboard */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>
             )}
