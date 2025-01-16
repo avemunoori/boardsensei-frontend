@@ -25,7 +25,11 @@ const App = () => {
 
         <div className="content-container">
           <Routes>
-            {/* Unauthenticated Routes */}
+            {/* 
+              If user is NOT authenticated,
+              allow them to see Home, Login, Register only.
+              Anything else => redirect to /login.
+            */}
             {!isAuthenticated ? (
               <>
                 {/* Public (Unauthenticated) Routes */}
@@ -67,12 +71,8 @@ const App = () => {
                 {/* Profile */}
                 <Route path="/profile" element={<Profile />} />
 
-                {/* 
-                  Removed the catch-all that redirected to /dashboard.
-                  This means if a user visits an invalid path while logged in,
-                  they simply won't match any route and see a blank or fallback
-                  (or you can add a custom 404 here).
-                */}
+                {/* Any other path -> /dashboard */}
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>
             )}
           </Routes>
