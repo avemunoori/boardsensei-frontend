@@ -29,10 +29,10 @@ const QuizDetail = () => {
   }, [id]);
 
   // Handle user answer selection
-  const handleAnswerChange = (questionIndex, answer) => {
+  const handleAnswerChange = (questionIndex, chosenChoice) => {
     setUserAnswers((prev) => ({
       ...prev,
-      [questionIndex]: answer,
+      [questionIndex]: chosenChoice,
     }));
   };
 
@@ -43,8 +43,9 @@ const QuizDetail = () => {
 
     try {
       // Convert userAnswers into { questionId, answer } if your backend expects that
+      // If each question has an _id, we can use that; otherwise, fallback to index
       const answersArray = quiz.questions.map((q, idx) => ({
-        questionId: q._id || idx, // If each question has an _id
+        questionId: q._id || idx,
         answer: userAnswers[idx], // The user-chosen option
       }));
 
@@ -60,7 +61,8 @@ const QuizDetail = () => {
 
   return (
     <div className="quiz-detail-container">
-      <h1>{quiz.name}</h1>
+      {/* Use openingName instead of quiz.name */}
+      <h1>{quiz.openingName}</h1>
 
       {score !== null ? (
         <div className="quiz-results">
@@ -74,16 +76,17 @@ const QuizDetail = () => {
             quiz.questions.map((question, idx) => (
               <div key={idx} className="quiz-question">
                 <h3>{question.question}</h3>
-                {question.options.map((option) => (
-                  <label key={option}>
+                {/* Use question.choices instead of question.options */}
+                {question.choices.map((choice) => (
+                  <label key={choice}>
                     <input
                       type="radio"
                       name={`question-${idx}`}
-                      value={option}
-                      onChange={() => handleAnswerChange(idx, option)}
+                      value={choice}
+                      onChange={() => handleAnswerChange(idx, choice)}
                       required
                     />
-                    {option}
+                    {choice}
                   </label>
                 ))}
               </div>
