@@ -49,7 +49,7 @@ const LessonDetail = () => {
       )}
 
       {!isCompleted ? (
-        <button onClick={handleCompleteLesson}>Mark Lesson Complete</button>
+        <button onClick={handleCompleteLesson}>Lesson Complete</button>
       ) : (
         <p>You have completed this lesson!</p>
       )}
