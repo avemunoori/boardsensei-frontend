@@ -1,7 +1,8 @@
-// LessonDetail.jsx (example of marking a lesson complete)
+// LessonDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../services/api";
+import ChessBoard from "../ChessBoard/ChessBoard";
 import "./LessonDetail.css";
 
 const LessonDetail = () => {
@@ -31,27 +32,55 @@ const LessonDetail = () => {
     }
   };
 
+  // parse all steps' "move" fields into a single array of half-moves
+  // e.g. "e4 c5" => ["e4", "c5"]
+  const parseLessonMoves = (steps) => {
+    const halfMoves = [];
+    steps.forEach((step) => {
+      const splitted = step.move.trim().split(/\s+/);
+      halfMoves.push(...splitted);
+    });
+    return halfMoves;
+  };
+
   if (error) return <p className="error-message">{error}</p>;
   if (!lesson) return <p>Loading lesson...</p>;
 
+  // Create an array of moves for the ChessBoard
+  const movesForChessBoard = parseLessonMoves(lesson.steps || []);
+
   return (
-    <div className="lesson-detail">
+    <div className="lesson-detail-container">
       <h1>{lesson.name}</h1>
       <p>{lesson.description}</p>
+
+      {/* Interactive Chessboard with next/prev/autoplay */}
+      <ChessBoard moves={movesForChessBoard} />
+
+      {/* Detailed steps list */}
       {lesson.steps && lesson.steps.length > 0 && (
-        <ul>
-          {lesson.steps.map((step, i) => (
-            <li key={i}>
-              <strong>{step.move}:</strong> {step.explanation}
-            </li>
-          ))}
-        </ul>
+        <div className="lesson-steps-section">
+          <h2>Detailed Steps:</h2>
+          <ul className="lesson-steps-list">
+            {lesson.steps.map((step, index) => (
+              <li key={index} className="lesson-step">
+                <div className="step-header">
+                  <span className="step-index">Step {index + 1}:</span>
+                  <span className="step-move">{step.move}</span>
+                </div>
+                <div className="step-explanation">{step.explanation}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
       {!isCompleted ? (
-        <button onClick={handleCompleteLesson}>Lesson Complete</button>
+        <button onClick={handleCompleteLesson} className="complete-lesson-button">
+          Lesson Complete
+        </button>
       ) : (
-        <p>You have completed this lesson!</p>
+        <p className="completed-message">You have completed this lesson!</p>
       )}
     </div>
   );
