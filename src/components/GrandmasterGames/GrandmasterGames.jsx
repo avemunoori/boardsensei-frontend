@@ -10,30 +10,22 @@ const GrandmasterGames = () => {
   const [error, setError] = useState("");
 
   const handleFetchGames = async () => {
-    // Basic validation
     if (!month || !year) {
       setError("Please enter both month and year.");
-      setGames([]); 
+      setGames([]);
       return;
     }
-
     setError("");
 
     try {
-      // Zero-pad the month so "2" => "02"
       const formattedMonth = month.toString().padStart(2, "0");
-
       const response = await axios.get(
         `https://api.chess.com/pub/player/${grandmaster}/games/${year}/${formattedMonth}`
       );
-      
-      // Safely access the games array (default to [])
-      const allGames = response.data.games || [];
 
-      // Take only the first 10 games
+      const allGames = response.data.games || [];
       const fetchedGames = allGames.slice(0, 10);
 
-      // If there are no games, show a message
       if (fetchedGames.length === 0) {
         setError(
           `No games found for ${grandmaster} in ${formattedMonth}/${year}. 
@@ -41,11 +33,13 @@ const GrandmasterGames = () => {
         );
       }
 
-      // Transform the data (guard against undefined properties)
+      // Extract the actual strings from the objects
       const validGames = fetchedGames.map((game) => ({
-        white: game.white || "Unknown",
-        black: game.black || "Unknown",
-        result: game.result || "Unknown",
+        white: game.white?.username || "Unknown",
+        black: game.black?.username || "Unknown",
+        // Check if the API has an overall 'result' field or if it's stored in black/white sub-fields
+        // For now, let's assume white.result or black.result:
+        result: game.white?.result || game.black?.result || "Unknown",
         url: game.url || "#",
       }));
 
@@ -53,7 +47,7 @@ const GrandmasterGames = () => {
     } catch (err) {
       console.error("Error fetching GM games:", err);
       setError("Failed to fetch games. Please try again.");
-      setGames([]); // Clear the previous games list on error
+      setGames([]); 
     }
   };
 
@@ -103,7 +97,6 @@ const GrandmasterGames = () => {
             </div>
           ))
         ) : (
-          // Show this if games array is empty and there's no error set
           !error && <p>No games to display. Please enter a valid month and year.</p>
         )}
       </div>
