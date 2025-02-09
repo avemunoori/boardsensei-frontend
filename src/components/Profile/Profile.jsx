@@ -15,7 +15,6 @@ const Profile = () => {
           setError("No token found. Please log in again.");
           return;
         }
-
         const userId = JSON.parse(atob(token.split(".")[1])).id;
         const { data } = await API.get(`/auth/users/progress/${userId}`);
         setUserProgress(data.progress);

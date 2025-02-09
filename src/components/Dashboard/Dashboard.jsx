@@ -17,8 +17,6 @@ const Dashboard = () => {
           setError("No token found. Please log in.");
           return;
         }
-
-        // decode userId from token
         const userId = JSON.parse(atob(token.split(".")[1])).id;
         const { data } = await API.get(`/auth/users/progress/${userId}`);
         setUserProgress(data.progress);
@@ -64,7 +62,6 @@ const Dashboard = () => {
           <h2>Quizzes Completed</h2>
           <ul>
             {userProgress.quizzesCompleted.map((quiz) => {
-              // Use quiz.openingName, or fallback to lesson name if present
               const quizTitle = quiz.openingName || quiz.lesson?.name || "Unknown Quiz";
               return <li key={quiz._id}>{`Quiz on ${quizTitle}`}</li>;
             })}
