@@ -1,3 +1,4 @@
+// Profile.jsx
 import React, { useEffect, useState } from "react";
 import API from "../../services/api";
 import "./Profile.css";
@@ -15,7 +16,6 @@ const Profile = () => {
           return;
         }
 
-        // Decode userId from JWT
         const userId = JSON.parse(atob(token.split(".")[1])).id;
         const { data } = await API.get(`/auth/users/progress/${userId}`);
         setUserProgress(data.progress);
@@ -49,7 +49,6 @@ const Profile = () => {
     <div className="profile-container">
       <h1>Your Profile</h1>
       <div className="profile-content">
-        {/* Lessons Completed */}
         <div className="progress-section">
           <h2>Lessons Completed</h2>
           <ul>
@@ -58,20 +57,12 @@ const Profile = () => {
             ))}
           </ul>
         </div>
-
-        {/* Quizzes Completed */}
         <div className="progress-section">
           <h2>Quizzes Completed</h2>
           <ul>
             {userProgress.quizzesCompleted.map((quiz) => {
-              // Use quiz.openingName if it exists, fallback to quiz.lesson?.name or "Unknown Quiz"
-              const quizTitle = quiz.openingName 
-                ? quiz.openingName 
-                : quiz.lesson?.name || "Unknown Quiz";
-
-              return (
-                <li key={quiz._id}>{` ${quizTitle}`}</li>
-              );
+              const quizTitle = quiz.openingName || quiz.lesson?.name || "Unknown Quiz";
+              return <li key={quiz._id}>{`Quiz on ${quizTitle}`}</li>;
             })}
           </ul>
         </div>

@@ -1,3 +1,4 @@
+// Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../../services/api";
@@ -17,7 +18,7 @@ const Dashboard = () => {
           return;
         }
 
-        // Decode the user ID from the JWT
+        // decode userId from token
         const userId = JSON.parse(atob(token.split(".")[1])).id;
         const { data } = await API.get(`/auth/users/progress/${userId}`);
         setUserProgress(data.progress);
@@ -51,7 +52,6 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <h1>Dashboard</h1>
       <div className="dashboard-content">
-        {/* Lessons Completed */}
         <div className="progress-section">
           <h2>Lessons Completed</h2>
           <ul>
@@ -60,26 +60,17 @@ const Dashboard = () => {
             ))}
           </ul>
         </div>
-
-        {/* Quizzes Completed */}
         <div className="progress-section">
           <h2>Quizzes Completed</h2>
           <ul>
             {userProgress.quizzesCompleted.map((quiz) => {
-              // Use openingName if it exists, otherwise quiz.lesson?.name
-              const quizTitle = quiz.openingName 
-                ? quiz.openingName 
-                : quiz.lesson?.name || "Unknown Quiz";
-
-              return (
-                <li key={quiz._id}>{` ${quizTitle}`}</li>
-              );
+              // Use quiz.openingName, or fallback to lesson name if present
+              const quizTitle = quiz.openingName || quiz.lesson?.name || "Unknown Quiz";
+              return <li key={quiz._id}>{`Quiz on ${quizTitle}`}</li>;
             })}
           </ul>
         </div>
-
         <div className="actions-section">
-          {/* Navigate to Lessons or Quizzes List */}
           <button onClick={() => navigate("/lessons")}>View Lessons</button>
           <button onClick={() => navigate("/quizzes")}>Take a Quiz</button>
         </div>
