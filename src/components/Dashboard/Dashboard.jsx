@@ -12,6 +12,12 @@ const Dashboard = () => {
     const fetchUserProgress = async () => {
       try {
         const token = localStorage.getItem("token");
+        if (!token) {
+          setError("No token found. Please log in.");
+          return;
+        }
+
+        // Decode the user ID from the JWT
         const userId = JSON.parse(atob(token.split(".")[1])).id;
         const { data } = await API.get(`/auth/users/progress/${userId}`);
         setUserProgress(data.progress);
@@ -23,36 +29,61 @@ const Dashboard = () => {
     fetchUserProgress();
   }, []);
 
+  if (error) {
+    return (
+      <div className="dashboard-container">
+        <h1>Dashboard</h1>
+        <p className="error-message">{error}</p>
+      </div>
+    );
+  }
+
+  if (!userProgress) {
+    return (
+      <div className="dashboard-container">
+        <h1>Dashboard</h1>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="dashboard-container">
       <h1>Dashboard</h1>
-      {error && <p className="error-message">{error}</p>}
-      {!userProgress ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="dashboard-content">
-          <div className="progress-section">
-            <h2>Lessons Completed</h2>
-            <ul>
-              {userProgress.lessonsCompleted.map((lesson) => (
-                <li key={lesson._id}>{lesson.name}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="progress-section">
-            <h2>Quizzes Completed</h2>
-            <ul>
-              {userProgress.quizzesCompleted.map((quiz) => (
-                <li key={quiz._id}>{`Quiz on ${quiz.lesson.name}`}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="actions-section">
-            <button onClick={() => navigate("/lessons")}>View Lessons</button>
-            <button onClick={() => navigate("/quiz")}>Take a Quiz</button>
-          </div>
+      <div className="dashboard-content">
+        {/* Lessons Completed */}
+        <div className="progress-section">
+          <h2>Lessons Completed</h2>
+          <ul>
+            {userProgress.lessonsCompleted.map((lesson) => (
+              <li key={lesson._id}>{lesson.name}</li>
+            ))}
+          </ul>
         </div>
-      )}
+
+        {/* Quizzes Completed */}
+        <div className="progress-section">
+          <h2>Quizzes Completed</h2>
+          <ul>
+            {userProgress.quizzesCompleted.map((quiz) => {
+              // Use openingName if it exists, otherwise quiz.lesson?.name
+              const quizTitle = quiz.openingName 
+                ? quiz.openingName 
+                : quiz.lesson?.name || "Unknown Quiz";
+
+              return (
+                <li key={quiz._id}>{`Quiz on ${quizTitle}`}</li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div className="actions-section">
+          {/* Navigate to Lessons or Quizzes List */}
+          <button onClick={() => navigate("/lessons")}>View Lessons</button>
+          <button onClick={() => navigate("/quizzes")}>Take a Quiz</button>
+        </div>
+      </div>
     </div>
   );
 };
