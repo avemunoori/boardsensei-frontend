@@ -70,7 +70,7 @@ const Profile = () => {
                 : quiz.lesson?.name || "Unknown Quiz";
 
               return (
-                <li key={quiz._id}>{`Quiz on ${quizTitle}`}</li>
+                <li key={quiz._id}>{` ${quizTitle}`}</li>
               );
             })}
           </ul>
