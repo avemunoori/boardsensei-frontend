@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import API from "../../services/api";
-import "./QuizList.css"; // <-- Uses the styles you provided
+import "./QuizList.css"; // CSS styles
 
 const QuizList = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -24,10 +24,12 @@ const QuizList = () => {
     fetchQuizzes();
   }, []);
 
-  // Filter quizzes by name using searchTerm
-  const filteredQuizzes = quizzes.filter((quiz) =>
-    quiz.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter quizzes by the 'openingName' field
+  const filteredQuizzes = quizzes.filter((quiz) => {
+    // If there's no openingName, fallback to an empty string
+    const quizTitle = quiz.openingName || "";
+    return quizTitle.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   // Navigate to a specific quiz detail page
   const handleStartQuiz = (quizId) => {
@@ -49,17 +51,19 @@ const QuizList = () => {
       {error && <p className="error-message">{error}</p>}
 
       <div className="quiz-list-grid">
-        {filteredQuizzes.map((quiz) => (
-          <div key={quiz._id} className="quiz-card">
-            <h2>{quiz.name}</h2>
-            {/* Optional description field */}
-            {quiz.description && <p>{quiz.description}</p>}
+        {filteredQuizzes.map((quiz) => {
+          // Safely access openingName
+          const quizTitle = quiz.openingName || "No Title";
 
-            <button onClick={() => handleStartQuiz(quiz._id)}>
-              Start Quiz
-            </button>
-          </div>
-        ))}
+          return (
+            <div key={quiz._id} className="quiz-card">
+              <h2>{quizTitle}</h2>
+              <button onClick={() => handleStartQuiz(quiz._id)}>
+                Start Quiz
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
