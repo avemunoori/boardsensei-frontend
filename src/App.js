@@ -16,11 +16,11 @@ import "./App.css";
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // On app mount, check if token is in localStorage
+  // On app mount, check if a token is stored
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      
+      // Optionally verify token with your backend before setting true
       setIsAuthenticated(true);
     }
   }, []);
@@ -28,42 +28,51 @@ const App = () => {
   return (
     <Router>
       <div className="app-container">
-        {/* Show the sidebar if authenticated */}
-        {isAuthenticated && <Sidebar isAuthenticated={isAuthenticated} />}
+        {/* Show sidebar only when authenticated */}
+        {isAuthenticated && (
+          <Sidebar
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+          />
+        )}
+
         <div className="content-container">
           <Routes>
+            {/* Public (unauthenticated) routes */}
             {!isAuthenticated ? (
               <>
-                {/* Public routes */}
-                <Route 
-                  path="/" 
-                  element={<Home setIsAuthenticated={setIsAuthenticated} />} 
+                <Route
+                  path="/"
+                  element={<Home setIsAuthenticated={setIsAuthenticated} />}
                 />
-                <Route 
-                  path="/login" 
-                  element={<Login setIsAuthenticated={setIsAuthenticated} />} 
+                <Route
+                  path="/login"
+                  element={<Login setIsAuthenticated={setIsAuthenticated} />}
                 />
-                <Route 
-                  path="/register" 
-                  element={<Register setIsAuthenticated={setIsAuthenticated} />} 
+                <Route
+                  path="/register"
+                  element={<Register setIsAuthenticated={setIsAuthenticated} />}
                 />
 
-                {/* Any other path => redirect to /login */}
+                {/* Catch-all -> send to /login if not authenticated */}
                 <Route path="*" element={<Navigate to="/login" replace />} />
               </>
             ) : (
               <>
-                {/* Authenticated routes */}
+                {/* Private (authenticated) routes */}
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+
                 <Route path="/lessons" element={<LessonsList />} />
                 <Route path="/lessons/:id" element={<LessonDetail />} />
+
                 <Route path="/quizzes" element={<QuizList />} />
                 <Route path="/quizzes/:id" element={<QuizDetail />} />
+
                 <Route path="/grandmaster-games" element={<GrandmasterGames />} />
                 <Route path="/profile" element={<Profile />} />
-                
-                {/* Any other path => redirect to /dashboard */}
+
+                {/* Catch-all -> send to /dashboard if authenticated */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>
             )}

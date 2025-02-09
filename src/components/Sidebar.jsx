@@ -6,12 +6,12 @@ const Sidebar = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Remove token from localStorage
+    // Clear token
     localStorage.removeItem("token");
-    // Update state so user is no longer authenticated
+    // Flip auth state
     setIsAuthenticated(false);
-    // Redirect to the public home or login page
-    navigate("/");
+    // Immediately navigate to login (or home)
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -19,7 +19,6 @@ const Sidebar = ({ isAuthenticated, setIsAuthenticated }) => {
       <div className="sidebar-logo">
         <h1>BoardSensei</h1>
       </div>
-
       <nav className="sidebar-nav">
         {isAuthenticated ? (
           <>
@@ -28,7 +27,6 @@ const Sidebar = ({ isAuthenticated, setIsAuthenticated }) => {
             <NavLink to="/quizzes" className="sidebar-link">Quizzes</NavLink>
             <NavLink to="/grandmaster-games" className="sidebar-link">Grandmaster Games</NavLink>
             <NavLink to="/profile" className="sidebar-link">Profile</NavLink>
-            {/* Logout Button */}
             <button onClick={handleLogout} className="sidebar-link logout-button">
               Logout
             </button>
