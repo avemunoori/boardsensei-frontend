@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../services/api";
-import "./QuizDetail.css"; // Similar style as your "Quiz.css"
+import "./QuizDetail.css";
 
 const QuizDetail = () => {
-  const { id } = useParams(); // e.g. /quizzes/:id
+  const { id } = useParams();
   const [quiz, setQuiz] = useState(null);
-  const [userAnswers, setUserAnswers] = useState({});
+  const [userAnswers, setUserAnswers] = useState({}); // Maps questionIndex -> chosenOption
   const [score, setScore] = useState(null);
   const [error, setError] = useState("");
 
@@ -28,11 +28,11 @@ const QuizDetail = () => {
     fetchQuizById();
   }, [id]);
 
-  // Handle user answer selection
-  const handleAnswerChange = (questionIndex, chosenChoice) => {
+  // Handle user choosing an option for a given question
+  const handleAnswerChange = (questionIndex, chosenOption) => {
     setUserAnswers((prev) => ({
       ...prev,
-      [questionIndex]: chosenChoice,
+      [questionIndex]: chosenOption,
     }));
   };
 
@@ -42,13 +42,13 @@ const QuizDetail = () => {
     if (!quiz) return;
 
     try {
-      // Convert userAnswers into { questionId, answer } if your backend expects that
-      // If each question has an _id, we can use that; otherwise, fallback to index
-      const answersArray = quiz.questions.map((q, idx) => ({
-        questionId: q._id || idx,
-        answer: userAnswers[idx], // The user-chosen option
-      }));
+      // The backend expects an array of strings, one per question index
+      // e.g. ["option1", "option2", ...]
+      const answersArray = quiz.questions.map((q, idx) => {
+        return userAnswers[idx] || "";
+      });
 
+      // Send the array of strings to the server
       const { data } = await API.post(`/quizzes/${id}/submit`, { answers: answersArray });
       setScore(data.score);
     } catch (err) {
@@ -61,7 +61,7 @@ const QuizDetail = () => {
 
   return (
     <div className="quiz-detail-container">
-      {/* Use openingName instead of quiz.name */}
+      {/* Display the quiz's openingName (not quiz.name) */}
       <h1>{quiz.openingName}</h1>
 
       {score !== null ? (
@@ -76,17 +76,17 @@ const QuizDetail = () => {
             quiz.questions.map((question, idx) => (
               <div key={idx} className="quiz-question">
                 <h3>{question.question}</h3>
-                {/* Use question.choices instead of question.options */}
-                {question.choices.map((choice) => (
-                  <label key={choice}>
+                {/* Use question.options instead of question.choices */}
+                {question.options.map((option) => (
+                  <label key={option}>
                     <input
                       type="radio"
                       name={`question-${idx}`}
-                      value={choice}
-                      onChange={() => handleAnswerChange(idx, choice)}
+                      value={option}
+                      onChange={() => handleAnswerChange(idx, option)}
                       required
                     />
-                    {choice}
+                    {option}
                   </label>
                 ))}
               </div>
