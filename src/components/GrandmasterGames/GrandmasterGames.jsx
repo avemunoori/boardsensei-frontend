@@ -5,9 +5,13 @@ import axios from "axios"
 import { Chess } from "chess.js"
 import { Chessboard } from "react-chessboard"
 import { FaChess, FaArrowLeft, FaArrowRight } from "react-icons/fa"
-import { generateText } from "ai"
-import { openai } from "@ai-sdk/openai"
+import { Configuration, OpenAIApi } from "openai"
 import "./GrandmasterGames.css"
+
+const configuration = new Configuration({
+  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+})
+const openai = new OpenAIApi(configuration)
 
 const GrandmasterGames = () => {
   const [grandmaster, setGrandmaster] = useState("magnuscarlsen")
@@ -104,17 +108,17 @@ const GrandmasterGames = () => {
     setAnalyzing(true)
 
     try {
-      const { text } = await generateText({
-        model: openai("gpt-4o"),
+      const response = await openai.createCompletion({
+        model: "text-davinci-002",
         prompt: `Analyze this chess position and the current game state. Provide strategic insights and key ideas:
                 Position FEN: ${currentPosition.fen()}
                 Game PGN: ${selectedGame.pgn}
                 Current Move: ${moveIndex}`,
-        system:
-          "You are an expert chess analyst. Provide clear, concise analysis focusing on the key strategic elements and tactical opportunities in the position.",
+        max_tokens: 150,
+        temperature: 0.7,
       })
 
-      setAnalysis(text)
+      setAnalysis(response.data.choices[0].text.trim())
     } catch (error) {
       console.error("Error analyzing position:", error)
       setAnalysis("Failed to analyze position. Please try again.")

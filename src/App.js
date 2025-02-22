@@ -13,7 +13,7 @@ import QuizDetail from "./components/Quiz/QuizDetail"
 import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames"
 import Profile from "./components/Profile/Profile"
 import Home from "./components/Home/Home"
-import Header from "./components/Header/Header"
+import Header from "./components/Header"
 import "./App.css"
 
 const App = () => {

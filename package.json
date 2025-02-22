@@ -3,18 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chrisoakman/chessboardjs": "^1.0.0",
-    "axios": "^1.7.9",
-    "chess.js": "^1.0.0-beta.8",
-    "dotenv": "^16.4.7",
+    "axios": "^1.6.2",
+    "chess.js": "^1.0.0-beta.6",
+    "dotenv": "^16.3.1",
     "openai": "^3.2.1",
     "react": "^18.2.0",
-    "react-chessboard": "^4.7.2",
+    "react-chessboard": "^4.3.2",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.8.0",
-    "react-router-dom": "^7.1.1",
-    "react-scripts": "^5.0.1",
-    "ai": "^2.2.35"
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.20.0",
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,8 +28,7 @@
     "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
-    "prettier": "^3.4.2"
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0"
   }
 }
-
