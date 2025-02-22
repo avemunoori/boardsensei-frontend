@@ -8,8 +8,8 @@
   }
   
   /* ===========================
-     2) GLOBAL CUSTOM PROPERTIES
-     =========================== */
+         2) GLOBAL CUSTOM PROPERTIES
+         =========================== */
   :root {
     /* Primary Theme Colors */
     --primary-color: #007bff;
@@ -33,23 +33,18 @@
   }
   
   /* ===========================
-     3) GLOBAL BODY STYLING
-     =========================== */
+         3) GLOBAL BODY STYLING
+         =========================== */
   /* 
-     We'll use an animated gradient for the body background
-     to give an eye-catching effect across the entire site.
-  */
+         We'll use an animated gradient for the body background
+         to give an eye-catching effect across the entire site.
+      */
   body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     color: var(--text-color);
     line-height: 1.6;
     /* Animated multi-stop gradient */
-    background: linear-gradient(
-      135deg,
-      var(--body-gradient1),
-      var(--body-gradient2),
-      var(--body-gradient3)
-    );
+    background: linear-gradient(135deg, var(--body-gradient1), var(--body-gradient2), var(--body-gradient3));
     background-size: 400% 400%;
     animation: bodyGradientShift 15s ease-in-out infinite;
   }
@@ -68,8 +63,8 @@
   }
   
   /* ===========================
-     4) GLOBAL ELEMENT STYLES
-     =========================== */
+         4) GLOBAL ELEMENT STYLES
+         =========================== */
   
   /* Links inherit color, remove underlines by default */
   a {
@@ -125,4 +120,5 @@
     border-color: var(--primary-color);
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
+  
   

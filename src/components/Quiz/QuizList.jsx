@@ -1,72 +1,98 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import API from "../../services/api";
-import "./QuizList.css"; // CSS styles
+"use client"
+
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import API from "../../services/api"
+import { FaSearch, FaQuestionCircle, FaFilter, FaTrophy, FaArrowRight } from "react-icons/fa"
+import "./QuizList.css"
 
 const QuizList = () => {
-  const [quizzes, setQuizzes] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [quizzes, setQuizzes] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(true)
+  const [showFilters, setShowFilters] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchQuizzes = async () => {
-      try {
-        // Fetch all quizzes from "/quizzes"
-        const { data } = await API.get("/quizzes");
-        // data.data should be an array of quiz objects
-        setQuizzes(data.data || []);
-      } catch (err) {
-        setError(err.response?.data?.message || "Failed to fetch quizzes");
-      }
-    };
+    fetchQuizzes()
+  }, [])
 
-    fetchQuizzes();
-  }, []);
+  const fetchQuizzes = async () => {
+    try {
+      const { data } = await API.get("/quizzes")
+      setQuizzes(data.data)
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to fetch quizzes")
+    } finally {
+      setLoading(false)
+    }
+  }
 
-  // Filter quizzes by the 'openingName' field
   const filteredQuizzes = quizzes.filter((quiz) => {
-    // If there's no openingName, fallback to an empty string
-    const quizTitle = quiz.openingName || "";
-    return quizTitle.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+    const quizTitle = quiz.openingName || ""
+    return quizTitle.toLowerCase().includes(searchTerm.toLowerCase())
+  })
 
-  // Navigate to a specific quiz detail page
   const handleStartQuiz = (quizId) => {
-    navigate(`/quizzes/${quizId}`);
-  };
+    navigate(`/quizzes/${quizId}`)
+  }
+
+  if (loading) {
+    return (
+      <div className="quizzes-loading">
+        <div className="trophy-loader">
+          <FaTrophy className="loader-icon" />
+        </div>
+        <p>Preparing your chess challenges...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="quiz-list-container">
-      <div className="quiz-list-header">
-        <h1>Quizzes</h1>
-        <input
-          type="text"
-          placeholder="Search quizzes..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <div className="quiz-header">
+        <h1>
+          <FaQuestionCircle className="header-icon" />
+          Test Your Chess Skills
+        </h1>
+        <button className="filter-toggle" onClick={() => setShowFilters(!showFilters)}>
+          <FaFilter /> {showFilters ? "Hide Filters" : "Show Filters"}
+        </button>
+      </div>
+
+      <div className={`filters-section ${showFilters ? "show" : ""}`}>
+        <div className="search-bar">
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search for a specific quiz..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </div>
 
       {error && <p className="error-message">{error}</p>}
 
-      <div className="quiz-list-grid">
-        {filteredQuizzes.map((quiz) => {
-          // Safely access openingName
-          const quizTitle = quiz.openingName || "No Title";
-
-          return (
-            <div key={quiz._id} className="quiz-card">
-              <h2>{quizTitle}</h2>
-              <button onClick={() => handleStartQuiz(quiz._id)}>
-                Start Quiz
-              </button>
+      <div className="quiz-grid">
+        {filteredQuizzes.map((quiz) => (
+          <div key={quiz._id} className="quiz-card">
+            <div className="quiz-card-content">
+              <FaQuestionCircle className="quiz-icon" />
+              <h2>{quiz.openingName || "Chess Quiz"}</h2>
+              {quiz.lesson && <p>Related to: {quiz.lesson.name}</p>}
             </div>
-          );
-        })}
+
+            <button onClick={() => handleStartQuiz(quiz._id)} className="start-quiz-button">
+              Take Quiz <FaArrowRight className="button-icon" />
+            </button>
+          </div>
+        ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default QuizList;
+export default QuizList
+

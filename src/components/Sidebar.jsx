@@ -1,46 +1,30 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import "./Sidebar.css";
+import { NavLink } from "react-router-dom"
+import { FaChessBoard, FaBook, FaQuestionCircle, FaTrophy, FaUser } from "react-icons/fa"
+import "./Sidebar.css"
 
-const Sidebar = ({ isAuthenticated, setIsAuthenticated }) => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    // Clear token
-    localStorage.removeItem("token");
-    // Flip auth state
-    setIsAuthenticated(false);
-    // Immediately navigate to login (or home)
-    navigate("/login", { replace: true });
-  };
-
+const Sidebar = () => {
   return (
-    <div className="sidebar">
-      <div className="sidebar-logo">
-        <h1>BoardSensei</h1>
-      </div>
+    <aside className="sidebar">
       <nav className="sidebar-nav">
-        {isAuthenticated ? (
-          <>
-            <NavLink to="/dashboard" className="sidebar-link">Dashboard</NavLink>
-            <NavLink to="/lessons" className="sidebar-link">Lessons</NavLink>
-            <NavLink to="/quizzes" className="sidebar-link">Quizzes</NavLink>
-            <NavLink to="/grandmaster-games" className="sidebar-link">Grandmaster Games</NavLink>
-            <NavLink to="/profile" className="sidebar-link">Profile</NavLink>
-            <button onClick={handleLogout} className="sidebar-link logout-button">
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <NavLink to="/" className="sidebar-link">Home</NavLink>
-            <NavLink to="/login" className="sidebar-link">Login</NavLink>
-            <NavLink to="/register" className="sidebar-link">Register</NavLink>
-          </>
-        )}
+        <NavLink to="/dashboard" className="sidebar-link">
+          <FaChessBoard /> <span>Dashboard</span>
+        </NavLink>
+        <NavLink to="/lessons" className="sidebar-link">
+          <FaBook /> <span>Lessons</span>
+        </NavLink>
+        <NavLink to="/quizzes" className="sidebar-link">
+          <FaQuestionCircle /> <span>Quizzes</span>
+        </NavLink>
+        <NavLink to="/grandmaster-games" className="sidebar-link">
+          <FaTrophy /> <span>Grandmaster Games</span>
+        </NavLink>
+        <NavLink to="/profile" className="sidebar-link">
+          <FaUser /> <span>Profile</span>
+        </NavLink>
       </nav>
-    </div>
-  );
-};
+    </aside>
+  )
+}
 
-export default Sidebar;
+export default Sidebar
+

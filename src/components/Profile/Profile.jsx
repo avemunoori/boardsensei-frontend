@@ -1,30 +1,32 @@
+"use client"
+
 // Profile.jsx
-import React, { useEffect, useState } from "react";
-import API from "../../services/api";
-import "./Profile.css";
+import { useEffect, useState } from "react"
+import API from "../../services/api"
+import "./Profile.css"
 
 const Profile = () => {
-  const [userProgress, setUserProgress] = useState(null);
-  const [error, setError] = useState("");
+  const [userProgress, setUserProgress] = useState(null)
+  const [error, setError] = useState("")
 
   useEffect(() => {
     const fetchUserProgress = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token")
         if (!token) {
-          setError("No token found. Please log in again.");
-          return;
+          setError("No token found. Please log in again.")
+          return
         }
-        const userId = JSON.parse(atob(token.split(".")[1])).id;
-        const { data } = await API.get(`/auth/users/progress/${userId}`);
-        setUserProgress(data.progress);
+        const userId = JSON.parse(atob(token.split(".")[1])).id
+        const { data } = await API.get(`/auth/users/progress/${userId}`)
+        setUserProgress(data.progress)
       } catch (err) {
-        setError(err.response?.data?.message || "Failed to fetch progress");
+        setError(err.response?.data?.message || "Failed to fetch progress")
       }
-    };
+    }
 
-    fetchUserProgress();
-  }, []);
+    fetchUserProgress()
+  }, [])
 
   if (error) {
     return (
@@ -32,7 +34,7 @@ const Profile = () => {
         <h1>Your Profile</h1>
         <p className="error-message">{error}</p>
       </div>
-    );
+    )
   }
 
   if (!userProgress) {
@@ -41,7 +43,7 @@ const Profile = () => {
         <h1>Your Profile</h1>
         <p>Loading...</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -60,14 +62,15 @@ const Profile = () => {
           <h2>Quizzes Completed</h2>
           <ul>
             {userProgress.quizzesCompleted.map((quiz) => {
-              const quizTitle = quiz.openingName || quiz.lesson?.name || "Unknown Quiz";
-              return <li key={quiz._id}>{`Quiz on ${quizTitle}`}</li>;
+              const quizTitle = quiz.openingName || quiz.lesson?.name || "Unknown Quiz"
+              return <li key={quiz._id}>{`Quiz on ${quizTitle}`}</li>
             })}
           </ul>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
+

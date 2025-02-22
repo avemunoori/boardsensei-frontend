@@ -1,47 +1,73 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // <-- Import useNavigate
-import API from "../../services/api";
-import "./LessonsList.css";
+"use client"
+
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import API from "../../services/api"
+import { FaSearch, FaChessKnight, FaFilter, FaBookOpen, FaArrowRight } from "react-icons/fa"
+import "./LessonsList.css"
 
 const LessonsList = () => {
-  const [lessons, setLessons] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate(); // <-- For navigation
+  const [lessons, setLessons] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(true)
+  const [showFilters, setShowFilters] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchLessons = async () => {
-      try {
-        const { data } = await API.get("/lessons");
-        setLessons(data.data); // Assuming lessons are in `data.data`
-      } catch (err) {
-        setError(err.response?.data?.message || "Failed to fetch lessons");
-      }
-    };
+    fetchLessons()
+  }, [])
 
-    fetchLessons();
-  }, []);
+  const fetchLessons = async () => {
+    try {
+      const { data } = await API.get("/lessons")
+      setLessons(data.data)
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to fetch lessons")
+    } finally {
+      setLoading(false)
+    }
+  }
 
-  // Filter lessons by the search term
-  const filteredLessons = lessons.filter((lesson) =>
-    lesson.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredLessons = lessons.filter((lesson) => lesson.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  // Navigate to the lesson detail page
   const handleStartLesson = (lessonId) => {
-    navigate(`/lessons/${lessonId}`);
-  };
+    navigate(`/lessons/${lessonId}`)
+  }
+
+  if (loading) {
+    return (
+      <div className="lessons-loading">
+        <div className="chess-loader">
+          <FaChessKnight className="loader-icon" />
+        </div>
+        <p>Preparing your chess lessons...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="lessons-container">
       <div className="lessons-header">
-        <h1>Lessons</h1>
-        <input
-          type="text"
-          placeholder="Search lessons..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <h1>
+          <FaBookOpen className="header-icon" />
+          Master Chess with Our Lessons
+        </h1>
+        <button className="filter-toggle" onClick={() => setShowFilters(!showFilters)}>
+          <FaFilter /> {showFilters ? "Hide Filters" : "Show Filters"}
+        </button>
+      </div>
+
+      <div className={`filters-section ${showFilters ? "show" : ""}`}>
+        <div className="search-bar">
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search for a specific lesson..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </div>
 
       {error && <p className="error-message">{error}</p>}
@@ -49,16 +75,21 @@ const LessonsList = () => {
       <div className="lessons-grid">
         {filteredLessons.map((lesson) => (
           <div key={lesson._id} className="lesson-card">
-            <h2>{lesson.name}</h2>
-            <p>{lesson.description}</p>
-            <button onClick={() => handleStartLesson(lesson._id)}>
-              Start Lesson
+            <div className="lesson-card-content">
+              <FaChessKnight className="lesson-icon" />
+              <h2>{lesson.name}</h2>
+              <p>{lesson.description}</p>
+            </div>
+
+            <button onClick={() => handleStartLesson(lesson._id)} className="start-lesson-button">
+              Start Lesson <FaArrowRight className="button-icon" />
             </button>
           </div>
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LessonsList;
+export default LessonsList
+

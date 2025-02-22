@@ -1,139 +1,68 @@
-/* 
-  MAIN SIDEBAR CONTAINER 
-  - Animated gradient background 
-*/
 .sidebar {
-    width: 240px;
-    height: 100vh;
-    background: linear-gradient(135deg, #1a1a1a, #2b2b2b, #333333);
-    background-size: 400% 400%;
-    animation: sidebarGradientShift 12s ease-in-out infinite; /* Looping gradient shift */
-  
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    position: relative;
-    animation: fadeInLeft 1s ease; /* Slide-in from the left */
+  width: 250px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: slideInLeft 0.5s ease-out;
+  transition: transform var(--transition-speed) ease;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--accent-color);
+}
+
+.sidebar-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-left-color: var(--accent-color);
+}
+
+.sidebar-link svg {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.sidebar-link span {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
   }
-  
-  /* 
-    KEYFRAME for the sidebar's shifting background 
-  */
-  @keyframes sidebarGradientShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+
+  .sidebar.open {
+    transform: translateX(0);
   }
-  
-  /* SIDEBAR LOGO */
-  .sidebar-logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    font-family: "Poppins", sans-serif;
-    position: relative;
-  
-    /* Gradient text fallback color */
-    color: #ffffff;
-  
-    /* Gradient text for modern browsers */
-    background: linear-gradient(45deg, #007bff, #9f6eff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  
-    /* Standard properties for forward-compatibility */
-    background-clip: text;
-    color: transparent;
-  
-    /* Subtle text shadow for depth */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  
-    /* Optional mild shimmer effect on the logo text */
-    animation: sidebarLogoShimmer 3s linear infinite;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
   }
-  
-  /* SIDEBAR LOGO SHIMMER (if you want extra "wow") */
-  @keyframes sidebarLogoShimmer {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  to {
+    transform: translateX(0);
   }
-  
-  /* SIDEBAR NAVIGATION LINKS WRAPPER */
-  .sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-  }
-  
-  /* INDIVIDUAL LINK */
-  .sidebar-link {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 1rem;
-    padding: 10px 15px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    position: relative;
-    overflow: hidden; /* If we use radial highlight behind each link */
-  }
-  
-  /* Radial highlight effect behind the link on hover */
-  .sidebar-link::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 80%);
-    transform: translateY(-50%);
-    transition: height 0.4s ease;
-    z-index: -1;
-  }
-  
-  .sidebar-link:hover::before {
-    height: 200%;
-  }
-  
-  /* Hover State for Links */
-  .sidebar-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateX(5px); /* Slight slide to the right on hover */
-  }
-  
-  /* ACTIVE LINK (current route) */
-  .active {
-    background-color: rgba(255, 255, 255, 0.2);
-    font-weight: bold;
-    transform: translateX(5px);
-  }
-  
-  /* ANIMATIONS */
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
+}
+

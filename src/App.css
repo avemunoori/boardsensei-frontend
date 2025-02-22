@@ -1,192 +1,108 @@
-/* ===========================
-   APP LAYOUT & SHARED STYLES
-   =========================== */
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f5f7fa;
+  --accent-color: #ff6b6b;
+  --text-color: #333333;
+  --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --card-background: rgba(255, 255, 255, 0.1);
+  --card-border: 1px solid rgba(255, 255, 255, 0.2);
+  --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --button-gradient: linear-gradient(135deg, #6e8efb, #a777e3);
+  --button-hover-gradient: linear-gradient(135deg, #5a7df9, #9665e0);
+  --transition-speed: 0.3s;
+}
 
-/* Main App Container */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--background-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
 .app-container {
   display: flex;
-  flex-direction: row;
-  height: 100vh;
-  /* We rely on the body’s animated background, 
-     so no extra background needed here unless you want layering. */
+  min-height: 100vh;
 }
 
-/* SIDEBAR */
-.sidebar {
-  width: 240px;
-  background: linear-gradient(135deg, #1a1a1a, #2b2b2b, #333333);
-  background-size: 400% 400%;
-  animation: sidebarBgShift 12s ease-in-out infinite; /* Optional shifting gradient in the sidebar */
-  color: #ffffff;
+.content-wrapper {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-medium);
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-  position: relative;
-  animation: fadeInLeft 1s ease; /* Slide in from left */
-}
-
-/* Sidebar shifting gradient keyframe */
-@keyframes sidebarBgShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Slide in from the left */
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Example Sidebar Title */
-.sidebar h1 {
-  font-size: 1.8rem;
-  margin-bottom: var(--spacing-medium);
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(45deg, var(--primary-color), #9f6eff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  /* Optional shimmer */
-  animation: sidebarTitleShimmer 3s linear infinite;
-}
-
-@keyframes sidebarTitleShimmer {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Sidebar Links */
-.sidebar-link {
-  text-decoration: none;
-  color: #ffffff;
-  padding: var(--spacing-small) calc(var(--spacing-small) + 5px);
-  border-radius: var(--border-radius);
-  margin-bottom: var(--spacing-small);
-  font-size: 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  margin: 20px;
   overflow: hidden;
+  box-shadow: var(--card-shadow);
 }
 
-/* Radial highlight behind link on hover */
-.sidebar-link::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-  transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease;
-  z-index: -1;
-}
-
-.sidebar-link:hover::before {
-  width: 200%;
-  height: 200%;
-}
-
-.sidebar-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: translateX(5px); /* Subtle shift */
-}
-
-/* Active Link */
-.sidebar-link.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  font-weight: bold;
-  transform: translateX(5px);
-}
-
-/* CONTENT CONTAINER */
-.content-container {
-  flex: 1;
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
   overflow-y: auto;
-  padding: var(--spacing-medium);
-  background-color: #ffffff;
-  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: var(--border-radius);
-  position: relative;
-  animation: fadeIn 1.2s ease;
 }
 
-/* Keyframes for content fade-in */
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a7bc8;
+}
+
+/* Animations */
 @keyframes fadeIn {
-  0% {
+  from {
     opacity: 0;
-    transform: translateY(20px);
   }
-  40% {
-    opacity: 0.6;
-    transform: translateY(5px);
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
   }
   100% {
-    opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
-/* Headings inside the content area use the primary color by default */
-.content-container h1,
-.content-container h2,
-.content-container h3 {
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-small);
-  font-family: 'Roboto', sans-serif;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-wrapper {
+    margin: 10px;
+  }
+
+  .main-content {
+    padding: 15px;
+  }
 }
 
-/* Buttons (overrides if needed) */
-button {
-  padding: 12px 20px; 
-  color: #ffffff;
-  background-color: var(--primary-color);
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  font-weight: bold;
-}
-
-button:hover {
-  background-color: var(--primary-color-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-/* Example Card */
-.card {
-  background-color: #ffffff;
-  padding: var(--spacing-medium);
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-}
-
-.card:hover {
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  transform: translateY(-3px);
-}

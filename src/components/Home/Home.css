@@ -1,247 +1,160 @@
-/* 
-  MAIN HOME CONTAINER 
-  - Fill entire screen with the marble image,
-  - plus an animated overlay for a dreamy effect.
-*/
 .home-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: url("https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80")
+    center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1.5s ease;
+}
+
+.hero-section h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(90deg, #fff, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s infinite;
+}
+
+.hero-section p {
+  font-size: 1.3rem;
+  color: #f0f0f0;
+  margin-bottom: 2rem;
+}
+
+.home-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.home-button {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background: var(--button-gradient);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.home-button:hover {
+  background: var(--button-hover-gradient);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+}
+
+.feature-cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.feature-card {
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  width: 300px;
+  transition: all var(--transition-speed) ease;
+  border: var(--card-border);
+  backdrop-filter: blur(4px);
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: #f0f0f0;
+  font-size: 1rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+
+  .feature-cards {
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Center hero content vertically if desired */
-    position: relative;
-    overflow: hidden; /* So overlay doesn’t scroll */
-  
-    /* Marble chess theme, forced to cover the entire container */
-    background: url("https://www.samsonhistorical.com/cdn/shop/products/Brown-and-Tan-Marble-Chess-Set-2_1200x.jpg?v=1675363469")
-      center center / cover no-repeat;
   }
-  
-  /* 
-    ANIMATED GRADIENT OVERLAY 
-    - Subtle but mesmerizing effect 
-  */
-  .home-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Multi-stop gradient that shifts over time */
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.4) 0%,
-      rgba(0, 0, 0, 0.6) 50%,
-      rgba(0, 0, 0, 0.4) 100%
-    );
-    background-size: 200% 200%;
-    animation: overlayGradient 10s ease-in-out infinite;
-    z-index: 1;
-    backdrop-filter: blur(2px); /* Soft blur to blend with marble */
-  }
-  
-  /* 
-    KEYFRAME for overlay's shifting gradient 
-  */
-  @keyframes overlayGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  /* HERO SECTION 
-     - Content on top of the overlay
-  */
-  .hero-section {
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 2; /* Above the overlay */
-    animation: fadeInUp 1.5s ease;
-  }
-  
-  /* SHIMMER TEXT 
-     - Large, glowing text that cycles through a color gradient
-  */
-  .hero-section h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    font-family: "Poppins", sans-serif;
-    position: relative;
-    color: #fff;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-  
-    /* Shimmer effect */
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.8),
-      rgba(255, 255, 255, 0.3),
-      rgba(255, 255, 255, 0.8)
-    );
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text; /* standard property */
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 3s infinite;
-  }
-  
-  /* 
-    TEXT SHIMMER KEYFRAME 
-  */
-  @keyframes shimmer {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  /* Hero Subtitle */
-  .hero-section p {
-    font-size: 1.3rem;
-    color: #f0f0f0;
-    animation: fadeIn 2s ease;
-    margin-bottom: 30px;
-  }
-  
-  /* 
-    HERO BUTTONS 
-  */
-  .home-actions {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    animation: fadeInUp 2.2s ease;
-  }
-  
-  .home-button {
-    padding: 14px 28px;
-    font-size: 1.2rem;
-    color: #ffffff;
-    background: linear-gradient(45deg, #007bff, #0056b3);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .home-button:hover {
-    background: linear-gradient(45deg, #0056b3, #003f8a);
-    transform: scale(1.08);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.7);
-  }
-  
-  /* FEATURE CARDS 
-     - Appear in front of overlay, with fade-up effect
-  */
-  .feature-cards {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 2;
-    animation: fadeInUp 2.5s ease;
-  }
-  
+
   .feature-card {
-    background-color: #ffffff;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden; /* so glows or radial effects don't overflow */
-    animation: fadeIn 2.5s ease;
+    width: 100%;
+    max-width: 300px;
   }
-  
-  .feature-card:hover {
-    transform: translateY(-8px) rotate(0.5deg);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-    background-color: #f9f9f9;
-  }
-  
-  /* OPTIONAL: Radial highlight on hover */
-  .feature-card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0) 80%
-    );
-    border-radius: 50%;
-    transform: scale(0);
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    opacity: 0;
-    z-index: -1;
-  }
-  
-  .feature-card:hover::before {
-    transform: scale(1);
-    opacity: 1;
-  }
-  
-  /* RESPONSIVE DESIGN */
-  @media (max-width: 768px) {
-    .feature-cards {
-      flex-direction: column;
-      align-items: center;
-    }
-    .feature-card {
-      width: 90%;
-    }
-  }
-  
-  /* ANIMATIONS */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    40% {
-      opacity: 0.6;
-      transform: translateY(5px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    50% {
-      opacity: 0.7;
-      transform: translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+}
+
