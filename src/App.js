@@ -1,6 +1,4 @@
-"use client"
-
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Sidebar from "./components/Sidebar"
 import Login from "./components/Auth/Login"
@@ -14,10 +12,12 @@ import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames"
 import Profile from "./components/Profile/Profile"
 import Home from "./components/Home/Home"
 import Header from "./components/Header"
+import { FaBars } from "react-icons/fa"
 import "./App.css"
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -26,13 +26,28 @@ const App = () => {
     }
   }, [])
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen)
+  }
+
   return (
     <Router>
       <div className="app-container">
-        {isAuthenticated && <Sidebar />}
+        {isAuthenticated && (
+          <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+        )}
         <div className="content-wrapper">
-          <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+          <Header 
+            isAuthenticated={isAuthenticated} 
+            setIsAuthenticated={setIsAuthenticated}
+            toggleSidebar={toggleSidebar}
+          />
           <main className="main-content">
+            {isAuthenticated && (
+              <button className="sidebar-toggle" onClick={toggleSidebar}>
+                <FaBars />
+              </button>
+            )}
             <Routes>
               {!isAuthenticated ? (
                 <>

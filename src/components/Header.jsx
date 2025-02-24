@@ -1,8 +1,10 @@
+// components/Header.jsx
+import React from "react"
 import { useNavigate } from "react-router-dom"
-import { FaChess, FaSignOutAlt } from "react-icons/fa"
+import { FaChess, FaSignOutAlt, FaBars } from "react-icons/fa"
 import "./Header.css"
 
-const Header = ({ isAuthenticated, setIsAuthenticated }) => {
+const Header = ({ isAuthenticated, setIsAuthenticated, toggleSidebar }) => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -14,6 +16,11 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
   return (
     <header className="app-header">
       <div className="header-content">
+        {isAuthenticated && (
+          <button className="sidebar-toggle" onClick={toggleSidebar}>
+            <FaBars />
+          </button>
+        )}
         <div className="logo" onClick={() => navigate("/")}>
           <FaChess className="logo-icon" />
           <h1>BoardSensei</h1>
@@ -29,4 +36,3 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
 }
 
 export default Header
-

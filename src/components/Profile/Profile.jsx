@@ -1,8 +1,6 @@
-"use client"
-
-// Profile.jsx
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import API from "../../services/api"
+import { FaChessKnight, FaQuestionCircle } from "react-icons/fa"
 import "./Profile.css"
 
 const Profile = () => {
@@ -41,17 +39,17 @@ const Profile = () => {
     return (
       <div className="profile-container">
         <h1>Your Profile</h1>
-        <p>Loading...</p>
+        <p className="loading-message">Loading your chess journey...</p>
       </div>
     )
   }
 
   return (
     <div className="profile-container">
-      <h1>Your Profile</h1>
+      <h1>Your Chess Journey</h1>
       <div className="profile-content">
         <div className="progress-section">
-          <h2>Lessons Completed</h2>
+          <h2><FaChessKnight /> Lessons Completed</h2>
           <ul>
             {userProgress.lessonsCompleted.map((lesson) => (
               <li key={lesson._id}>{lesson.name}</li>
@@ -59,7 +57,7 @@ const Profile = () => {
           </ul>
         </div>
         <div className="progress-section">
-          <h2>Quizzes Completed</h2>
+          <h2><FaQuestionCircle /> Quizzes Completed</h2>
           <ul>
             {userProgress.quizzesCompleted.map((quiz) => {
               const quizTitle = quiz.openingName || quiz.lesson?.name || "Unknown Quiz"
@@ -73,4 +71,3 @@ const Profile = () => {
 }
 
 export default Profile
-
