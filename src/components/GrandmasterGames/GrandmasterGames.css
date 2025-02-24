@@ -1,27 +1,29 @@
 .grandmaster-games-container {
-  padding: 20px;
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  color: #ffffff;
 }
 
 .grandmaster-games-container h1 {
-  color: #ffffff;
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .search-controls {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 1rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .search-controls select,
 .search-controls input {
-  padding: 10px;
+  padding: 0.75rem 1rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -36,38 +38,39 @@
 }
 
 .fetch-button {
-  background: var(--accent-color);
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .fetch-button:hover {
-  background: #ff8c8c;
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(110, 142, 251, 0.4);
 }
 
 .fetch-button:disabled {
   background: #cccccc;
   cursor: not-allowed;
+  transform: none;
 }
 
 .game-analysis-container {
   display: grid;
   grid-template-columns: 300px 1fr;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .games-list {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  padding: 15px;
+  padding: 1.5rem;
   height: 600px;
   overflow-y: auto;
 }
@@ -75,13 +78,13 @@
 .game-item {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .game-item:hover {
@@ -90,12 +93,12 @@
 }
 
 .game-item.selected {
-  background: var(--accent-color);
+  background: rgba(110, 142, 251, 0.3);
 }
 
 .game-icon {
   font-size: 1.5rem;
-  color: #ffffff;
+  color: #ffd700;
 }
 
 .game-info {
@@ -105,7 +108,7 @@
 .game-info h3 {
   color: #ffffff;
   font-size: 0.9rem;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }
 
 .game-info p {
@@ -115,94 +118,136 @@
 }
 
 .game-date {
-  font-size: 0.7rem !important;
-  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .game-display {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  padding: 20px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
 }
 
 .chessboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 1.5rem;
 }
 
 .move-controls {
   display: flex;
-  gap: 10px;
+  justify-content: center;
   align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .move-controls button {
-  background: var(--accent-color);
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
   color: #ffffff;
   border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 5px;
-  transition: all 0.3s ease;
+  gap: 0.5rem;
 }
 
 .move-controls button:hover {
-  background: #ff8c8c;
+  background: linear-gradient(135deg, #5a7df9, #9665e0);
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(110, 142, 251, 0.4);
 }
 
 .move-controls button:disabled {
   background: #cccccc;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 .move-indicator {
+  font-size: 1rem;
   color: #ffffff;
-  font-weight: bold;
+  font-weight: 600;
+}
+
+.game-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
 }
 
 .analyze-button {
-  background: #4caf50;
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .analyze-button:hover {
-  background: #45a049;
+  background: linear-gradient(135deg, #ff8a5b, #ff4757);
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 153, 102, 0.4);
 }
 
 .analyze-button:disabled {
   background: #cccccc;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
+}
+
+.chess-com-button {
+  background: linear-gradient(135deg, #7fa650, #4d6b30);
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chess-com-button:hover {
+  background: linear-gradient(135deg, #8fb760, #5d7b40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(127, 166, 80, 0.4);
+}
+
+.chess-com-button svg {
+  font-size: 0.8rem;
 }
 
 .analysis-container {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
-  padding: 15px;
+  padding: 1.5rem;
   color: #ffffff;
 }
 
 .analysis-container h3 {
-  color: var(--accent-color);
-  margin-bottom: 10px;
+  color: #ffd700;
+  margin-bottom: 1rem;
 }
 
 .analysis-container p {
@@ -229,4 +274,3 @@
     width: 100%;
   }
 }
-

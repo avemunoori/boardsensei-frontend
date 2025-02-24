@@ -4,7 +4,7 @@ import { useState } from "react"
 import axios from "axios"
 import { Chess } from "chess.js"
 import { Chessboard } from "react-chessboard"
-import { FaChess, FaArrowLeft, FaArrowRight } from "react-icons/fa"
+import { FaChess, FaArrowLeft, FaArrowRight, FaExternalLinkAlt } from "react-icons/fa"
 import { Configuration, OpenAIApi } from "openai"
 import "./GrandmasterGames.css"
 
@@ -21,6 +21,7 @@ const GrandmasterGames = () => {
   const [selectedGame, setSelectedGame] = useState(null)
   const [currentPosition, setCurrentPosition] = useState(new Chess())
   const [moveIndex, setMoveIndex] = useState(0)
+  const [moves, setMoves] = useState([])
   const [analysis, setAnalysis] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -73,17 +74,22 @@ const GrandmasterGames = () => {
     setCurrentPosition(chess)
     setMoveIndex(0)
     setAnalysis("")
+    // Extract moves from PGN
+    const moves = chess.history()
+    setMoves(moves)
   }
 
   const handleNextMove = () => {
-    if (!selectedGame) return
+    if (!selectedGame || moveIndex >= moves.length) return
+    
     const chess = new Chess()
     chess.loadPgn(selectedGame.pgn)
-    const moves = chess.history()
-    if (moveIndex < moves.length) {
+    const gameMoves = chess.history()
+    
+    if (moveIndex < gameMoves.length) {
       const newChess = new Chess()
       for (let i = 0; i <= moveIndex; i++) {
-        newChess.move(moves[i])
+        newChess.move(gameMoves[i])
       }
       setCurrentPosition(newChess)
       setMoveIndex(moveIndex + 1)
@@ -92,15 +98,23 @@ const GrandmasterGames = () => {
 
   const handlePrevMove = () => {
     if (!selectedGame || moveIndex === 0) return
+    
     const chess = new Chess()
     chess.loadPgn(selectedGame.pgn)
-    const moves = chess.history()
+    const gameMoves = chess.history()
+    
     const newChess = new Chess()
     for (let i = 0; i < moveIndex - 1; i++) {
-      newChess.move(moves[i])
+      newChess.move(gameMoves[i])
     }
     setCurrentPosition(newChess)
     setMoveIndex(moveIndex - 1)
+  }
+
+  const handleViewOnChessCom = () => {
+    if (selectedGame && selectedGame.url) {
+      window.open(selectedGame.url, '_blank')
+    }
   }
 
   const analyzePosition = async () => {
@@ -191,13 +205,18 @@ const GrandmasterGames = () => {
                   <FaArrowLeft /> Previous
                 </button>
                 <span className="move-indicator">Move {moveIndex}</span>
-                <button onClick={handleNextMove} disabled={moveIndex === currentPosition.history().length}>
+                <button onClick={handleNextMove} disabled={moveIndex === moves.length}>
                   Next <FaArrowRight />
                 </button>
               </div>
-              <button onClick={analyzePosition} disabled={analyzing} className="analyze-button">
-                {analyzing ? "Analyzing..." : "Analyze Position"}
-              </button>
+              <div className="game-actions">
+                <button onClick={analyzePosition} disabled={analyzing} className="analyze-button">
+                  {analyzing ? "Analyzing..." : "Analyze Position"}
+                </button>
+                <button onClick={handleViewOnChessCom} className="chess-com-button">
+                  View on Chess.com <FaExternalLinkAlt />
+                </button>
+              </div>
             </div>
 
             {analysis && (
@@ -214,4 +233,3 @@ const GrandmasterGames = () => {
 }
 
 export default GrandmasterGames
-
