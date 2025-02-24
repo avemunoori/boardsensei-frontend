@@ -26,7 +26,8 @@ const Dashboard = () => {
         }
         const userId = JSON.parse(atob(token.split(".")[1])).id
         const { data } = await API.get(`/auth/users/progress/${userId}`)
-        setUserProgress(data.progress)
+        console.log("API Response:", data) // Log the API response
+        setUserProgress(data.progress || { lessonsCompleted: [], quizzesCompleted: [] })
       } catch (err) {
         console.error("Error fetching user progress:", err)
         setError(err.response?.data?.message || "Failed to fetch user progress")
