@@ -69,7 +69,7 @@ const GrandmasterGames = () => {
     setCurrentPosition(chess)
     setMoveIndex(0)
     setAnalysis("")
-    // Extract moves from PGN
+    setAnalysisError("")
     const moves = chess.history()
     setMoves(moves)
   }
@@ -116,32 +116,57 @@ const GrandmasterGames = () => {
     if (!selectedGame) return
     setAnalyzing(true)
     setAnalysisError("")
+    setAnalysis("")
+
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY
+    if (!apiKey) {
+      setAnalysisError(
+        "OpenAI API key not found. Please make sure the REACT_APP_OPENAI_API_KEY environment variable is set."
+      )
+      setAnalyzing(false)
+      return
+    }
 
     try {
       const response = await axios.post(
-        'https://api.openai.com/v1/engines/text-davinci-002/completions',
+        'https://api.openai.com/v1/chat/completions',
         {
-          prompt: `Analyze this chess position and the current game state. Provide strategic insights and key ideas:
-                  Position FEN: ${currentPosition.fen()}
-                  Game PGN: ${selectedGame.pgn}
-                  Current Move: ${moveIndex}`,
-          max_tokens: 150,
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: "You are a chess grandmaster analyzing positions. Provide concise, clear analysis focusing on key tactical and strategic elements."
+            },
+            {
+              role: "user",
+              content: `Analyze this chess position and provide strategic insights:
+              Position FEN: ${currentPosition.fen()}
+              Current Move: ${moveIndex}
+              Game Context: This is move ${moveIndex} in a game between ${selectedGame.white} (White) and ${selectedGame.black} (Black).
+              Please provide a brief analysis of the position, key tactical opportunities, and strategic considerations.`
+            }
+          ],
+          max_tokens: 200,
           temperature: 0.7,
         },
         {
           headers: {
-            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+            'Authorization': `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
           },
         }
       )
 
-      setAnalysis(response.data.choices[0].text.trim())
+      const analysisText = response.data.choices[0]?.message?.content
+      if (!analysisText) {
+        throw new Error("No analysis received from OpenAI")
+      }
+      setAnalysis(analysisText.trim())
     } catch (error) {
       console.error("Error analyzing position:", error)
+      const errorMessage = error.response?.data?.error?.message || error.message
       setAnalysisError(
-        `Failed to analyze position. Error: ${error.response?.data?.error?.message || error.message}. 
-        Please check your OpenAI API key and try again.`
+        `Failed to analyze position. ${errorMessage}. Please check your OpenAI API key and try again.`
       )
     } finally {
       setAnalyzing(false)
