@@ -6,20 +6,25 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <nav className="sidebar-nav">
-        <NavLink to="/dashboard" className="sidebar-link">
-          <FaChessBoard /> <span>Dashboard</span>
+        <NavLink to="/dashboard" className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}>
+          <FaChessBoard className="sidebar-icon" />
+          <span>Dashboard</span>
         </NavLink>
-        <NavLink to="/lessons" className="sidebar-link">
-          <FaBook /> <span>Lessons</span>
+        <NavLink to="/lessons" className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}>
+          <FaBook className="sidebar-icon" />
+          <span>Lessons</span>
         </NavLink>
-        <NavLink to="/quizzes" className="sidebar-link">
-          <FaQuestionCircle /> <span>Quizzes</span>
+        <NavLink to="/quizzes" className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}>
+          <FaQuestionCircle className="sidebar-icon" />
+          <span>Quizzes</span>
         </NavLink>
-        <NavLink to="/grandmaster-games" className="sidebar-link">
-          <FaTrophy /> <span>Grandmaster Games</span>
+        <NavLink to="/grandmaster-games" className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}>
+          <FaTrophy className="sidebar-icon" />
+          <span>Grandmaster Games</span>
         </NavLink>
-        <NavLink to="/profile" className="sidebar-link">
-          <FaUser /> <span>Profile</span>
+        <NavLink to="/profile" className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}>
+          <FaUser className="sidebar-icon" />
+          <span>Profile</span>
         </NavLink>
       </nav>
     </aside>
