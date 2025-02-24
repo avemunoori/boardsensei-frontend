@@ -91,3 +91,8 @@
   }
 }
 
+.error-message {
+  color: var(--error-color);
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
