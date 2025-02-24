@@ -1,5 +1,3 @@
-// File: src/components/Dashboard/Dashboard.jsx
-
 "use client"
 
 import { useEffect, useState } from "react"
@@ -10,7 +8,7 @@ import AIChessCoach from "../AIChessCoach/AIChessCoach"
 import "./Dashboard.css"
 
 const Dashboard = () => {
-  const [userProgress, setUserProgress] = useState(null)
+  const [userProgress, setUserProgress] = useState({ lessonsCompleted: [], quizzesCompleted: [] })
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -25,12 +23,21 @@ const Dashboard = () => {
           return
         }
         const userId = JSON.parse(atob(token.split(".")[1])).id
-        const { data } = await API.get(`/auth/users/progress/${userId}`)
-        console.log("API Response:", data) // Log the API response
-        setUserProgress(data.progress || { lessonsCompleted: [], quizzesCompleted: [] })
+        const response = await API.get(`/auth/users/progress/${userId}`)
+        
+        // Check if we have a valid response with progress data
+        if (response.data && response.data.progress) {
+          setUserProgress(response.data.progress)
+        } else {
+          // Initialize empty progress if none exists
+          setUserProgress({ lessonsCompleted: [], quizzesCompleted: [] })
+        }
       } catch (err) {
         console.error("Error fetching user progress:", err)
-        setError(err.response?.data?.message || "Failed to fetch user progress")
+        // Don't set error for 400 status - just use empty progress
+        if (err.response?.status !== 400) {
+          setError(err.response?.data?.message || "Failed to fetch user progress")
+        }
       } finally {
         setLoading(false)
       }
@@ -56,7 +63,7 @@ const Dashboard = () => {
     )
   }
 
-  const hasProgress = userProgress && (userProgress.lessonsCompleted.length > 0 || userProgress.quizzesCompleted.length > 0)
+  const hasProgress = userProgress.lessonsCompleted.length > 0 || userProgress.quizzesCompleted.length > 0
 
   return (
     <div className="dashboard-container">
