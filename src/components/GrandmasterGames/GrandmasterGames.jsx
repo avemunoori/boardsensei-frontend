@@ -5,13 +5,7 @@ import axios from "axios"
 import { Chess } from "chess.js"
 import { Chessboard } from "react-chessboard"
 import { FaChess, FaArrowLeft, FaArrowRight, FaExternalLinkAlt } from "react-icons/fa"
-import { Configuration, OpenAIApi } from "openai"
 import "./GrandmasterGames.css"
-
-const configuration = new Configuration({
-  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(configuration)
 
 const GrandmasterGames = () => {
   const [grandmaster, setGrandmaster] = useState("magnuscarlsen")
@@ -26,6 +20,7 @@ const GrandmasterGames = () => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [analyzing, setAnalyzing] = useState(false)
+  const [analysisError, setAnalysisError] = useState("")
 
   const handleFetchGames = async () => {
     if (!month || !year) {
@@ -81,11 +76,11 @@ const GrandmasterGames = () => {
 
   const handleNextMove = () => {
     if (!selectedGame || moveIndex >= moves.length) return
-    
+
     const chess = new Chess()
     chess.loadPgn(selectedGame.pgn)
     const gameMoves = chess.history()
-    
+
     if (moveIndex < gameMoves.length) {
       const newChess = new Chess()
       for (let i = 0; i <= moveIndex; i++) {
@@ -98,11 +93,11 @@ const GrandmasterGames = () => {
 
   const handlePrevMove = () => {
     if (!selectedGame || moveIndex === 0) return
-    
+
     const chess = new Chess()
     chess.loadPgn(selectedGame.pgn)
     const gameMoves = chess.history()
-    
+
     const newChess = new Chess()
     for (let i = 0; i < moveIndex - 1; i++) {
       newChess.move(gameMoves[i])
@@ -113,29 +108,41 @@ const GrandmasterGames = () => {
 
   const handleViewOnChessCom = () => {
     if (selectedGame && selectedGame.url) {
-      window.open(selectedGame.url, '_blank')
+      window.open(selectedGame.url, "_blank")
     }
   }
 
   const analyzePosition = async () => {
     if (!selectedGame) return
     setAnalyzing(true)
+    setAnalysisError("")
 
     try {
-      const response = await openai.createCompletion({
-        model: "text-davinci-002",
-        prompt: `Analyze this chess position and the current game state. Provide strategic insights and key ideas:
-                Position FEN: ${currentPosition.fen()}
-                Game PGN: ${selectedGame.pgn}
-                Current Move: ${moveIndex}`,
-        max_tokens: 150,
-        temperature: 0.7,
-      })
+      const response = await axios.post(
+        'https://api.openai.com/v1/engines/text-davinci-002/completions',
+        {
+          prompt: `Analyze this chess position and the current game state. Provide strategic insights and key ideas:
+                  Position FEN: ${currentPosition.fen()}
+                  Game PGN: ${selectedGame.pgn}
+                  Current Move: ${moveIndex}`,
+          max_tokens: 150,
+          temperature: 0.7,
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
 
       setAnalysis(response.data.choices[0].text.trim())
     } catch (error) {
       console.error("Error analyzing position:", error)
-      setAnalysis("Failed to analyze position. Please try again.")
+      setAnalysisError(
+        `Failed to analyze position. Error: ${error.response?.data?.error?.message || error.message}. 
+        Please check your OpenAI API key and try again.`
+      )
     } finally {
       setAnalyzing(false)
     }
@@ -223,6 +230,12 @@ const GrandmasterGames = () => {
               <div className="analysis-container">
                 <h3>AI Analysis</h3>
                 <p>{analysis}</p>
+              </div>
+            )}
+            
+            {analysisError && (
+              <div className="analysis-error">
+                <p>{analysisError}</p>
               </div>
             )}
           </div>
