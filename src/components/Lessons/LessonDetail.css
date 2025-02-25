@@ -1,240 +1,175 @@
-/* 
-  MAIN LESSON DETAIL CONTAINER 
-  - Animated gradient background for extra “wow”
-*/
 .lesson-detail-container {
   min-height: 100vh;
-  padding: 20px;
-
-  background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
-  background-size: 400% 400%;
-  animation: lessonDetailBgShift 12s ease-in-out infinite; /* shifting gradient */
-
-  position: relative;
-  animation: fadeIn 1s ease;
+  padding: 2rem;
+  background-color: #0f172a;
+  color: #f8fafc;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Keyframe for container's animated gradient */
-@keyframes lessonDetailBgShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* LESSON INFO CARD */
 .lesson-info-card {
-  background-color: #ffffff;
-  width: 80%;
+  background-color: #1e293b;
+  width: 100%;
   max-width: 800px;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  animation: fadeInUp 1.8s ease;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
   text-align: center;
-  position: relative;
-  overflow: hidden; /* if we want a radial effect on hover */
+  animation: fadeInUp 0.6s ease;
 }
 
-/* Title in the Lesson Info Card */
 .lesson-info-card h1 {
-  font-size: 2.4rem;
-  margin-bottom: 20px;
-  font-family: "Poppins", sans-serif;
-  position: relative;
-
-  /* Gradient text fallback color */
-  color: #333333;
-
-  /* Gradient text for modern browsers */
-  background: linear-gradient(45deg, #007bff, #9f6eff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* Standard properties for forward-compatibility */
-  background-clip: text;
-  color: transparent;
-
-  /* Soft text shadow for depth */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-
-  /* Optional mild shimmer effect for the lesson title */
-  animation: lessonTitleShimmer 3s linear infinite;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  color: #60a5fa;
+  letter-spacing: -0.025em;
 }
 
-/* Shimmer keyframe for the lesson title */
-@keyframes lessonTitleShimmer {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Lesson Description Text */
 .lesson-description {
-  font-size: 1.2rem;
-  color: #555555;
+  font-size: 1rem;
+  color: #94a3b8;
   line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
-/* 
-    OPTIONAL CHESSBOARD SECTION 
-    - If you want to wrap your ChessBoard in a separate container 
-    - for alignment or spacing.
-  */
 .lesson-chessboard-section {
-  width: 80%;
+  width: 100%;
   max-width: 800px;
-  margin-bottom: 30px;
-  animation: fadeInUp 1.8s ease;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease;
 }
 
-/* STEPS SECTION */
 .lesson-steps-section {
-  width: 80%;
+  width: 100%;
   max-width: 800px;
-  animation: fadeInUp 2s ease;
+  animation: fadeInUp 1s ease;
 }
 
-/* Steps Section Title */
 .lesson-steps-section h2 {
-  font-size: 1.6rem;
-  color: #007bff;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #60a5fa;
+  margin-bottom: 1.5rem;
   text-align: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
 }
 
-/* STEPS LIST */
 .lesson-steps-list {
   list-style-type: none;
   padding: 0;
   margin: 0 auto;
 }
 
-/* INDIVIDUAL STEP (as a card) */
 .lesson-step {
-  background: #ffffff;
-  margin-bottom: 15px;
-  padding: 15px 20px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background: #1e293b;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden; /* if we do a radial glow effect */
 }
 
-/* Radial highlight on step hover */
-.lesson-step::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(159, 110, 255, 0.15) 0%, rgba(0, 123, 255, 0) 60%);
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(0);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: -1;
-}
-
-.lesson-step:hover::before {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Step Hover */
 .lesson-step:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* STEP HEADER (Move + Step Index) */
 .step-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
-  font-size: 1rem;
-  color: #333333;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
 }
 
 .step-index {
-  font-weight: bold;
-  color: #333333;
+  font-weight: 600;
+  color: #60a5fa;
 }
 
 .step-move {
-  font-weight: bold;
-  color: #007bff;
+  font-weight: 600;
+  color: #fcd34d;
 }
 
-/* STEP EXPLANATION */
 .step-explanation {
   font-size: 1rem;
-  color: #555555;
-  line-height: 1.4;
+  color: #e2e8f0;
+  line-height: 1.6;
 }
 
-/* LOADING & ERROR STATES */
+.complete-lesson-button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.complete-lesson-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.completed-message {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #065f46;
+  color: #ecfdf5;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
 .error-message {
-  color: red;
-  font-size: 1.1rem;
-  margin-bottom: 10px;
+  color: #fca5a5;
+  background-color: rgba(239, 68, 68, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
   text-align: center;
-}
-
-.loading-message {
-  font-size: 1.1rem;
-  margin-top: 20px;
-  text-align: center;
-  color: #555555;
-}
-
-/* FADE-IN ANIMATIONS */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  margin-top: 1rem;
 }
 
 @keyframes fadeInUp {
-  0% {
+  from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
-  50% {
-    opacity: 0.7;
-    transform: translateY(15px);
-  }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .lesson-detail-container {
+    padding: 1rem;
+  }
+
+  .lesson-info-card,
+  .lesson-chessboard-section,
+  .lesson-steps-section {
+    width: 100%;
+  }
+
+  .lesson-info-card h1 {
+    font-size: 1.75rem;
+  }
+
+  .lesson-steps-section h2 {
+    font-size: 1.25rem;
   }
 }
 

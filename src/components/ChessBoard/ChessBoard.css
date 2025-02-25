@@ -1,152 +1,143 @@
-/* 
-  MAIN CONTAINER FOR THE CHESSBOARD 
-  - Animated gradient background for a vibrant look.
-*/
 .chessboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f3f4f6, #e9ecef, #dfe3e8);
-  background-size: 400% 400%;
-  animation: chessBgShift 12s ease-in-out infinite; /* Smooth gradient shifting */
+  padding: 2rem;
+  background-color: #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
 }
 
-/* Keyframe for the container's animated background */
-@keyframes chessBgShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* 
-    CHESSBOARD WRAPPER 
-    - Slight glow and rounding to focus on the board
-  */
 .chessboard-wrapper {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
-  border: 2px solid #333;
-  border-radius: 10px;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  animation: fadeInUp 1.5s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.8s ease;
 }
 
-/* Fade-in-up animation for the board wrapper */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 
-    MOVE CONTROLS (Previous, Next) 
-  */
 .move-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  gap: 10px;
-  animation: fadeIn 2s ease; /* Staggered fade in for controls */
+  margin-top: 1.5rem;
+  gap: 1rem;
 }
 
-/* Fade-in for the move-controls */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  40% {
-    opacity: 0.6;
-    transform: translateY(5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Move control buttons */
 .move-controls button {
-  padding: 10px 20px;
+  padding: 0.75rem 1.25rem;
   font-size: 1rem;
   color: #ffffff;
-  background: linear-gradient(45deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
+  transition: all 0.3s ease;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Hover effect for move control buttons */
 .move-controls button:hover {
-  background: linear-gradient(45deg, #0056b3, #003f8a);
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
-/* Disabled state */
+.move-controls button:active {
+  transform: translateY(0);
+}
+
 .move-controls button:disabled {
-  background-color: #cccccc;
+  background: #4b5563;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-/* Current move display */
 .current-move {
   font-size: 1rem;
-  color: #333333;
-  margin: 0 15px;
-  font-family: "Poppins", sans-serif;
+  color: #e2e8f0;
+  margin: 0 1rem;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 500;
 }
 
 .extra-controls {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
-  animation: fadeIn 2.2s ease;
+  gap: 1rem;
+  margin-top: 1.5rem;
   justify-content: center;
 }
 
 .extra-controls button {
-  padding: 10px 20px;
+  padding: 0.75rem 1.25rem;
   font-size: 1rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   color: #ffffff;
-  background: linear-gradient(45deg, #007bff, #825eff);
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  font-weight: bold;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .extra-controls button:hover {
-  background: linear-gradient(45deg, #825eff, #5b34ea);
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(123, 55, 255, 0.5);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.extra-controls button:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .chessboard-container {
+    padding: 1rem;
+  }
+
+  .move-controls,
+  .extra-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .move-controls button,
+  .extra-controls button {
+    width: 100%;
+  }
+
+  .current-move {
+    text-align: center;
+    margin: 1rem 0;
+  }
 }
 
