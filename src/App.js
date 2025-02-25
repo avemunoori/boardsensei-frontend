@@ -14,7 +14,6 @@ import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames"
 import Profile from "./components/Profile/Profile"
 import Home from "./components/Home/Home"
 import Header from "./components/Header"
-import { FaBars } from "react-icons/fa"
 import "./App.css"
 
 const App = () => {
@@ -41,11 +40,6 @@ const App = () => {
             toggleSidebar={toggleSidebar}
           />
           <main className="main-content">
-            {isAuthenticated && (
-              <button className="sidebar-toggle" onClick={toggleSidebar}>
-                <FaBars className="sidebar-toggle-icon" />
-              </button>
-            )}
             <Routes>
               {!isAuthenticated ? (
                 <>

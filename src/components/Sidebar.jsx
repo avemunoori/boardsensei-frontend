@@ -1,11 +1,10 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { FaChessBoard, FaBook, FaQuestionCircle, FaTrophy, FaUser, FaTimes } from "react-icons/fa";
-import "./Sidebar.css";
+import { NavLink } from "react-router-dom"
+import { FaChessBoard, FaBook, FaQuestionCircle, FaTrophy, FaUser, FaTimes } from "react-icons/fa"
+import "./Sidebar.css"
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
-    <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
+    <aside className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar-content">
         <button className="close-button" onClick={toggleSidebar}>
           <FaTimes className="close-icon" />
@@ -21,9 +20,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <NavLink
               key={item.to}
               to={item.to}
-              className={({ isActive }) =>
-                `nav-link ${isActive ? 'active' : ''}`
-              }
+              className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
               onClick={toggleSidebar}
             >
               <item.icon className="nav-icon" />
@@ -33,7 +30,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </nav>
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
+
