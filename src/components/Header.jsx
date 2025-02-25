@@ -51,4 +51,3 @@ const Header = ({ isAuthenticated, setIsAuthenticated, toggleSidebar }) => {
 }
 
 export default Header
-

@@ -22,10 +22,19 @@
     font-size: 1.5rem;
     cursor: pointer;
     transition: color var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    margin-right: 1rem;
   }
   
   .sidebar-toggle:hover {
     color: var(--accent-color);
+  }
+  
+  .sidebar-toggle-icon {
+    font-size: 1.5rem;
   }
   
   .logo-container {
@@ -112,5 +121,3 @@
       font-size: 0.875rem;
     }
   }
-  
-  
