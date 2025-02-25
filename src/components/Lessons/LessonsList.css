@@ -1,8 +1,9 @@
 .lessons-container {
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  color: #f8fafc;
+  color: var(--primary-text);
+  animation: fadeIn 0.5s ease-out;
 }
 
 .lessons-header {
@@ -13,51 +14,50 @@
 }
 
 .lessons-header h1 {
-  font-size: 2.25rem;
-  font-weight: 600;
-  color: #f8fafc;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-text);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-family: "Inter", system-ui, sans-serif;
-  letter-spacing: -0.025em;
+  animation: slideInFromLeft 0.5s ease-out;
 }
 
 .header-icon {
-  font-size: 2.25rem;
-  color: #60a5fa;
+  font-size: 2.5rem;
+  color: var(--accent-color);
 }
 
 .filter-toggle {
-  background: #3b82f6;
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  color: var(--primary-text);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Inter", system-ui, sans-serif;
+  animation: slideInFromRight 0.5s ease-out;
 }
 
 .filter-toggle:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
 .filters-section {
-  background: #2d3748;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 2rem;
   display: none;
-  animation: slideDown 0.3s ease-out;
+  animation: slideInFromTop 0.3s ease-out;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -68,18 +68,18 @@
 .search-bar {
   display: flex;
   align-items: center;
-  background: #1e293b;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 0.75rem 1rem;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
 }
 
 .search-bar:focus-within {
-  box-shadow: 0 0 0 2px #60a5fa;
+  box-shadow: 0 0 0 2px var(--accent-color);
 }
 
 .search-icon {
-  color: #94a3b8;
+  color: var(--secondary-text);
   margin-right: 0.75rem;
   font-size: 1.2rem;
 }
@@ -87,15 +87,14 @@
 .search-bar input {
   background: transparent;
   border: none;
-  color: #f8fafc;
+  color: var(--primary-text);
   font-size: 1rem;
   width: 100%;
   outline: none;
-  font-family: "Inter", system-ui, sans-serif;
 }
 
 .search-bar input::placeholder {
-  color: #94a3b8;
+  color: var(--secondary-text);
 }
 
 .lessons-grid {
@@ -105,13 +104,12 @@
 }
 
 .lesson-card {
-  background: #1e293b;
+  background: linear-gradient(135deg, var(--secondary-bg), var(--primary-bg));
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .lesson-card:hover {
@@ -121,62 +119,55 @@
 
 .lesson-card-content {
   padding: 1.5rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
 }
 
 .lesson-icon {
-  font-size: 2.5rem;
-  color: #60a5fa;
+  font-size: 3rem;
+  color: var(--accent-color);
   margin-bottom: 1rem;
-  align-self: center;
 }
 
 .lesson-card h2 {
-  color: #f8fafc;
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
+  color: var(--primary-text);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
-  font-family: "Inter", system-ui, sans-serif;
 }
 
 .lesson-card p {
-  color: #94a3b8;
-  font-size: 0.875rem;
-  line-height: 1.5;
+  color: var(--secondary-text);
+  font-size: 1rem;
+  line-height: 1.6;
   margin-bottom: 1.5rem;
-  flex-grow: 1;
 }
 
 .start-lesson-button {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: #3b82f6;
-  color: #ffffff;
+  padding: 0.75rem;
+  background: var(--accent-color);
+  color: var(--primary-text);
   border: none;
   cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  border-radius: 0 0 12px 12px;
-  font-family: "Inter", system-ui, sans-serif;
 }
 
 .start-lesson-button:hover {
-  background: #2563eb;
+  background: var(--accent-hover);
 }
 
 .button-icon {
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-speed) ease;
 }
 
 .start-lesson-button:hover .button-icon {
-  transform: translateX(3px);
+  transform: translateX(5px);
 }
 
 .lessons-loading {
@@ -185,7 +176,7 @@
   align-items: center;
   justify-content: center;
   height: 50vh;
-  color: #f8fafc;
+  color: var(--primary-text);
 }
 
 .chess-loader {
@@ -193,35 +184,9 @@
 }
 
 .loader-icon {
-  font-size: 3rem;
-  color: #60a5fa;
+  font-size: 4rem;
+  color: var(--accent-color);
   animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.6;
-    transform: scale(0.9);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 0.6;
-    transform: scale(0.9);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @media (max-width: 768px) {

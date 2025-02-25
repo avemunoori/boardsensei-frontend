@@ -1,19 +1,19 @@
 .grandmaster-games-container {
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  color: #f8fafc;
+  color: var(--primary-text);
+  animation: fadeIn 0.5s ease-out;
 }
 
 .grandmaster-games-container h1 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
   text-align: center;
-  color: #60a5fa;
-  font-family: "Inter", system-ui, sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  color: var(--accent-color);
+  font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideInFromTop 0.5s ease-out;
 }
 
 .search-controls {
@@ -22,6 +22,7 @@
   margin-bottom: 2rem;
   flex-wrap: wrap;
   justify-content: center;
+  animation: slideInFromLeft 0.5s ease-out;
 }
 
 .search-controls select,
@@ -29,44 +30,41 @@
   padding: 0.75rem 1rem;
   border: none;
   border-radius: 8px;
-  font-size: 0.875rem;
-  background: #2d3748;
-  color: #f8fafc;
-  font-family: "Inter", system-ui, sans-serif;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-text);
+  transition: all var(--transition-speed) ease;
 }
 
 .search-controls select:focus,
 .search-controls input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #60a5fa;
+  box-shadow: 0 0 0 2px var(--accent-color);
 }
 
 .search-controls select option {
-  background: #1e293b;
-  color: #f8fafc;
+  background: var(--primary-bg);
+  color: var(--primary-text);
 }
 
 .fetch-button {
-  background: #3b82f6;
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  color: var(--primary-text);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
 }
 
 .fetch-button:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
 .fetch-button:disabled {
-  background: #4b5563;
+  background: var(--secondary-text);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
@@ -77,40 +75,43 @@
   grid-template-columns: 300px 1fr;
   gap: 2rem;
   margin-top: 2rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .games-list {
-  background: #2d3748;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 1.5rem;
   height: 600px;
   overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .game-item {
-  background: #1e293b;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
 .game-item:hover {
-  background: #2c3e50;
+  background: rgba(255, 255, 255, 0.1);
   transform: translateX(5px);
 }
 
 .game-item.selected {
-  background: #3b82f6;
+  background: var(--accent-color);
 }
 
 .game-icon {
   font-size: 1.5rem;
-  color: #fcd34d;
+  color: var(--accent-color);
 }
 
 .game-info {
@@ -118,30 +119,32 @@
 }
 
 .game-info h3 {
-  color: #f8fafc;
+  color: var(--primary-text);
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
 
 .game-info p {
-  color: #94a3b8;
+  color: var(--secondary-text);
   font-size: 0.8rem;
   margin: 0;
 }
 
 .game-date {
   font-size: 0.7rem;
-  color: #64748b;
+  color: var(--secondary-text);
 }
 
 .game-display {
-  background: #2d3748;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .chessboard-container {
@@ -160,29 +163,28 @@
 }
 
 .move-controls button {
-  background: #3b82f6;
-  color: #ffffff;
+  background: var(--accent-color);
+  color: var(--primary-text);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Inter", system-ui, sans-serif;
 }
 
 .move-controls button:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
+  background: var(--accent-hover);
+  transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
 .move-controls button:disabled {
-  background: #4b5563;
+  background: var(--secondary-text);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
@@ -190,7 +192,7 @@
 
 .move-indicator {
   font-size: 1rem;
-  color: #f8fafc;
+  color: var(--primary-text);
   font-weight: 500;
 }
 
@@ -203,16 +205,15 @@
 
 .analyze-button,
 .chess-com-button {
-  background: #3b82f6;
-  color: #ffffff;
+  background: var(--accent-color);
+  color: var(--primary-text);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: all 0.3s ease;
-  font-family: "Inter", system-ui, sans-serif;
+  transition: all var(--transition-speed) ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -220,28 +221,28 @@
 
 .analyze-button:hover,
 .chess-com-button:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
+  background: var(--accent-hover);
+  transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
 .analyze-button:disabled,
 .chess-com-button:disabled {
-  background: #4b5563;
+  background: var(--secondary-text);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
 .analysis-container {
-  background: #1e293b;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   padding: 1.5rem;
-  color: #f8fafc;
+  color: var(--primary-text);
 }
 
 .analysis-container h3 {
-  color: #60a5fa;
+  color: var(--accent-color);
   margin-bottom: 1rem;
   font-weight: 600;
 }
@@ -255,7 +256,7 @@
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
-  color: #fca5a5;
+  color: var(--error-color);
 }
 
 .analysis-error p {

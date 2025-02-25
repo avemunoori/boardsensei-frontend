@@ -1,6 +1,7 @@
 .app-container {
     min-height: 100vh;
-    background-color: #0f172a; /* Dark navy background */
+    background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+    animation: fadeIn 0.5s ease-out;
   }
   
   .app-content {
@@ -12,10 +13,12 @@
   .main-content {
     flex-grow: 1;
     padding: 2rem;
-    background-color: #1e293b; /* Slightly lighter navy for main content */
     margin: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideInFromTop 0.5s ease-out;
   }
   
   @media (max-width: 768px) {
@@ -36,15 +39,22 @@
       top: 1rem;
       left: 1rem;
       z-index: 50;
-      background-color: #2d3748; /* Dark gray for the toggle button */
+      background-color: var(--accent-color);
+      color: var(--primary-text);
       padding: 0.5rem;
       border-radius: 50%;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: all var(--transition-speed) ease;
+    }
+  
+    .sidebar-toggle:hover {
+      background-color: var(--accent-hover);
+      transform: scale(1.1);
     }
   }
   
   .sidebar-toggle-icon {
-    color: #e2e8f0; /* Light gray for the icon */
+    color: var(--primary-text);
   }
   
   

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react"
+"use client"
+
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import API from "../../services/api"
 import { FaBook, FaQuestionCircle, FaTrophy, FaChartLine } from "react-icons/fa"
@@ -22,7 +24,7 @@ const Dashboard = () => {
         }
         const userId = JSON.parse(atob(token.split(".")[1])).id
         const response = await API.get(`/auth/users/progress/${userId}`)
-        
+
         if (response.data && response.data.progress) {
           setUserProgress(response.data.progress)
         } else {
@@ -121,3 +123,4 @@ const DashboardCard = ({ icon: Icon, title, count, action, buttonText }) => (
 )
 
 export default Dashboard
+

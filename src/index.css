@@ -1,145 +1,83 @@
-/* ===========================
-   1) GLOBAL RESET & BOX-SIZING
-   =========================== */
-   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-bg: #0f172a;
+  --secondary-bg: #1e293b;
+  --primary-text: #f8fafc;
+  --secondary-text: #94a3b8;
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --transition-speed: 0.3s;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* ===========================
-     2) GLOBAL CUSTOM PROPERTIES
-     =========================== */
-  :root {
-    /* Primary Theme Colors */
-    --primary-color: #3b82f6;
-    --primary-color-hover: #2563eb;
-    --secondary-color: #1f2937;
-    --text-color: #e2e8f0;
-    --text-color-muted: #9ca3af;
-    --background-color: #111827;
-    --surface-color: #1f2937;
-    --error-color: #ef4444;
-  
-    /* Spacing & Sizing */
-    --spacing-large: 30px;
-    --spacing-medium: 20px;
-    --spacing-small: 10px;
-    --font-size-large: 2rem;
-    --font-size-base: 1.6rem;
-    --border-radius: 8px;
-  
-    /* Gradients for animated backgrounds */
-    --body-gradient1: #0f172a;
-    --body-gradient2: #1e293b;
-    --body-gradient3: #334155;
+  to {
+    opacity: 1;
   }
-  
-  /* ===========================
-     3) GLOBAL BODY STYLING
-     =========================== */
-  body {
-    font-family: "Inter", "Arial", sans-serif;
-    color: var(--text-color);
-    line-height: 1.6;
-    background: linear-gradient(135deg, var(--body-gradient1), var(--body-gradient2), var(--body-gradient3));
-    background-size: 400% 400%;
-    animation: bodyGradientShift 15s ease-in-out infinite;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
   }
-  
-  /* Keyframe for the body's animated gradient */
-  @keyframes bodyGradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  /* ===========================
-     4) GLOBAL ELEMENT STYLES
-     =========================== */
-  
-  /* Links */
-  a {
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: color 0.3s ease;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
   }
-  
-  a:hover {
-    color: var(--primary-color-hover);
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  /* Utility Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--spacing-medium);
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
   }
-  
-  /* Buttons */
-  button {
-    padding: var(--spacing-small) var(--spacing-medium);
-    font-size: 1rem;
-    color: #ffffff;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  button:hover {
-    background-color: var(--primary-color-hover);
-    transform: translateY(-2px);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-  
-  button:disabled {
-    background-color: var(--text-color-muted);
-    cursor: not-allowed;
+  50% {
+    transform: scale(1.05);
   }
-  
-  /* Inputs */
-  input,
-  select,
-  textarea {
-    font-size: 1rem;
-    padding: var(--spacing-small);
-    margin-bottom: var(--spacing-small);
-    border: 1px solid var(--text-color-muted);
-    border-radius: var(--border-radius);
-    background-color: var(--surface-color);
-    color: var(--text-color);
-    width: 100%;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  100% {
+    transform: scale(1);
   }
-  
-  input:focus,
-  select:focus,
-  textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-  }
-  
-  /* Headings */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Poppins", "Arial", sans-serif;
-    color: var(--text-color);
-    margin-bottom: var(--spacing-medium);
-  }
-  
-  /* Paragraphs */
-  p {
-    margin-bottom: var(--spacing-small);
-  }
-  
-  /* ===========================
-     5) UTILITY CLASSES
-     =========================== */
-  .text-center { text-align: center; }
-  .mt-1 { margin-top: var(--spacing-small); }
-  .mt-2 { margin-top: var(--spacing-medium); }
-  .mt-3 { margin-top: var(--spacing-large); }
-  .mb-1 { margin-bottom: var(--spacing-small); }
-  .mb-2 { margin-bottom: var(--spacing-medium); }
-  .mb-3 { margin-bottom: var(--spacing-large); }
+}
+

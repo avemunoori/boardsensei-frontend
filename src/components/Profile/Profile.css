@@ -2,18 +2,18 @@
   padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
-  color: #f8fafc;
+  color: var(--primary-text);
+  animation: fadeIn 0.5s ease-out;
 }
 
 .profile-container h1 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
   text-align: center;
-  color: #60a5fa;
-  font-family: "Inter", system-ui, sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  color: var(--accent-color);
+  font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideInFromTop 0.5s ease-out;
 }
 
 .profile-content {
@@ -23,11 +23,13 @@
 }
 
 .progress-section {
-  background: #1e293b;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
+  animation: slideInFromLeft 0.5s ease-out;
 }
 
 .progress-section:hover {
@@ -38,11 +40,10 @@
 .progress-section h2 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #60a5fa;
+  color: var(--accent-color);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Inter", system-ui, sans-serif;
   font-weight: 600;
 }
 
@@ -52,35 +53,37 @@
 }
 
 .progress-section li {
-  background: #2d3748;
+  background: rgba(255, 255, 255, 0.05);
   margin-bottom: 0.75rem;
   padding: 0.75rem 1rem;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
   font-size: 0.875rem;
-  color: #e2e8f0;
+  color: var(--primary-text);
 }
 
 .progress-section li:hover {
-  background: #3b4758;
+  background: rgba(255, 255, 255, 0.1);
   transform: translateX(5px);
 }
 
 .error-message {
-  color: #fca5a5;
+  color: var(--error-color);
   text-align: center;
   font-size: 1rem;
   background: rgba(239, 68, 68, 0.1);
   padding: 1rem;
   border-radius: 8px;
   margin-top: 1rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .loading-message {
   text-align: center;
   font-size: 1rem;
-  color: #60a5fa;
+  color: var(--accent-color);
   margin-top: 2rem;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 .progress-icon {
@@ -90,13 +93,14 @@
 
 .progress-empty {
   text-align: center;
-  color: #94a3b8;
+  color: var(--secondary-text);
   font-style: italic;
   margin-top: 1rem;
 }
 
 .profile-stats {
-  background: #1e293b;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 1.5rem;
   margin-top: 2rem;
@@ -104,6 +108,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 1rem;
+  animation: slideInFromBottom 0.5s ease-out;
 }
 
 .stat-item {
@@ -112,13 +117,13 @@
 
 .stat-value {
   font-size: 2rem;
-  font-weight: 600;
-  color: #60a5fa;
+  font-weight: 700;
+  color: var(--accent-color);
 }
 
 .stat-label {
   font-size: 0.875rem;
-  color: #94a3b8;
+  color: var(--secondary-text);
   margin-top: 0.25rem;
 }
 
@@ -128,7 +133,7 @@
   }
 
   .profile-container h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   .profile-content {

@@ -1,18 +1,16 @@
 .header {
-    background-color: #1e1e2e;
+    background-color: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0 1.5rem;
-    height: 64px;
-    display: flex;
-    align-items: center;
+    padding: 1rem;
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 1000;
+    animation: slideInFromTop 0.5s ease-out;
   }
   
   .header-container {
-    max-width: 1400px;
-    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -22,112 +20,70 @@
   .logo-container {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    color: var(--primary-text);
+    transition: all var(--transition-speed) ease;
   }
   
   .logo-container:hover {
-    opacity: 0.9;
+    transform: scale(1.05);
   }
   
   .logo-icon {
-    font-size: 1.75rem;
-    color: #60a5fa;
-    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.3));
+    font-size: 2rem;
+    color: var(--accent-color);
   }
   
   .logo-text {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #f8fafc;
-    font-family: "Inter", system-ui, sans-serif;
-    letter-spacing: -0.025em;
+    font-size: 1.5rem;
+    font-weight: 700;
   }
   
   .logout-button {
-    display: inline-flex;
+    background-color: var(--accent-color);
+    color: var(--primary-text);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: #3b82f6;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: "Inter", system-ui, sans-serif;
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
   }
   
   .logout-button:hover {
-    background-color: #2563eb;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
-  }
-  
-  .logout-button:active {
-    transform: translateY(0);
-  }
-  
-  .logout-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
   }
   
   .logout-icon {
     font-size: 1rem;
   }
   
-  .sidebar-toggle {
-    display: none;
-  }
-  
   @media (max-width: 768px) {
-    .sidebar-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      background: rgba(255, 255, 255, 0.05);
-      border: none;
-      border-radius: 8px;
-      color: #94a3b8;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-  
-    .sidebar-toggle:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #f8fafc;
-    }
-  
-    .sidebar-toggle:active {
-      transform: scale(0.95);
-    }
-  
-    .sidebar-toggle-icon {
-      width: 20px;
-      height: 20px;
-    }
-  
     .header {
-      padding: 0 1rem;
+      padding: 0.5rem;
     }
-  }
   
-  @media (max-width: 640px) {
     .logo-text {
-      font-size: 1.125rem;
+      font-size: 1.2rem;
     }
   
     .logout-button {
-      padding: 0.5rem 0.75rem;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
     }
   }
   
-  
+    @keyframes slideInFromTop {
+        from {
+        transform: translateY(-100%);
+        }
+        to {
+        transform: translateY(0);
+        }
+    }
+    
+      
