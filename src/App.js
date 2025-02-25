@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from "react"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
-import Sidebar from "./components/Sidebar"
-import Login from "./components/Auth/Login"
-import Register from "./components/Auth/Register"
-import Dashboard from "./components/Dashboard/Dashboard"
-import LessonsList from "./components/Lessons/LessonsList"
-import LessonDetail from "./components/Lessons/LessonDetail"
-import QuizList from "./components/Quiz/QuizList"
-import QuizDetail from "./components/Quiz/QuizDetail"
-import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames"
-import Profile from "./components/Profile/Profile"
-import Home from "./components/Home/Home"
-import Header from "./components/Header"
-import { FaBars } from "react-icons/fa"
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Dashboard from "./components/Dashboard/Dashboard";
+import LessonsList from "./components/Lessons/LessonsList";
+import LessonDetail from "./components/Lessons/LessonDetail";
+import QuizList from "./components/Quiz/QuizList";
+import QuizDetail from "./components/Quiz/QuizDetail";
+import GrandmasterGames from "./components/GrandmasterGames/GrandmasterGames";
+import Profile from "./components/Profile/Profile";
+import Home from "./components/Home/Home";
+import Header from "./components/Header";
+import { FaBars } from "react-icons/fa";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (token) {
-      setIsAuthenticated(true)
+      setIsAuthenticated(true);
     }
-  }, [])
+  }, []);
 
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800">
+      <div className="min-h-screen bg-gray-100">
         {isAuthenticated && (
           <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         )}
@@ -39,7 +39,7 @@ const App = () => {
             setIsAuthenticated={setIsAuthenticated}
             toggleSidebar={toggleSidebar}
           />
-          <main className="flex-grow p-4 md:p-8 transition-all duration-300 ease-in-out">
+          <main className="flex-grow p-4 md:p-8">
             {isAuthenticated && (
               <button className="md:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded-full shadow-lg" onClick={toggleSidebar}>
                 <FaBars className="text-gray-600" />
@@ -71,7 +71,7 @@ const App = () => {
         </div>
       </div>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
