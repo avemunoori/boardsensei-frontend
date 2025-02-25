@@ -13,7 +13,6 @@ import Profile from "./components/Profile/Profile"
 import Home from "./components/Home/Home"
 import Header from "./components/Header"
 import { FaBars } from "react-icons/fa"
-import "./App.css"
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -32,20 +31,20 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className="min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 text-white">
         {isAuthenticated && (
           <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         )}
-        <div className="content-wrapper">
+        <div className="flex flex-col min-h-screen">
           <Header 
             isAuthenticated={isAuthenticated} 
             setIsAuthenticated={setIsAuthenticated}
             toggleSidebar={toggleSidebar}
           />
-          <main className="main-content">
+          <main className="flex-grow p-4 md:p-8">
             {isAuthenticated && (
-              <button className="sidebar-toggle" onClick={toggleSidebar}>
-                <FaBars />
+              <button className="md:hidden fixed top-4 left-4 z-50 bg-gray-700 p-2 rounded-full shadow-lg" onClick={toggleSidebar}>
+                <FaBars className="text-white" />
               </button>
             )}
             <Routes>

@@ -1,8 +1,5 @@
-"use client"
-
-import { useState } from "react"
+import React, { useState } from "react"
 import axios from "axios"
-import "./AIChessCoach.css"
 
 const AIChessCoach = () => {
   const [userInput, setUserInput] = useState("")
@@ -63,25 +60,29 @@ const AIChessCoach = () => {
   }
 
   return (
-    <div className="ai-coach-container">
-      <h2>AI Chess Coach</h2>
-      <form onSubmit={handleSubmit} className="ai-coach-form">
+    <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6">
+      <h2 className="text-2xl font-bold mb-4 text-center text-yellow-400">AI Chess Coach</h2>
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           placeholder="Ask about chess strategy, openings, or famous games..."
-          className="ai-coach-input"
+          className="w-full p-2 rounded-md bg-gray-700 text-white placeholder-gray-400 mb-2"
         />
-        <button type="submit" className="ai-coach-button" disabled={isLoading}>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          disabled={isLoading}
+        >
           {isLoading ? "Thinking..." : "Ask Coach"}
         </button>
       </form>
-      {error && <p className="error-message">{error}</p>}
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       {aiResponse && (
-        <div className="ai-coach-response">
-          <h3>Coach's Response:</h3>
-          <p>{aiResponse}</p>
+        <div className="bg-gray-800 rounded-md p-4">
+          <h3 className="text-lg font-semibold mb-2 text-yellow-400">Coach's Response:</h3>
+          <p className="text-white">{aiResponse}</p>
         </div>
       )}
     </div>

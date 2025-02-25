@@ -1,0 +1,124 @@
+/* ===========================
+   1) GLOBAL RESET & BOX-SIZING
+   =========================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* ===========================
+         2) GLOBAL CUSTOM PROPERTIES
+         =========================== */
+  :root {
+    /* Primary Theme Colors */
+    --primary-color: #007bff;
+    --primary-color-hover: #0056b3;
+    --secondary-color: #f8f9fa;
+    --text-color: #333333;
+    --error-color: red;
+  
+    /* Spacing & Sizing */
+    --spacing-large: 30px;
+    --spacing-medium: 20px;
+    --spacing-small: 10px;
+    --font-size-large: 2rem;
+    --font-size-base: 1.6rem;
+    --border-radius: 8px;
+  
+    /* WOW: Adjust these as you wish for animated backgrounds */
+    --body-gradient1: #f3f4f6;
+    --body-gradient2: #e9ecef;
+    --body-gradient3: #dfe3e8;
+  }
+  
+  /* ===========================
+         3) GLOBAL BODY STYLING
+         =========================== */
+  /* 
+         We'll use an animated gradient for the body background
+         to give an eye-catching effect across the entire site.
+      */
+  body {
+    font-family: "Arial", sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    /* Animated multi-stop gradient */
+    background: linear-gradient(135deg, var(--body-gradient1), var(--body-gradient2), var(--body-gradient3));
+    background-size: 400% 400%;
+    animation: bodyGradientShift 15s ease-in-out infinite;
+  }
+  
+  /* Keyframe for the body’s animated gradient */
+  @keyframes bodyGradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* ===========================
+         4) GLOBAL ELEMENT STYLES
+         =========================== */
+  
+  /* Links inherit color, remove underlines by default */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Utility Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-medium);
+  }
+  
+  /* Buttons */
+  button {
+    padding: var(--spacing-small) var(--spacing-medium);
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: var(--primary-color-hover);
+    transform: translateY(-2px);
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Inputs */
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+    padding: var(--spacing-small);
+    margin-bottom: var(--spacing-small);
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  
