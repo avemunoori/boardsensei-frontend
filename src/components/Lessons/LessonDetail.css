@@ -1,15 +1,16 @@
 .lesson-detail-container {
   min-height: 100vh;
   padding: 2rem;
-  background-color: #0f172a;
-  color: #f8fafc;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .lesson-info-card {
-  background-color: #1e293b;
+  background-color: var(--secondary-bg);
   width: 100%;
   max-width: 800px;
   padding: 2rem;
@@ -17,21 +18,20 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   text-align: center;
-  animation: fadeInUp 0.6s ease;
+  animation: slideInFromTop 0.5s ease-out;
 }
 
 .lesson-info-card h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  font-family: "Inter", system-ui, sans-serif;
-  font-weight: 600;
-  color: #60a5fa;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .lesson-description {
   font-size: 1rem;
-  color: #94a3b8;
+  color: var(--secondary-text);
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
@@ -40,21 +40,20 @@
   width: 100%;
   max-width: 800px;
   margin-bottom: 2rem;
-  animation: fadeInUp 0.8s ease;
+  animation: slideInFromLeft 0.5s ease-out;
 }
 
 .lesson-steps-section {
   width: 100%;
   max-width: 800px;
-  animation: fadeInUp 1s ease;
+  animation: slideInFromRight 0.5s ease-out;
 }
 
 .lesson-steps-section h2 {
-  font-size: 1.5rem;
-  color: #60a5fa;
+  font-size: 1.8rem;
+  color: var(--accent-color);
   margin-bottom: 1.5rem;
   text-align: center;
-  font-family: "Inter", system-ui, sans-serif;
   font-weight: 600;
 }
 
@@ -65,12 +64,12 @@
 }
 
 .lesson-step {
-  background: #1e293b;
+  background: var(--secondary-bg);
   margin-bottom: 1rem;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all var(--transition-speed) ease;
 }
 
 .lesson-step:hover {
@@ -84,41 +83,40 @@
   align-items: center;
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
-  color: #94a3b8;
+  color: var(--secondary-text);
 }
 
 .step-index {
   font-weight: 600;
-  color: #60a5fa;
+  color: var(--accent-color);
 }
 
 .step-move {
   font-weight: 600;
-  color: #fcd34d;
+  color: var(--accent-color);
 }
 
 .step-explanation {
   font-size: 1rem;
-  color: #e2e8f0;
+  color: var(--primary-text);
   line-height: 1.6;
 }
 
 .complete-lesson-button {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
-  background-color: #3b82f6;
-  color: #ffffff;
+  background-color: var(--accent-color);
+  color: var(--primary-text);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "Inter", system-ui, sans-serif;
+  transition: all var(--transition-speed) ease;
 }
 
 .complete-lesson-button:hover {
-  background-color: #2563eb;
+  background-color: var(--accent-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
@@ -126,31 +124,22 @@
 .completed-message {
   margin-top: 2rem;
   padding: 1rem;
-  background-color: #065f46;
-  color: #ecfdf5;
+  background-color: var(--success-color);
+  color: var(--primary-text);
   border-radius: 8px;
   text-align: center;
   font-weight: 500;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .error-message {
-  color: #fca5a5;
+  color: var(--error-color);
   background-color: rgba(239, 68, 68, 0.1);
   padding: 1rem;
   border-radius: 8px;
   text-align: center;
   margin-top: 1rem;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: fadeIn 0.5s ease-out;
 }
 
 @media (max-width: 768px) {
@@ -165,11 +154,11 @@
   }
 
   .lesson-info-card h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   .lesson-steps-section h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 

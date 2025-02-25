@@ -4,26 +4,34 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom right, #3182ce, #2c5282);
-    color: white;
-    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+    color: var(--primary-text);
+    padding: 2rem;
+    overflow: hidden;
   }
   
   .welcome-section {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    animation: fadeInUp 1s ease-out;
   }
   
   .welcome-section h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
-    font-family: 'Arial', sans-serif;
+    background: linear-gradient(45deg, var(--accent-color), #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
   
   .welcome-section p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
+    max-width: 600px;
+    line-height: 1.6;
   }
   
   .auth-buttons {
@@ -34,75 +42,116 @@
   
   .login-button,
   .register-button {
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
     font-weight: 600;
     transition: all 0.3s ease;
     text-decoration: none;
+    font-size: 1rem;
   }
   
   .login-button {
-    background-color: white;
-    color: #3182ce;
+    background-color: var(--accent-color);
+    color: var(--primary-text);
   }
   
   .login-button:hover {
-    background-color: #ebf8ff;
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
   }
   
   .register-button {
     background-color: transparent;
-    border: 2px solid white;
-    color: white;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
   }
   
   .register-button:hover {
-    background-color: white;
-    color: #3182ce;
+    background-color: var(--accent-color);
+    color: var(--primary-text);
+    transform: translateY(-2px);
   }
   
   .features-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    max-width: 64rem;
-  }
-  
-  @media (min-width: 768px) {
-    .features-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    max-width: 1200px;
+    width: 100%;
   }
   
   .feature-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
     text-align: center;
-    transform: scale(1);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out;
+    animation-fill-mode: both;
   }
   
   .feature-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
   
   .feature-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    color: #ffd700;
+    color: var(--accent-color);
   }
   
   .feature-card h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
   }
   
   .feature-card p {
-    font-size: 0.875rem;
-    color: #e2e8f0;
+    font-size: 1rem;
+    color: var(--secondary-text);
+    line-height: 1.6;
   }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Stagger the animation of feature cards */
+  .feature-card:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .feature-card:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .feature-card:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  .feature-card:nth-child(4) {
+    animation-delay: 0.8s;
+  }
+  
+  @media (max-width: 768px) {
+    .welcome-section h1 {
+      font-size: 2.5rem;
+    }
+  
+    .welcome-section p {
+      font-size: 1rem;
+    }
+  
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  

@@ -1,29 +1,39 @@
 .header {
-    background-color: rgba(30, 41, 59, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem;
+    background-color: var(--secondary-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
-    animation: slideInFromTop 0.5s ease-out;
   }
   
   .header-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
+  .sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--primary-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease;
+  }
+  
+  .sidebar-toggle:hover {
+    color: var(--accent-color);
+  }
+  
   .logo-container {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: var(--primary-text);
-    transition: all var(--transition-speed) ease;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform var(--transition-speed) ease;
   }
   
   .logo-container:hover {
@@ -38,6 +48,7 @@
   .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
+    color: var(--primary-text);
   }
   
   .logout-button {
@@ -47,7 +58,7 @@
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
-    transition: all var(--transition-speed) ease;
+    transition: background-color var(--transition-speed) ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -55,16 +66,26 @@
   
   .logout-button:hover {
     background-color: var(--accent-hover);
-    transform: translateY(-2px);
   }
   
-  .logout-icon {
-    font-size: 1rem;
+  .auth-nav {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .auth-link {
+    color: var(--primary-text);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+  }
+  
+  .auth-link:hover {
+    color: var(--accent-color);
   }
   
   @media (max-width: 768px) {
-    .header {
-      padding: 0.5rem;
+    .header-container {
+      padding: 0.5rem 1rem;
     }
   
     .logo-text {
@@ -77,13 +98,4 @@
     }
   }
   
-    @keyframes slideInFromTop {
-        from {
-        transform: translateY(-100%);
-        }
-        to {
-        transform: translateY(0);
-        }
-    }
-    
-      
+  

@@ -1,6 +1,5 @@
-import React from "react"
 import { Link } from "react-router-dom"
-import { FaChess, FaQuestionCircle, FaTrophy } from "react-icons/fa"
+import { FaChess, FaQuestionCircle, FaTrophy, FaGraduationCap } from "react-icons/fa"
 import "./Home.css"
 
 const Home = () => {
@@ -8,33 +7,38 @@ const Home = () => {
     <div className="home-container">
       <div className="welcome-section">
         <h1>Welcome to BoardSensei</h1>
-        <p>Master chess openings, take quizzes, and learn from grandmasters.</p>
+        <p>Elevate your chess game with expert lessons, challenging quizzes, and grandmaster insights.</p>
         <div className="auth-buttons">
           <Link to="/login" className="login-button">
-            Login
+            Sign In
           </Link>
           <Link to="/register" className="register-button">
-            Register
+            Get Started
           </Link>
         </div>
       </div>
 
       <div className="features-grid">
         {[
-          { 
-            icon: FaChess, 
-            title: "Learn Openings", 
-            description: "Explore and master popular chess openings to improve your game." 
+          {
+            icon: FaGraduationCap,
+            title: "Expert Lessons",
+            description: "Learn from carefully crafted lessons designed to improve your chess skills at any level.",
           },
-          { 
-            icon: FaQuestionCircle, 
-            title: "Take Quizzes", 
-            description: "Test your knowledge with interactive quizzes and track your progress." 
+          {
+            icon: FaQuestionCircle,
+            title: "Interactive Quizzes",
+            description: "Test your knowledge and reinforce your learning with our engaging chess quizzes.",
           },
-          { 
-            icon: FaTrophy, 
-            title: "Grandmaster Games", 
-            description: "Study games from top grandmasters and learn from the best." 
+          {
+            icon: FaTrophy,
+            title: "Grandmaster Analysis",
+            description: "Study and analyze games from top grandmasters to understand high-level strategies.",
+          },
+          {
+            icon: FaChess,
+            title: "AI-Powered Coaching",
+            description: "Get personalized advice and insights from our advanced AI chess coach.",
           },
         ].map((feature, index) => (
           <div key={index} className="feature-card">
@@ -49,3 +53,4 @@ const Home = () => {
 }
 
 export default Home
+

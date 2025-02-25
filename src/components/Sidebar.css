@@ -4,7 +4,7 @@
     left: 0;
     height: 100vh;
     width: 250px;
-    background: linear-gradient(135deg, var(--secondary-bg), var(--primary-bg));
+    background: var(--secondary-bg);
     transform: translateX(-100%);
     transition: transform var(--transition-speed) ease-in-out;
     z-index: 1000;
@@ -30,12 +30,11 @@
     color: var(--primary-text);
     font-size: 1.5rem;
     cursor: pointer;
-    transition: all var(--transition-speed) ease;
+    transition: color var(--transition-speed) ease;
   }
   
   .close-button:hover {
     color: var(--accent-color);
-    transform: rotate(90deg);
   }
   
   .sidebar-nav {
@@ -57,7 +56,6 @@
   
   .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    transform: translateX(5px);
   }
   
   .nav-link.active {
