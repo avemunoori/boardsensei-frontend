@@ -21,19 +21,6 @@
     align-items: center;
   }
   
-  .auth-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
-  
-  .auth-logo-icon {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-right: 0.5rem;
-  }
-  
   .auth-form-container h1 {
     color: var(--primary-text);
     font-size: 2rem;
@@ -55,7 +42,6 @@
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
-    max-width: 300px;
   }
   
   .input-group {
