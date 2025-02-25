@@ -16,6 +16,9 @@
     max-width: 400px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .auth-logo {
@@ -51,17 +54,19 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
+    max-width: 300px;
   }
   
   .input-group {
     position: relative;
+    display: flex;
+    align-items: center;
   }
   
   .input-icon {
     position: absolute;
-    top: 50%;
     left: 1rem;
-    transform: translateY(-50%);
     color: var(--secondary-text);
     font-size: 1.25rem;
   }
