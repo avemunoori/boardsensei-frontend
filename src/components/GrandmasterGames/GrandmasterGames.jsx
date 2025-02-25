@@ -121,7 +121,7 @@ const GrandmasterGames = () => {
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY
     if (!apiKey) {
       setAnalysisError(
-        "OpenAI API key not found. Please make sure the REACT_APP_OPENAI_API_KEY environment variable is set."
+        "OpenAI API key not found. Please make sure the REACT_APP_OPENAI_API_KEY environment variable is set.",
       )
       setAnalyzing(false)
       return
@@ -129,13 +129,14 @@ const GrandmasterGames = () => {
 
     try {
       const response = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
+        "https://api.openai.com/v1/chat/completions",
         {
           model: "gpt-3.5-turbo",
           messages: [
             {
               role: "system",
-              content: "You are a chess grandmaster analyzing positions. Provide concise, clear analysis focusing on key tactical and strategic elements."
+              content:
+                "You are a chess grandmaster analyzing positions. Provide concise, clear analysis focusing on key tactical and strategic elements.",
             },
             {
               role: "user",
@@ -143,18 +144,18 @@ const GrandmasterGames = () => {
               Position FEN: ${currentPosition.fen()}
               Current Move: ${moveIndex}
               Game Context: This is move ${moveIndex} in a game between ${selectedGame.white} (White) and ${selectedGame.black} (Black).
-              Please provide a brief analysis of the position, key tactical opportunities, and strategic considerations.`
-            }
+              Please provide a brief analysis of the position, key tactical opportunities, and strategic considerations.`,
+            },
           ],
           max_tokens: 200,
           temperature: 0.7,
         },
         {
           headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
           },
-        }
+        },
       )
 
       const analysisText = response.data.choices[0]?.message?.content
@@ -165,9 +166,7 @@ const GrandmasterGames = () => {
     } catch (error) {
       console.error("Error analyzing position:", error)
       const errorMessage = error.response?.data?.error?.message || error.message
-      setAnalysisError(
-        `Failed to analyze position. ${errorMessage}. Please check your OpenAI API key and try again.`
-      )
+      setAnalysisError(`Failed to analyze position. ${errorMessage}. Please check your OpenAI API key and try again.`)
     } finally {
       setAnalyzing(false)
     }
@@ -257,7 +256,7 @@ const GrandmasterGames = () => {
                 <p>{analysis}</p>
               </div>
             )}
-            
+
             {analysisError && (
               <div className="analysis-error">
                 <p>{analysisError}</p>
@@ -271,3 +270,4 @@ const GrandmasterGames = () => {
 }
 
 export default GrandmasterGames
+

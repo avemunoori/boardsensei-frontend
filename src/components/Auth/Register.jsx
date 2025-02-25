@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import API from "../../services/api"
+import "./Register.css"
 
 const Register = ({ setIsAuthenticated }) => {
   const [name, setName] = useState("")
@@ -45,20 +46,20 @@ const Register = ({ setIsAuthenticated }) => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-400 to-primary-600 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-soft">
+    <div className="register-container">
+      <div className="register-form-container">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 font-display">Create your account</h2>
+          <h2>Create your account</h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+        <form className="register-form" onSubmit={handleSubmit}>
+          <div className="input-group">
             <div>
               <input
                 id="name"
                 name="name"
                 type="text"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+                className="input-field"
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -71,7 +72,7 @@ const Register = ({ setIsAuthenticated }) => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+                className="input-field"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -84,7 +85,7 @@ const Register = ({ setIsAuthenticated }) => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+                className="input-field"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -92,26 +93,26 @@ const Register = ({ setIsAuthenticated }) => {
             </div>
           </div>
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="error-message">{error}</p>}
 
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition duration-150 ease-in-out"
+              className="submit-button"
               disabled={isLoading}
             >
               {isLoading ? (
-                <svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <svg className="loading-spinner" viewBox="0 0 24 24">
+                  <circle className="spinner-circle" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="spinner-path" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
               ) : "Register"}
             </button>
           </div>
         </form>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="login-prompt">
           Already have an account?{" "}
-          <button onClick={() => navigate("/login")} className="font-medium text-primary-600 hover:text-primary-500 transition duration-150 ease-in-out">
+          <button onClick={() => navigate("/login")} className="login-link">
             Login here
           </button>
         </p>
