@@ -8,10 +8,10 @@
   }
   
   .auth-form-container {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 2.5rem;
     width: 100%;
     max-width: 400px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -40,28 +40,31 @@
   .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
     width: 100%;
+    max-width: 320px;
   }
   
   .input-group {
     position: relative;
-    display: flex;
-    align-items: center;
+    width: 100%;
   }
   
   .input-icon {
     position: absolute;
     left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--secondary-text);
     font-size: 1.25rem;
+    pointer-events: none;
   }
   
   .input-field {
     width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.875rem 1rem 0.875rem 3rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     color: var(--primary-text);
     font-size: 1rem;
@@ -71,23 +74,28 @@
   .input-field:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
   }
   
   .input-field::placeholder {
     color: var(--secondary-text);
+    opacity: 0.7;
   }
   
   .error-message {
     color: var(--error-color);
     font-size: 0.875rem;
-    margin-top: 0.5rem;
     text-align: center;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
   }
   
   .submit-button {
     width: 100%;
-    padding: 1rem;
+    padding: 0.875rem;
     background: var(--accent-color);
     color: var(--primary-text);
     border: none;
@@ -96,7 +104,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
   
   .submit-button:hover {
@@ -110,6 +118,7 @@
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    opacity: 0.7;
   }
   
   .auth-switch {
@@ -124,10 +133,12 @@
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
+    margin-left: 0.25rem;
   }
   
   .auth-switch-link:hover {
     color: var(--accent-hover);
+    text-decoration: underline;
   }
   
   @keyframes fadeIn {
@@ -143,7 +154,7 @@
   
   @media (max-width: 480px) {
     .auth-form-container {
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
     }
   
     .auth-form-container h1 {
@@ -151,15 +162,15 @@
     }
   
     .auth-form-container h2 {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   
     .input-field {
-      padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
     }
   
     .submit-button {
-      padding: 0.875rem;
+      padding: 0.75rem;
     }
   }
   
