@@ -43,7 +43,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary-600"></div>
       </div>
     )
   }
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">{hasProgress ? "Your Chess Journey" : "Welcome to BoardSensei!"}</h1>
+      <h1 className="text-4xl font-display font-bold mb-8 text-center text-gray-900">{hasProgress ? "Your Chess Journey" : "Welcome to BoardSensei!"}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <DashboardCard
           icon={FaBook}
@@ -91,16 +91,16 @@ const Dashboard = () => {
         />
       </div>
       {!hasProgress && (
-        <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-yellow-400">Get Started with BoardSensei</h2>
-          <p className="mb-4">Welcome to your personal chess improvement journey! Here are some ways to begin:</p>
-          <ul className="list-disc list-inside mb-4 space-y-2">
+        <div className="bg-white shadow-soft rounded-xl p-6 mb-8">
+          <h2 className="text-2xl font-display font-bold mb-4 text-primary-600">Get Started with BoardSensei</h2>
+          <p className="mb-4 text-gray-700">Welcome to your personal chess improvement journey! Here are some ways to begin:</p>
+          <ul className="list-disc list-inside mb-4 space-y-2 text-gray-700">
             <li>Take your first lesson to learn new concepts</li>
             <li>Challenge yourself with a quiz to test your knowledge</li>
             <li>Analyze grandmaster games to improve your strategic thinking</li>
             <li>Use the AI Chess Coach for personalized advice</li>
           </ul>
-          <p>Your progress will be tracked as you complete lessons and quizzes. Good luck!</p>
+          <p className="text-gray-700">Your progress will be tracked as you complete lessons and quizzes. Good luck!</p>
         </div>
       )}
       <AIChessCoach />
@@ -109,13 +109,13 @@ const Dashboard = () => {
 }
 
 const DashboardCard = ({ icon: Icon, title, count, action, buttonText }) => (
-  <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 flex flex-col items-center justify-between transition-all duration-300 hover:transform hover:scale-105">
-    <Icon className="text-4xl text-yellow-400 mb-4" />
-    <h2 className="text-xl font-semibold mb-2">{title}</h2>
-    {count !== undefined && <p className="text-3xl font-bold text-blue-400 mb-4">{count}</p>}
+  <div className="bg-white shadow-soft rounded-xl p-6 flex flex-col items-center justify-between transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105">
+    <Icon className="text-4xl text-primary-600 mb-4" />
+    <h2 className="text-xl font-display font-semibold mb-2 text-gray-900">{title}</h2>
+    {count !== undefined && <p className="text-3xl font-bold text-primary-600 mb-4">{count}</p>}
     <button
       onClick={action}
-      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+      className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition duration-150 ease-in-out"
     >
       {buttonText}
     </button>

@@ -25,13 +25,11 @@ const App = () => {
     }
   }, [])
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen)
-  }
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 text-white">
+      <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800">
         {isAuthenticated && (
           <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         )}
@@ -41,10 +39,10 @@ const App = () => {
             setIsAuthenticated={setIsAuthenticated}
             toggleSidebar={toggleSidebar}
           />
-          <main className="flex-grow p-4 md:p-8">
+          <main className="flex-grow p-4 md:p-8 transition-all duration-300 ease-in-out">
             {isAuthenticated && (
-              <button className="md:hidden fixed top-4 left-4 z-50 bg-gray-700 p-2 rounded-full shadow-lg" onClick={toggleSidebar}>
-                <FaBars className="text-white" />
+              <button className="md:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded-full shadow-lg" onClick={toggleSidebar}>
+                <FaBars className="text-gray-600" />
               </button>
             )}
             <Routes>
