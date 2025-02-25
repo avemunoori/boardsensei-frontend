@@ -1,6 +1,7 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useNavigate, Link } from "react-router-dom"
 import API from "../../services/api"
+import { FaUser, FaEnvelope, FaLock, FaChess } from "react-icons/fa"
 import "./Register.css"
 
 const Register = ({ setIsAuthenticated }) => {
@@ -11,10 +12,10 @@ const Register = ({ setIsAuthenticated }) => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
-  const allowedDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com']
+  const allowedDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"]
 
   const validateEmail = (email) => {
-    const domain = email.split('@')[1]
+    const domain = email.split("@")[1]
     return allowedDomains.includes(domain)
   }
 
@@ -46,75 +47,64 @@ const Register = ({ setIsAuthenticated }) => {
   }
 
   return (
-    <div className="register-container">
-      <div className="register-form-container">
-        <div>
-          <h2>Create your account</h2>
+    <div className="auth-container">
+      <div className="auth-form-container">
+        <div className="auth-logo">
+          <FaChess className="auth-logo-icon" />
+          <h1>BoardSensei</h1>
         </div>
-        <form className="register-form" onSubmit={handleSubmit}>
+        <h2>Create your account</h2>
+        <form className="auth-form" onSubmit={handleSubmit}>
           <div className="input-group">
-            <div>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="input-field"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="input-field"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                className="input-field"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+            <FaUser className="input-icon" />
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <FaEnvelope className="input-icon" />
+            <input
+              id="email-address"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <FaLock className="input-icon" />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
           {error && <p className="error-message">{error}</p>}
 
-          <div>
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <svg className="loading-spinner" viewBox="0 0 24 24">
-                  <circle className="spinner-circle" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="spinner-path" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-              ) : "Register"}
-            </button>
-          </div>
-        </form>
-        <p className="login-prompt">
-          Already have an account?{" "}
-          <button onClick={() => navigate("/login")} className="login-link">
-            Login here
+          <button type="submit" className="submit-button" disabled={isLoading}>
+            {isLoading ? "Creating account..." : "Sign up"}
           </button>
+        </form>
+        <p className="auth-switch">
+          Already have an account?{" "}
+          <Link to="/login" className="auth-switch-link">
+            Sign in
+          </Link>
         </p>
       </div>
     </div>
