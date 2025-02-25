@@ -1,24 +1,91 @@
 :root {
-  /* Colors */
-  --primary-color: #007bff;
-  --primary-color-hover: #0056b3;
-  --secondary-color: #f8f9fa;
-  --text-color: #333333;
-  --error-color: red;
+  /* Color Palette */
+  --primary-color: #3b82f6;
+  --primary-color-light: #60a5fa;
+  --primary-color-dark: #2563eb;
+  --secondary-color: #10b981;
+  --secondary-color-light: #34d399;
+  --secondary-color-dark: #059669;
+  
+  /* Neutral Colors */
+  --background-color: #0f172a;
+  --surface-color: #1e293b;
+  --text-color: #f1f5f9;
+  --text-color-muted: #94a3b8;
+  --border-color: #334155;
+
+  /* Semantic Colors */
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --success-color: #22c55e;
+  --info-color: #3b82f6;
 
   /* Spacing */
-  --spacing-small: 10px;
-  --spacing-medium: 20px;
-  --spacing-large: 40px;
+  --spacing-xxs: 0.25rem;  /* 4px */
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 1rem;      /* 16px */
+  --spacing-md: 1.5rem;    /* 24px */
+  --spacing-lg: 2rem;      /* 32px */
+  --spacing-xl: 3rem;      /* 48px */
+  --spacing-xxl: 4rem;     /* 64px */
 
-  /* Fonts */
-  --font-family: "Arial", sans-serif;
-  --font-size-base: 1rem;
-  --font-size-large: 1.5rem;
-  --font-size-small: 0.9rem;
+  /* Typography */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-serif: 'Georgia', 'Times New Roman', serif;
+  --font-family-mono: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem;  /* 36px */
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
 
   /* Borders */
-  --border-radius: 5px;
-  --border-color: #cccccc;
-}
+  --border-radius-sm: 0.125rem; /* 2px */
+  --border-radius-md: 0.25rem;  /* 4px */
+  --border-radius-lg: 0.5rem;   /* 8px */
+  --border-radius-full: 9999px;
 
+  --border-width-thin: 1px;
+  --border-width-thick: 2px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+
+  /* Z-index */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+
+  /* Grid */
+  --grid-columns: 12;
+  --container-max-width: 1200px;
+  --container-padding: var(--spacing-md);
+}

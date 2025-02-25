@@ -8,15 +8,18 @@
   }
   
   /* ===========================
-         2) GLOBAL CUSTOM PROPERTIES
-         =========================== */
+     2) GLOBAL CUSTOM PROPERTIES
+     =========================== */
   :root {
     /* Primary Theme Colors */
-    --primary-color: #007bff;
-    --primary-color-hover: #0056b3;
-    --secondary-color: #f8f9fa;
-    --text-color: #333333;
-    --error-color: red;
+    --primary-color: #3b82f6;
+    --primary-color-hover: #2563eb;
+    --secondary-color: #1f2937;
+    --text-color: #e2e8f0;
+    --text-color-muted: #9ca3af;
+    --background-color: #111827;
+    --surface-color: #1f2937;
+    --error-color: #ef4444;
   
     /* Spacing & Sizing */
     --spacing-large: 30px;
@@ -26,50 +29,44 @@
     --font-size-base: 1.6rem;
     --border-radius: 8px;
   
-    /* WOW: Adjust these as you wish for animated backgrounds */
-    --body-gradient1: #f3f4f6;
-    --body-gradient2: #e9ecef;
-    --body-gradient3: #dfe3e8;
+    /* Gradients for animated backgrounds */
+    --body-gradient1: #0f172a;
+    --body-gradient2: #1e293b;
+    --body-gradient3: #334155;
   }
   
   /* ===========================
-         3) GLOBAL BODY STYLING
-         =========================== */
-  /* 
-         We'll use an animated gradient for the body background
-         to give an eye-catching effect across the entire site.
-      */
+     3) GLOBAL BODY STYLING
+     =========================== */
   body {
-    font-family: "Arial", sans-serif;
+    font-family: "Inter", "Arial", sans-serif;
     color: var(--text-color);
     line-height: 1.6;
-    /* Animated multi-stop gradient */
     background: linear-gradient(135deg, var(--body-gradient1), var(--body-gradient2), var(--body-gradient3));
     background-size: 400% 400%;
     animation: bodyGradientShift 15s ease-in-out infinite;
   }
   
-  /* Keyframe for the body’s animated gradient */
+  /* Keyframe for the body's animated gradient */
   @keyframes bodyGradientShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
   
   /* ===========================
-         4) GLOBAL ELEMENT STYLES
-         =========================== */
+     4) GLOBAL ELEMENT STYLES
+     =========================== */
   
-  /* Links inherit color, remove underlines by default */
+  /* Links */
   a {
     text-decoration: none;
-    color: inherit;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: var(--primary-color-hover);
   }
   
   /* Utility Container */
@@ -97,7 +94,7 @@
   }
   
   button:disabled {
-    background-color: #cccccc;
+    background-color: var(--text-color-muted);
     cursor: not-allowed;
   }
   
@@ -108,8 +105,10 @@
     font-size: 1rem;
     padding: var(--spacing-small);
     margin-bottom: var(--spacing-small);
-    border: 1px solid #ccc;
+    border: 1px solid var(--text-color-muted);
     border-radius: var(--border-radius);
+    background-color: var(--surface-color);
+    color: var(--text-color);
     width: 100%;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
@@ -117,8 +116,30 @@
   input:focus,
   select:focus,
   textarea:focus {
+    outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
   }
   
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", "Arial", sans-serif;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-medium);
+  }
   
+  /* Paragraphs */
+  p {
+    margin-bottom: var(--spacing-small);
+  }
+  
+  /* ===========================
+     5) UTILITY CLASSES
+     =========================== */
+  .text-center { text-align: center; }
+  .mt-1 { margin-top: var(--spacing-small); }
+  .mt-2 { margin-top: var(--spacing-medium); }
+  .mt-3 { margin-top: var(--spacing-large); }
+  .mb-1 { margin-bottom: var(--spacing-small); }
+  .mb-2 { margin-bottom: var(--spacing-medium); }
+  .mb-3 { margin-bottom: var(--spacing-large); }

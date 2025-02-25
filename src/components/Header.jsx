@@ -12,6 +12,14 @@ const Header = ({ isAuthenticated, setIsAuthenticated, toggleSidebar }) => {
     navigate("/login");
   };
 
+  const handleLogoClick = () => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <header className="header">
       <div className="header-container">
@@ -20,7 +28,7 @@ const Header = ({ isAuthenticated, setIsAuthenticated, toggleSidebar }) => {
             <FaBars className="sidebar-toggle-icon" />
           </button>
         )}
-        <div className="logo-container">
+        <div className="logo-container" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
           <FaChess className="logo-icon" />
           <h1 className="logo-text">BoardSensei</h1>
         </div>
