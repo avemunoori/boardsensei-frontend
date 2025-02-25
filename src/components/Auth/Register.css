@@ -1,177 +1,175 @@
-.register-page {
+.auth-container {
     min-height: 100vh;
-    background-color: #0f1729;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .register-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #1a2231;
-  }
-  
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    text-decoration: none;
-  }
-  
-  .logo-icon {
-    color: #60a5fa;
-    font-size: 1.75rem;
-  }
-  
-  .logo-text {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-  
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .nav-link {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  
-  .nav-link:hover {
-    color: #fff;
-  }
-  
-  .nav-link.active {
-    color: #fff;
-  }
-  
-  .register-container {
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+    padding: 1rem;
   }
   
-  .register-card {
-    background-color: #1e293b;
-    border-radius: 0.75rem;
+  .auth-form-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
     padding: 2rem;
     width: 100%;
     max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-out;
   }
   
-  .register-header {
+  .auth-logo {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    justify-content: center;
     margin-bottom: 2rem;
   }
   
-  .register-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .auth-logo-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-right: 0.5rem;
   }
   
-  .register-logo-icon {
-    color: #60a5fa;
+  .auth-form-container h1 {
+    color: var(--primary-text);
     font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
   }
   
-  .register-logo-text {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-  
-  .register-title {
-    color: #fff;
+  .auth-form-container h2 {
+    color: var(--secondary-text);
     font-size: 1.25rem;
     font-weight: 500;
     text-align: center;
+    margin-bottom: 2rem;
   }
   
-  .register-form {
+  .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  .input-group {
+    position: relative;
   }
   
-  .form-input {
-    background-color: #2a3649;
-    border: 1px solid #374151;
-    border-radius: 0.375rem;
-    padding: 0.75rem 1rem;
-    color: #fff;
-    font-size: 0.875rem;
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: var(--secondary-text);
+    font-size: 1.25rem;
+  }
+  
+  .input-field {
     width: 100%;
-    transition: border-color 0.2s;
+    padding: 1rem 1rem 1rem 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--primary-text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
   }
   
-  .form-input::placeholder {
-    color: #6b7280;
-  }
-  
-  .form-input:focus {
+  .input-field:focus {
     outline: none;
-    border-color: #60a5fa;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
   }
   
-  .submit-button {
-    background-color: #3b82f6;
-    color: #fff;
-    font-weight: 500;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: 0.5rem;
-  }
-  
-  .submit-button:hover {
-    background-color: #2563eb;
-  }
-  
-  .register-footer {
-    margin-top: 1.5rem;
-    text-align: center;
-    color: #94a3b8;
-    font-size: 0.875rem;
-  }
-  
-  .register-footer-link {
-    color: #60a5fa;
-    text-decoration: none;
-    font-weight: 500;
-    margin-left: 0.25rem;
-  }
-  
-  .register-footer-link:hover {
-    text-decoration: underline;
+  .input-field::placeholder {
+    color: var(--secondary-text);
   }
   
   .error-message {
-    background-color: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    color: #ef4444;
-    padding: 0.75rem;
-    border-radius: 0.375rem;
+    color: var(--error-color);
     font-size: 0.875rem;
-    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    text-align: center;
   }
+  
+  .submit-button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-color);
+    color: var(--primary-text);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  .submit-button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+  }
+  
+  .submit-button:disabled {
+    background: var(--secondary-text);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .auth-switch {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+  }
+  
+  .auth-switch-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .auth-switch-link:hover {
+    color: var(--accent-hover);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .auth-form-container {
+      padding: 1.5rem;
+    }
+  
+    .auth-form-container h1 {
+      font-size: 1.75rem;
+    }
+  
+    .auth-form-container h2 {
+      font-size: 1rem;
+    }
+  
+    .input-field {
+      padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+    }
+  
+    .submit-button {
+      padding: 0.875rem;
+    }
+  }
+  
+  
