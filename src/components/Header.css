@@ -46,12 +46,18 @@
   }
   
   .logo-text {
+    font-family: var(--font-primary);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-text);
+    letter-spacing: -0.02em;
   }
   
   .logout-button {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    letter-spacing: 0.5px;
     background-color: var(--accent-color);
     color: var(--primary-text);
     border: none;
@@ -74,6 +80,10 @@
   }
   
   .auth-link {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    letter-spacing: 0.5px;
     color: var(--primary-text);
     text-decoration: none;
     transition: color var(--transition-speed) ease;
@@ -89,12 +99,17 @@
     }
   
     .logo-text {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
     }
   
     .logout-button {
       padding: 0.4rem 0.8rem;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
+    }
+  
+    .auth-link,
+    .logout-button {
+      font-size: 0.875rem;
     }
   }
   
