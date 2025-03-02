@@ -17,9 +17,7 @@ const RecommendationEngine = ({ userProgress, lessons, quizzes }) => {
 
   const generateRecommendations = () => {
     const completedLessonIds = new Set(userProgress.lessonsCompleted.map((lesson) => lesson._id))
-
     const completedQuizIds = new Set(userProgress.quizzesCompleted.map((quiz) => quiz._id))
-
     const newRecommendations = []
 
     // If user has completed no lessons, recommend the first lesson
@@ -33,10 +31,8 @@ const RecommendationEngine = ({ userProgress, lessons, quizzes }) => {
       })
     }
 
-    // Find uncompleted lessons
+    // Find uncompleted lessons and quizzes
     const uncompletedLessons = lessons.filter((lesson) => !completedLessonIds.has(lesson._id))
-
-    // Find uncompleted quizzes
     const uncompletedQuizzes = quizzes.filter((quiz) => !completedQuizIds.has(quiz._id))
 
     // Recommend a quiz related to a completed lesson
@@ -47,7 +43,6 @@ const RecommendationEngine = ({ userProgress, lessons, quizzes }) => {
     if (lessonRelatedQuizzes.length > 0) {
       const recommendedQuiz = lessonRelatedQuizzes[0]
       const relatedLesson = lessons.find((l) => l._id === recommendedQuiz.lesson)
-
       newRecommendations.push({
         type: "quiz",
         id: recommendedQuiz._id,
@@ -57,10 +52,8 @@ const RecommendationEngine = ({ userProgress, lessons, quizzes }) => {
       })
     }
 
-    // Recommend next logical lesson based on difficulty or sequence
+    // Recommend next logical lesson
     if (uncompletedLessons.length > 0) {
-      // For simplicity, just recommend the first uncompleted lesson
-      // In a real app, you might have a more sophisticated algorithm
       newRecommendations.push({
         type: "lesson",
         id: uncompletedLessons[0]._id,

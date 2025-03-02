@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import API from "../../services/api"
 import { FaBook, FaQuestionCircle, FaTrophy, FaChartLine } from "react-icons/fa"
