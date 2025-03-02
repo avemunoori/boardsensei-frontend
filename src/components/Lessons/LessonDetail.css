@@ -1,164 +1,192 @@
 .lesson-detail-container {
-  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
-  background-color: var(--primary-bg);
   color: var(--primary-text);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: fadeIn 0.5s ease-out;
 }
 
-.lesson-info-card {
+.back-button {
   background-color: var(--secondary-bg);
-  width: 100%;
-  max-width: 800px;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-  text-align: center;
-  animation: slideInFromTop 0.5s ease-out;
+  color: var(--primary-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.lesson-info-card h1 {
+.back-button:hover {
+  background-color: var(--accent-color);
+}
+
+.lesson-detail-container h1 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
   color: var(--accent-color);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 .lesson-description {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--secondary-text);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.lesson-chessboard-section {
-  width: 100%;
-  max-width: 800px;
   margin-bottom: 2rem;
-  animation: slideInFromLeft 0.5s ease-out;
 }
 
-.lesson-steps-section {
-  width: 100%;
-  max-width: 800px;
-  animation: slideInFromRight 0.5s ease-out;
-}
-
-.lesson-steps-section h2 {
-  font-size: 1.8rem;
-  color: var(--accent-color);
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 600;
-}
-
-.lesson-steps-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0 auto;
-}
-
-.lesson-step {
-  background: var(--secondary-bg);
-  margin-bottom: 1rem;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all var(--transition-speed) ease;
-}
-
-.lesson-step:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.step-header {
+.lesson-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--secondary-text);
+  gap: 2rem;
 }
 
-.step-index {
-  font-weight: 600;
-  color: var(--accent-color);
+.chessboard-container {
+  flex: 1;
+  max-width: 600px;
 }
 
-.step-move {
-  font-weight: 600;
+.lesson-steps {
+  flex: 1;
+}
+
+.lesson-steps h2 {
+  font-size: 1.5rem;
   color: var(--accent-color);
+  margin-bottom: 1rem;
 }
 
 .step-explanation {
   font-size: 1rem;
+  color: var(--secondary-text);
+  margin-bottom: 1rem;
+}
+
+.move-feedback {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.correct-move {
+  color: #10b981;
+}
+
+.incorrect-move {
+  color: #ef4444;
+}
+
+.step-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.step-navigation button {
+  background-color: var(--secondary-bg);
   color: var(--primary-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.step-navigation button:hover:not(:disabled) {
+  background-color: var(--accent-color);
+}
+
+.step-navigation button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lesson-completed {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.completed-icon {
+  font-size: 3rem;
+  color: #f59e0b;
+  margin-bottom: 1rem;
+}
+
+.lesson-progress {
+  margin-top: 2rem;
+}
+
+.progress-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.progress-step {
+  flex: 1;
+  height: 8px;
+  background-color: var(--secondary-bg);
+  border-radius: 4px;
+}
+
+.progress-step.completed {
+  background-color: var(--accent-color);
+}
+
+.ai-explanation {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ai-explanation h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.ai-explanation p {
+  color: var(--primary-text);
+  font-size: 1rem;
   line-height: 1.6;
 }
 
-.complete-lesson-button {
-  margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--accent-color);
-  color: var(--primary-text);
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-speed) ease;
+.spinner {
+  animation: spin 1s linear infinite;
+  color: var(--accent-color);
+  font-size: 1.5rem;
 }
 
-.complete-lesson-button:hover {
-  background-color: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.completed-message {
-  margin-top: 2rem;
-  padding: 1rem;
-  background-color: var(--success-color);
-  color: var(--primary-text);
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.error-message {
-  color: var(--error-color);
-  background-color: rgba(239, 68, 68, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  margin-top: 1rem;
-  animation: fadeIn 0.5s ease-out;
+.ai-explanation .loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary-text);
 }
 
 @media (max-width: 768px) {
-  .lesson-detail-container {
-    padding: 1rem;
+  .lesson-content {
+    flex-direction: column;
   }
 
-  .lesson-info-card,
-  .lesson-chessboard-section,
-  .lesson-steps-section {
-    width: 100%;
-  }
-
-  .lesson-info-card h1 {
-    font-size: 2rem;
-  }
-
-  .lesson-steps-section h2 {
-    font-size: 1.5rem;
+  .chessboard-container {
+    max-width: 100%;
   }
 }
 
