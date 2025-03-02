@@ -6,7 +6,7 @@ import { Chess } from "chess.js"
 import { Chessboard } from "react-chessboard"
 import API from "../../services/api"
 import AIExplanation from "./AIExplanation"
-import { FaArrowLeft, FaArrowRight, FaCheck, FaTimes, FaTrophy } from "react-icons/fa"
+import { FaArrowLeft, FaArrowRight, FaCheck, FaTimes, FaTrophy, FaPlay } from "react-icons/fa"
 import "./LessonDetail.css"
 
 const LessonDetail = () => {
@@ -19,6 +19,9 @@ const LessonDetail = () => {
   const [isCompleted, setIsCompleted] = useState(false)
   const [error, setError] = useState("")
   const [completedSteps, setCompletedSteps] = useState([])
+  const [isStarted, setIsStarted] = useState(false)
+  const [showAIInsight, setShowAIInsight] = useState(false)
+  const [moveResult, setMoveResult] = useState(null)
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -38,31 +41,39 @@ const LessonDetail = () => {
     setGame(newGame)
     setCurrentStepIndex(0)
     setCompletedSteps([])
+    setIsStarted(false)
+    setShowAIInsight(false)
+    setUserMoveAttempt(null)
+    setMoveResult(null)
   }
 
   const handleMove = (move) => {
+    if (!isStarted) return false
+
     setUserMoveAttempt(move)
     const gameCopy = new Chess(game.fen())
     const result = gameCopy.move(move)
     if (result) {
       setGame(gameCopy)
       checkMoveCorrectness(move)
+      return true
     }
+    return false
   }
 
   const checkMoveCorrectness = (move) => {
     const currentStep = lesson.steps[currentStepIndex]
     if (move.san === currentStep.move) {
+      setMoveResult("correct")
       const newCompletedSteps = [...completedSteps, currentStepIndex]
       setCompletedSteps(newCompletedSteps)
+      setShowAIInsight(true)
       if (newCompletedSteps.length === lesson.steps.length) {
         handleLessonCompletion()
-      } else {
-        setCurrentStepIndex(currentStepIndex + 1)
       }
     } else {
-      // Incorrect move, provide feedback
-      setUserMoveAttempt(null)
+      setMoveResult("incorrect")
+      setShowAIInsight(true)
     }
   }
 
@@ -75,22 +86,24 @@ const LessonDetail = () => {
     }
   }
 
-  const handlePreviousStep = () => {
-    if (currentStepIndex > 0) {
-      setCurrentStepIndex(currentStepIndex - 1)
-      const previousGame = new Chess()
-      lesson.steps.slice(0, currentStepIndex).forEach((step) => previousGame.move(step.move))
-      setGame(previousGame)
-    }
-  }
-
   const handleNextStep = () => {
     if (currentStepIndex < lesson.steps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1)
-      const nextGame = new Chess(game.fen())
-      nextGame.move(lesson.steps[currentStepIndex].move)
-      setGame(nextGame)
+      setShowAIInsight(false)
+      setUserMoveAttempt(null)
+      setMoveResult(null)
     }
+  }
+
+  const handleStartLesson = () => {
+    setIsStarted(true)
+  }
+
+  const handleTryAgain = () => {
+    setGame(new Chess(game.fen())) // Reset to the position before the incorrect move
+    setUserMoveAttempt(null)
+    setMoveResult(null)
+    setShowAIInsight(false)
   }
 
   if (error) return <p className="error-message">{error}</p>
@@ -125,48 +138,61 @@ const LessonDetail = () => {
           <h2>
             Step {currentStepIndex + 1} of {lesson.steps.length}
           </h2>
-          <p className="step-explanation">{currentStep.explanation}</p>
+          {!isStarted ? (
+            <button onClick={handleStartLesson} className="start-button">
+              <FaPlay /> Start Lesson
+            </button>
+          ) : (
+            <>
+              <p className="step-explanation">{currentStep.explanation}</p>
 
-          <AIExplanation position={game.fen()} correctMove={currentStep.move} userMove={userMoveAttempt} />
-
-          {userMoveAttempt && (
-            <div className="move-feedback">
-              {userMoveAttempt.san === currentStep.move ? (
-                <p className="correct-move">
-                  <FaCheck /> Correct move!
-                </p>
-              ) : (
-                <p className="incorrect-move">
-                  <FaTimes /> Incorrect move. Try again.
-                </p>
+              {moveResult && (
+                <div className={`move-feedback ${moveResult}`}>
+                  {moveResult === "correct" ? (
+                    <p className="correct-move">
+                      <FaCheck /> Correct move!
+                    </p>
+                  ) : (
+                    <p className="incorrect-move">
+                      <FaTimes /> Incorrect move. Try again.
+                    </p>
+                  )}
+                </div>
               )}
-            </div>
+
+              {showAIInsight && (
+                <AIExplanation position={game.fen()} correctMove={currentStep.move} userMove={userMoveAttempt} />
+              )}
+
+              {moveResult === "correct" && (
+                <button onClick={handleNextStep} className="next-step-button">
+                  Next Step <FaArrowRight />
+                </button>
+              )}
+
+              {moveResult === "incorrect" && (
+                <button onClick={handleTryAgain} className="try-again-button">
+                  Try Again
+                </button>
+              )}
+            </>
           )}
 
-          <div className="step-navigation">
-            <button onClick={handlePreviousStep} disabled={currentStepIndex === 0}>
-              <FaArrowLeft /> Previous
-            </button>
-            <button onClick={handleNextStep} disabled={currentStepIndex === lesson.steps.length - 1}>
-              Next <FaArrowRight />
-            </button>
-          </div>
-
-          {isCompleted ? (
+          {isCompleted && (
             <div className="lesson-completed">
               <FaTrophy className="completed-icon" />
-              <h3>Congratulations! You've completed this lesson.</h3>
-            </div>
-          ) : (
-            <div className="lesson-progress">
-              <h3>Lesson Progress</h3>
-              <div className="progress-bar">
-                {lesson.steps.map((_, index) => (
-                  <div key={index} className={`progress-step ${completedSteps.includes(index) ? "completed" : ""}`} />
-                ))}
-              </div>
+              <h3>All done! Congratulations on completing this lesson.</h3>
             </div>
           )}
+
+          <div className="lesson-progress">
+            <h3>Lesson Progress</h3>
+            <div className="progress-bar">
+              {lesson.steps.map((_, index) => (
+                <div key={index} className={`progress-step ${completedSteps.includes(index) ? "completed" : ""}`} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
