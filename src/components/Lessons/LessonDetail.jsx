@@ -6,7 +6,7 @@ import { Chess } from "chess.js"
 import { Chessboard } from "react-chessboard"
 import API from "../../services/api"
 import AIExplanation from "./AIExplanation"
-import { FaArrowLeft, FaArrowRight, FaCheck, FaTimes, FaTrophy, FaPlay } from "react-icons/fa"
+import { FaArrowLeft, FaArrowRight, FaCheck, FaTimes, FaTrophy, FaPlay, FaChessKnight, FaUndo } from "react-icons/fa"
 import "./LessonDetail.css"
 
 const LessonDetail = () => {
@@ -15,13 +15,14 @@ const LessonDetail = () => {
   const [lesson, setLesson] = useState(null)
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [game, setGame] = useState(new Chess())
-  const [userMoveAttempt, setUserMoveAttempt] = useState(null)
   const [isCompleted, setIsCompleted] = useState(false)
   const [error, setError] = useState("")
   const [completedSteps, setCompletedSteps] = useState([])
   const [isStarted, setIsStarted] = useState(false)
   const [showAIInsight, setShowAIInsight] = useState(false)
   const [moveResult, setMoveResult] = useState(null)
+  const [stepMoves, setStepMoves] = useState([])
+  const [stepStartPosition, setStepStartPosition] = useState(new Chess().fen())
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -43,37 +44,63 @@ const LessonDetail = () => {
     setCompletedSteps([])
     setIsStarted(false)
     setShowAIInsight(false)
-    setUserMoveAttempt(null)
     setMoveResult(null)
+    setStepMoves([])
+    setStepStartPosition(newGame.fen())
+  }
+
+  const setupStepPosition = (stepIndex) => {
+    const newGame = new Chess()
+    for (let i = 0; i < stepIndex; i++) {
+      const stepMoves = lesson.steps[i].move.split(" ")
+      stepMoves.forEach((move) => newGame.move(move))
+    }
+    setGame(newGame)
+    setStepStartPosition(newGame.fen())
+    setStepMoves([])
   }
 
   const handleMove = (move) => {
     if (!isStarted) return false
 
-    setUserMoveAttempt(move)
     const gameCopy = new Chess(game.fen())
     const result = gameCopy.move(move)
     if (result) {
       setGame(gameCopy)
-      checkMoveCorrectness(move)
+      setStepMoves([...stepMoves, move])
       return true
     }
     return false
   }
 
-  const checkMoveCorrectness = (move) => {
+  const checkStepCorrectness = () => {
     const currentStep = lesson.steps[currentStepIndex]
-    if (move.san === currentStep.move) {
-      setMoveResult("correct")
+    const expectedMoves = currentStep.move.split(" ")
+
+    if (stepMoves.length !== expectedMoves.length) {
+      return false
+    }
+
+    for (let i = 0; i < expectedMoves.length; i++) {
+      if (stepMoves[i].san !== expectedMoves[i]) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  const handleSubmitStep = () => {
+    const isCorrect = checkStepCorrectness()
+    setMoveResult(isCorrect ? "correct" : "incorrect")
+    setShowAIInsight(true)
+
+    if (isCorrect) {
       const newCompletedSteps = [...completedSteps, currentStepIndex]
       setCompletedSteps(newCompletedSteps)
-      setShowAIInsight(true)
       if (newCompletedSteps.length === lesson.steps.length) {
         handleLessonCompletion()
       }
-    } else {
-      setMoveResult("incorrect")
-      setShowAIInsight(true)
     }
   }
 
@@ -88,9 +115,10 @@ const LessonDetail = () => {
 
   const handleNextStep = () => {
     if (currentStepIndex < lesson.steps.length - 1) {
-      setCurrentStepIndex(currentStepIndex + 1)
+      const nextStepIndex = currentStepIndex + 1
+      setCurrentStepIndex(nextStepIndex)
+      setupStepPosition(nextStepIndex)
       setShowAIInsight(false)
-      setUserMoveAttempt(null)
       setMoveResult(null)
     }
   }
@@ -100,8 +128,9 @@ const LessonDetail = () => {
   }
 
   const handleTryAgain = () => {
-    setGame(new Chess(game.fen())) // Reset to the position before the incorrect move
-    setUserMoveAttempt(null)
+    const resetGame = new Chess(stepStartPosition)
+    setGame(resetGame)
+    setStepMoves([])
     setMoveResult(null)
     setShowAIInsight(false)
   }
@@ -145,6 +174,13 @@ const LessonDetail = () => {
           ) : (
             <>
               <p className="step-explanation">{currentStep.explanation}</p>
+              <p className="step-move">Expected move(s): {currentStep.move}</p>
+
+              {moveResult === null && (
+                <button onClick={handleSubmitStep} className="submit-step-button">
+                  <FaChessKnight /> Submit Step
+                </button>
+              )}
 
               {moveResult && (
                 <div className={`move-feedback ${moveResult}`}>
@@ -161,7 +197,7 @@ const LessonDetail = () => {
               )}
 
               {showAIInsight && (
-                <AIExplanation position={game.fen()} correctMove={currentStep.move} userMove={userMoveAttempt} />
+                <AIExplanation position={stepStartPosition} correctMove={currentStep.move} userMoves={stepMoves} />
               )}
 
               {moveResult === "correct" && (
@@ -172,7 +208,7 @@ const LessonDetail = () => {
 
               {moveResult === "incorrect" && (
                 <button onClick={handleTryAgain} className="try-again-button">
-                  Try Again
+                  <FaUndo /> Try Again
                 </button>
               )}
             </>
