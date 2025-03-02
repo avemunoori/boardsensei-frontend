@@ -4,16 +4,16 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { FaLightbulb, FaSpinner } from "react-icons/fa"
 
-const AIExplanation = ({ position, correctMove, userMove }) => {
+const AIExplanation = ({ position, correctMove, userMoves }) => {
   const [explanation, setExplanation] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (userMove) {
+    if (userMoves.length > 0) {
       generateExplanation()
     }
-  }, [userMove]) // Only userMove is needed here
+  }, [userMoves])
 
   const generateExplanation = async () => {
     setIsLoading(true)
@@ -31,10 +31,10 @@ const AIExplanation = ({ position, correctMove, userMove }) => {
             {
               role: "user",
               content: `Chess position FEN: ${position}
-              Correct move: ${correctMove}
-              User's move: ${userMove.san}
+              Correct move(s): ${correctMove}
+              User's move(s): ${userMoves.map((move) => move.san).join(", ")}
               
-              Explain why the correct move is good and if the user's move is different, explain why it might not be the best choice. Keep the explanation concise and friendly.`,
+              Explain why the correct move(s) are good and if the user's moves are different, explain why they might not be the best choice. Keep the explanation concise and friendly.`,
             },
           ],
           max_tokens: 150,
@@ -56,7 +56,7 @@ const AIExplanation = ({ position, correctMove, userMove }) => {
     }
   }
 
-  if (!userMove) return null
+  if (userMoves.length === 0) return null
 
   return (
     <div className="ai-explanation">

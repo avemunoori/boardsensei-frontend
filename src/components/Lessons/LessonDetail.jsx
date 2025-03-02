@@ -67,7 +67,7 @@ const LessonDetail = () => {
     const result = gameCopy.move(move)
     if (result) {
       setGame(gameCopy)
-      setStepMoves([...stepMoves, move])
+      setStepMoves([...stepMoves, result])
       return true
     }
     return false
@@ -93,14 +93,16 @@ const LessonDetail = () => {
   const handleSubmitStep = () => {
     const isCorrect = checkStepCorrectness()
     setMoveResult(isCorrect ? "correct" : "incorrect")
-    setShowAIInsight(true)
 
     if (isCorrect) {
+      setShowAIInsight(true)
       const newCompletedSteps = [...completedSteps, currentStepIndex]
       setCompletedSteps(newCompletedSteps)
       if (newCompletedSteps.length === lesson.steps.length) {
         handleLessonCompletion()
       }
+    } else {
+      setShowAIInsight(false)
     }
   }
 
