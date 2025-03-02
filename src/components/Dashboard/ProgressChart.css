@@ -1,0 +1,126 @@
+.progress-chart-container {
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+  
+  .empty-chart {
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  
+  .empty-chart p {
+    color: var(--secondary-text);
+    margin-top: 1rem;
+  }
+  
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .chart-header h2 {
+    font-size: 1.5rem;
+    color: var(--primary-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .chart-toggle-button {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .chart-toggle-button:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-wrapper {
+    background: rgba(15, 23, 42, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .chart-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .summary-item {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .summary-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .summary-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--secondary-text);
+    margin-bottom: 0.5rem;
+  }
+  
+  .summary-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .summary-value.lessons {
+    color: #3b82f6;
+  }
+  
+  .summary-value.quizzes {
+    color: #10b981;
+  }
+  
+  .summary-value.total {
+    color: #f59e0b;
+  }
+  
+  @media (max-width: 768px) {
+    .chart-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  
+    .chart-toggle-button {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .chart-summary {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  

@@ -5,42 +5,56 @@ import { useNavigate } from "react-router-dom"
 import API from "../../services/api"
 import { FaBook, FaQuestionCircle, FaTrophy, FaChartLine } from "react-icons/fa"
 import AIChessCoach from "../AIChessCoach/AIChessCoach"
+import ProgressChart from "./ProgressChart"
+import AchievementSystem from "./AchievementSystem"
+import RecommendationEngine from "./RecommendationEngine"
 import "./Dashboard.css"
 
 const Dashboard = () => {
   const [userProgress, setUserProgress] = useState({ lessonsCompleted: [], quizzesCompleted: [] })
+  const [lessons, setLessons] = useState([])
+  const [quizzes, setQuizzes] = useState([])
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchUserProgress = async () => {
+    const fetchData = async () => {
       try {
+        setLoading(true)
         const token = localStorage.getItem("token")
         if (!token) {
           setError("No token found. Please log in.")
           setLoading(false)
           return
         }
-        const userId = JSON.parse(atob(token.split(".")[1])).id
-        const response = await API.get(`/auth/users/progress/${userId}`)
 
-        if (response.data && response.data.progress) {
-          setUserProgress(response.data.progress)
+        // Fetch user progress
+        const userId = JSON.parse(atob(token.split(".")[1])).id
+        const progressResponse = await API.get(`/auth/users/progress/${userId}`)
+
+        if (progressResponse.data && progressResponse.data.progress) {
+          setUserProgress(progressResponse.data.progress)
         } else {
           setUserProgress({ lessonsCompleted: [], quizzesCompleted: [] })
         }
+
+        // Fetch lessons and quizzes for recommendations
+        const [lessonsResponse, quizzesResponse] = await Promise.all([API.get("/lessons"), API.get("/quizzes")])
+
+        setLessons(lessonsResponse.data.data)
+        setQuizzes(quizzesResponse.data.data)
       } catch (err) {
-        console.error("Error fetching user progress:", err)
+        console.error("Error fetching dashboard data:", err)
         if (err.response?.status !== 400) {
-          setError(err.response?.data?.message || "Failed to fetch user progress")
+          setError(err.response?.data?.message || "Failed to fetch user data")
         }
       } finally {
         setLoading(false)
       }
     }
 
-    fetchUserProgress()
+    fetchData()
   }, [])
 
   if (loading) {
@@ -65,6 +79,8 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h1>{hasProgress ? "Your Chess Journey" : "Welcome to BoardSensei!"}</h1>
+
+      {/* Quick Access Cards */}
       <div className="dashboard-grid">
         <DashboardCard
           icon={FaBook}
@@ -93,6 +109,16 @@ const Dashboard = () => {
           buttonText="View Profile"
         />
       </div>
+
+      {/* Personalized Recommendations */}
+      <RecommendationEngine userProgress={userProgress} lessons={lessons} quizzes={quizzes} />
+
+      {/* Progress Visualization */}
+      <ProgressChart userProgress={userProgress} />
+
+      {/* Achievement System */}
+      <AchievementSystem userProgress={userProgress} />
+
       {!hasProgress && (
         <div className="get-started-container">
           <h2>Get Started with BoardSensei</h2>
@@ -106,6 +132,7 @@ const Dashboard = () => {
           <p>Your progress will be tracked as you complete lessons and quizzes. Good luck!</p>
         </div>
       )}
+
       <AIChessCoach />
     </div>
   )

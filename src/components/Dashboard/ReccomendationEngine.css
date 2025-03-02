@@ -1,0 +1,118 @@
+.recommendations-container {
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+  
+  .recommendations-container h2 {
+    font-size: 1.5rem;
+    color: var(--primary-text);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .recommendations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .recommendation-card {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .recommendation-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  }
+  
+  .recommendation-card.priority-high::before {
+    background: linear-gradient(to bottom, #ef4444, #dc2626);
+  }
+  
+  .recommendation-card.priority-medium::before {
+    background: linear-gradient(to bottom, #f59e0b, #d97706);
+  }
+  
+  .recommendation-card.priority-low::before {
+    background: linear-gradient(to bottom, #3b82f6, #2563eb);
+  }
+  
+  .recommendation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recommendation-icon {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  
+  .recommendation-content {
+    flex-grow: 1;
+  }
+  
+  .recommendation-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-text);
+  }
+  
+  .recommendation-content p {
+    font-size: 0.875rem;
+    color: var(--secondary-text);
+    margin-bottom: 0.5rem;
+  }
+  
+  .recommendation-type {
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+  
+  .recommendation-arrow {
+    color: var(--secondary-text);
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .recommendation-card:hover .recommendation-arrow {
+    transform: translateX(5px);
+    color: var(--accent-color);
+  }
+  
+  @media (max-width: 768px) {
+    .recommendations-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  
